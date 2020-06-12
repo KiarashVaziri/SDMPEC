@@ -12,16 +12,13 @@ class Ground extends Base {
 }
 
 class Node extends Base {
-    float voltage = 0;
-    float current = 0;
-
-    float previousVoltage = 0;
-    float previousCurrent = 0;
-
-    float newVoltage = 0;
-    float newCurrent = 0;
-
     int nodeNumber;
+    float previousVoltage = 0;
+    float voltage = 0;
+    float newVoltage = 0;
+    float previousCurrent = 0;
+    float current = 0;
+    float newCurrent = 0;
 
     Node(int a) {
         nodeNumber = a;
@@ -35,9 +32,9 @@ class Node extends Base {
 class Branch {
     String name;
     Node port1, port2;
-    double resistor;
-    double capacity;
-    double inductance;
+    float resistance;
+    float capacity;
+    float inductance;
     float current = 0;
     float previousCurrent = 0;
     float newCurrent = 0;
@@ -61,26 +58,36 @@ class Branch {
 }
 
 class Resistor extends Branch {
-    Resistor(int a, int b, double r) {
+    Resistor(int a, int b, float r) {
         port1 = new Node(a);
         port2 = new Node(b);
-        this.resistor = r;
+        this.resistance = r;
         this.voltage = (float) (port1.getVoltage() - port2.getVoltage());
-        this.current = (float) (voltage / r);
+        this.current = voltage / r;
     }
 
     @Override
     void updateBranch(Node port1, Node port2, float dt, float dv) {
-        current =2;
+        current = (port1.voltage - port2.voltage) / resistance;
+        previousCurrent = (port1.voltage - port2.voltage + dv) / resistance;
     }
 }
 
 class CurrentSource extends Branch {
-    CurrentSource(int a, int b, double value) {
+    final float value;
+
+    CurrentSource(int a, int b, float value) {
         port1 = new Node(a);
         port2 = new Node(b);
         this.voltage = (float) (port1.getVoltage() - port2.getVoltage());
-        this.current = (float) value;
+        this.current = value;
+        this.value = value;
+    }
+
+    @Override
+    void updateBranch(Node port1, Node port2, float dt, float dv) {
+        previousCurrent = current;
+        current = value;
     }
 }
 
@@ -89,6 +96,10 @@ class VoltageSource extends Branch {
         port1 = new Node(a);
         port2 = new Node(b);
         this.voltage = value;
+    }
+
+    void updateBranch(Node port1, Node port2, float dt, float dv) {
+        //pass
     }
 }
 
@@ -99,6 +110,11 @@ class Capacitor extends Branch {
         this.capacity = value;
         this.voltage = (float) (port1.getVoltage() - port2.getVoltage());
     }
+
+    void updateBranch(Node port1, Node port2, float dt, float dv) {
+        current = (capacity * (port1.voltage - port1.previousCurrent - port2.voltage + port2.previousVoltage)) / dt;
+        previousCurrent = (capacity * (port1.voltage - port1.previousCurrent - port2.voltage + port2.previousVoltage + dv)) / dt;
+    }
 }
 
 class Inductor extends Branch {
@@ -107,6 +123,11 @@ class Inductor extends Branch {
         port2 = new Node(b);
         this.inductance = value;
         this.voltage = (float) (port1.getVoltage() - port2.getVoltage());
+    }
+
+    void updateBranch(Node port1, Node port2, float dt, float dv) {
+        current += ((port1.voltage - port1.previousVoltage - port2.voltage + port2.previousVoltage) * dt) / inductance;
+        previousCurrent += ((port1.voltage - port1.previousVoltage - port2.voltage + port2.previousVoltage + dv) * dt) / inductance;
     }
 }
 
