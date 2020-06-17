@@ -167,21 +167,22 @@ class Circuit {
         //nodeSet.add(endNode);
         numberOfNodes = Math.max(numberOfNodes, Math.max(startNode, endNode));
 
-        if (type.equals("R")) {
-            branchArray[numberOfBranches] = new Resistor(startNode, endNode, value);
-            numberOfBranches++;
-        } else if (type.equals("I")) {
-            branchArray[numberOfBranches] = new CurrentSource(startNode, endNode, value);
-            numberOfBranches++;
-        } else if (type.equals("V")) {
-            branchArray[numberOfBranches] = new VoltageSource(startNode, endNode, value);
-            numberOfBranches++;
-        } else if (type.equals("C")) {
-            branchArray[numberOfBranches] = new Capacitor(startNode, endNode, value);
-            numberOfBranches++;
-        } else if (type.equals("L")) {
-            branchArray[numberOfBranches] = new Inductor(startNode, endNode, value);
-            numberOfBranches++;
+        switch (type) {
+            case "R":
+                branchArray[numberOfBranches++] = new Resistor(startNode, endNode, value);
+                break;
+            case "I":
+                branchArray[numberOfBranches++] = new CurrentSource(startNode, endNode, value);
+                break;
+            case "V":
+                branchArray[numberOfBranches++] = new VoltageSource(startNode, endNode, value);
+                break;
+            case "C":
+                branchArray[numberOfBranches++] = new Capacitor(startNode, endNode, value);
+                break;
+            case "L":
+                branchArray[numberOfBranches++] = new Inductor(startNode, endNode, value);
+                break;
         }
     }
 
