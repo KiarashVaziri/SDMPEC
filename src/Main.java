@@ -125,9 +125,13 @@ class Capacitor extends Branch {
         this.capacity = value;
     }
 
+    float getVoltage(Node s, Node e) {
+        return s.voltage - e.voltage;
+    }
+
     void updateBranch(Node s, Node e, float dt, float dv) {
-        current = (capacity * (s.voltage - s.previousCurrent - e.voltage + e.previousVoltage)) / dt;
-        previousCurrent = (capacity * (s.voltage - s.previousCurrent - e.voltage + e.previousVoltage + dv)) / dt;
+        current = (capacity * (s.voltage - s.previousVoltage - e.voltage + e.previousVoltage)) / dt;
+        previousCurrent = (capacity * (s.voltage - s.previousVoltage - e.voltage + e.previousVoltage + dv)) / dt;
     }
 }
 
@@ -137,6 +141,10 @@ class Inductor extends Branch {
         port1 = a;
         port2 = b;
         this.inductance = value;
+    }
+
+    float getVoltage(Node s, Node e) {
+        return s.voltage - e.voltage;
     }
 
     void updateBranch(Node s, Node e, float dt, float dv) {
@@ -236,13 +244,13 @@ public class Main {
         circuit.add("I", 0, 1, 10);
         circuit.add("R", 1, 2, 5);
         circuit.add("R", 2, 3, 6);
-        circuit.add("L", 2, 0, 0.01f);
+        circuit.add("C", 2, 0, 1);
         circuit.add("R", 3, 0, 4);
         circuit.initCircuit();
-        for (int k = 0; k < 1000; k++) {
+        for (int k = 0; k < 100; k++) {
             circuit.updateBranches();
             circuit.updateNodes();
-            if (k % 100 == 0) circuit.printData();
+            if (k % 10 == 0) circuit.printData();
         }
     }
 }
