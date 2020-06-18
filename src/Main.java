@@ -3,17 +3,7 @@ import java.util.Iterator;
 import java.util.Set;
 import java.util.regex.Matcher;
 
-abstract class Base {
-    double getVoltage() {
-        return 0;
-    }
-}
-
-class Ground extends Base {
-    static final double voltage = 0;
-}
-
-class Node extends Base {
+class Node {
     int nodeNumber;
     float previousVoltage = 0;
     float voltage = 0;
@@ -28,6 +18,15 @@ class Node extends Base {
 
     double getVoltage() {
         return voltage;
+    }
+}
+
+class Ground extends Node {
+    static final double voltage = 0;
+    Node[] node_array;
+
+    Ground(int a) {
+        super(a);
     }
 }
 
