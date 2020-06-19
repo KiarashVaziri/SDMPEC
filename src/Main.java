@@ -98,8 +98,8 @@ class CurrentSource extends Branch {
 
     @Override
     void updateBranch(Node a, Node b, float dt, float dv) {
-        previousCurrent = current;
         current = value;
+        previousCurrent = current;
     }
 }
 
@@ -191,6 +191,14 @@ class Circuit {
                 branchArray[numberOfBranches++] = new Inductor(startNode, endNode, value);
                 break;
         }
+
+    }
+
+    void add_currentDependentCS(String type, int startNode, int endNode, int k, int m, float value) {
+        switch (type) {
+            case "G":
+                branchArray[numberOfBranches++] = new VoltageDependentCS(startNode, endNode, k, m, value);
+        }
     }
 
     void initCircuit() {
@@ -243,13 +251,13 @@ public class Main {
         circuit.add("I", 0, 1, 10);
         circuit.add("R", 1, 2, 5);
         circuit.add("R", 2, 3, 6);
-        circuit.add("C", 2, 0, 1);
+        circuit.add("L", 2, 0, 0.01f);
         circuit.add("R", 3, 0, 4);
         circuit.initCircuit();
-        for (int k = 0; k < 100; k++) {
+        for (int k = 0; k < 1000; k++) {
             circuit.updateBranches();
             circuit.updateNodes();
-            if (k % 10 == 0) circuit.printData();
+            if (k % 100 == 0) circuit.printData();
         }
     }
 }
