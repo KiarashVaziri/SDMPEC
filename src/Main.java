@@ -288,7 +288,7 @@ class Circuit {
                     Value = Value * 10 + c[i] - 48;
                     i++;
                 }
-
+                circuit.add("R", Node1 , Node2 , Value);
             }
             else if(c[0] == 'C')
             {
@@ -317,6 +317,7 @@ class Circuit {
                     Value = Value * 10 + c[i] - 48;
                     i++;
                 }
+                circuit.add("C", Node1 , Node2 , Value);
             }
             else if(c[0] == 'L')
             {
@@ -345,6 +346,7 @@ class Circuit {
                     Value = Value * 10 + c[i] - 48;
                     i++;
                 }
+                circuit.add("L", Node1 , Node2 , Value);
             }
             else if(c[0] == 'I')
             {
@@ -436,6 +438,7 @@ class Circuit {
                     Value = Value * 10 + c[i] - 48;
                     i++;
                 }
+                circuit.add("V", Node1 , Node2 , Value);
             }
             else if(c[0] == 'G')
             {
