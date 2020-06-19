@@ -191,7 +191,6 @@ class Circuit {
                 branchArray[numberOfBranches++] = new Inductor(startNode, endNode, value);
                 break;
         }
-
     }
 
     void add_currentDependentCS(String type, int startNode, int endNode, int k, int m, float value) {
