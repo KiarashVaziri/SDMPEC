@@ -245,11 +245,7 @@ class Circuit {
             System.out.println("Branch: " + branchArray[j].getClass() + " voltage:" + branchArray[j].getVoltage(nodeArray[branchArray[j].port1], nodeArray[branchArray[j].port2]) + " current:" + branchArray[j].getCurrent());
         System.out.println("--------");
     }
-}
-
-//last update
-
- static void GetData() throws FileNotFoundException {
+    void GetData() throws FileNotFoundException {
         File Data = new File("Data.txt");
         Scanner sc;
         String s , Name;
@@ -288,7 +284,7 @@ class Circuit {
                     Value = Value * 10 + c[i] - 48;
                     i++;
                 }
-                circuit.add("R", Node1 , Node2 , Value);
+                add("R", Node1 , Node2 , Value);
             }
             else if(c[0] == 'C')
             {
@@ -317,7 +313,7 @@ class Circuit {
                     Value = Value * 10 + c[i] - 48;
                     i++;
                 }
-                circuit.add("C", Node1 , Node2 , Value);
+                add("C", Node1 , Node2 , Value);
             }
             else if(c[0] == 'L')
             {
@@ -346,7 +342,7 @@ class Circuit {
                     Value = Value * 10 + c[i] - 48;
                     i++;
                 }
-                circuit.add("L", Node1 , Node2 , Value);
+                add("L", Node1 , Node2 , Value);
             }
             else if(c[0] == 'I')
             {
@@ -438,7 +434,7 @@ class Circuit {
                     Value = Value * 10 + c[i] - 48;
                     i++;
                 }
-                circuit.add("V", Node1 , Node2 , Value);
+                add("V", Node1 , Node2 , Value);
             }
             else if(c[0] == 'G')
             {
@@ -527,8 +523,7 @@ class Circuit {
             s = sc.nextLine();
         }
     }
-
-//last update
+}
 
 public class Main {
     public static void main(String[] args) {
