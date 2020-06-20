@@ -267,7 +267,7 @@ class Circuit {
             e.printStackTrace();
         }
     }
-    //getda update
+    //getdata update
 
     void GetData() throws FileNotFoundException {
         File Data = new File("Data.txt");
