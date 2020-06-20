@@ -1,9 +1,8 @@
+import java.io.*;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 import java.util.regex.Matcher;
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 class Node {
@@ -245,6 +244,31 @@ class Circuit {
             System.out.println("Branch: " + branchArray[j].getClass() + " voltage:" + branchArray[j].getVoltage(nodeArray[branchArray[j].port1], nodeArray[branchArray[j].port2]) + " current:" + branchArray[j].getCurrent());
         System.out.println("--------");
     }
+
+    //getdata update
+    void readFile() throws FileNotFoundException {
+        File file = new File ("Circuit.txt");
+        Scanner sc;
+        try {
+            FileReader fileReader = new FileReader(file);
+            BufferedReader br = new BufferedReader(fileReader);
+            String line;
+            String[] info = new String[10];
+            line = br.readLine();
+            while(line!= null){
+                sc = new Scanner(line);
+                line = sc.nextLine();
+                info = line.split(" ");
+
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    //getda update
+
     void GetData() throws FileNotFoundException {
         File Data = new File("Data.txt");
         Scanner sc;
