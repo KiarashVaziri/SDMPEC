@@ -1,15 +1,16 @@
 class VoltageDependentCS extends Branch {
-    int type = 1;
-        /*there are two types:
-     1. dependent to a certain voltage
-     2. dependent to a certain current */
+    int type = 1;//G
+    /*there are two types:
+    1. dependent to a certain voltage
+    2. dependent to a certain current */
 
     float gain;
     int related_port1;
     int related_port2;
 
-    VoltageDependentCS(int i, int j, int k, int m, float value) {
-        super(i, j, value);
+    VoltageDependentCS(String name, int i, int j, int k, int m, float value) {
+        super(name, i, j, value);
+        this.name = name;
         port1 = i;
         port2 = j;
         this.gain = value;

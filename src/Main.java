@@ -107,8 +107,10 @@ class CurrentSource extends Branch {
 
     @Override
     void updateBranch(Node a, Node b, float dt, float dv) {
-        current = offset;
+        int k=1;
         previousCurrent = current;
+        current = (float) (offset + amplitude * Math.sin(frequency * k * dt + phase));
+        k++;
     }
 }
 
@@ -221,13 +223,6 @@ class Circuit {
         }
     }*/
 
-    void add_currentDependentCS(String type, int startNode, int endNode, int k, int m, float value) {
-        switch (type) {
-            case "G":
-                branchArray[numberOfBranches++] = new VoltageDependentCS(startNode, endNode, k, m, value);
-        }
-    }
-
     void initCircuit() {
         for (int j = 0; j <= numberOfNodes; j++) nodeArray[j] = new Node(j);
     }
@@ -271,9 +266,8 @@ class Circuit {
         System.out.println("--------");
     }
 
-    //getData update
     void readFile() throws FileNotFoundException {
-        File file = new File("Circuit.txt");
+        File file = new File("Input.txt");
         Scanner sc;
         try {
             FileReader fileReader = new FileReader(file);
@@ -311,7 +305,7 @@ class Circuit {
                     float amplitude = Float.parseFloat(info[4]);
                     float frequency = Float.parseFloat(info[5]);
                     float phase = Float.parseFloat(info[6]);
-                    CurrentSource cs = new CurrentSource(element_name,startNode,endNode,offset,amplitude,frequency,phase);
+                    CurrentSource cs = new CurrentSource(element_name, startNode, endNode, offset, amplitude, frequency, phase);
                     addElement(cs);
                 } else if (element_name.matches("V(\\d)+")) {
                     int startNode = Integer.parseInt(info[1]);
@@ -320,9 +314,25 @@ class Circuit {
                     float amplitude = Float.parseFloat(info[4]);
                     float frequency = Float.parseFloat(info[5]);
                     float phase = Float.parseFloat(info[6]);
-                    VoltageSource vs = new VoltageSource(element_name,startNode,endNode,offset,amplitude,frequency,phase);
+                    VoltageSource vs = new VoltageSource(element_name, startNode, endNode, offset, amplitude, frequency, phase);
                     addElement(vs);
+                } else if (element_name.matches("G(\\d)+")) {
+                    int startNode = Integer.parseInt(info[1]);
+                    int endNode = Integer.parseInt(info[2]);
+                    int related_port1 = Integer.parseInt(info[3]);
+                    int related_port2 = Integer.parseInt(info[4]);
+                    float gain = Float.parseFloat(info[5]);
+                    VoltageDependentCS voltageDependentCS = new VoltageDependentCS(element_name, startNode, endNode, related_port1, related_port2, gain);
+                    addElement(voltageDependentCS);
+                } else if (element_name.matches("F(\\d)+")) {
+                    int startNode = Integer.parseInt(info[1]);
+                    int endNode = Integer.parseInt(info[2]);
+                    String dependentElementName = info[3];
+                    float gain = Float.parseFloat(info[4]);
+                    CurrentDependentCS currentDependentCS = new CurrentDependentCS(element_name,startNode,endNode,dependentElementName,gain);
+                    addElement(currentDependentCS);
                 }
+                line = br.readLine();
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
