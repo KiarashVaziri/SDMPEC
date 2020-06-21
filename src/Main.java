@@ -44,7 +44,7 @@ class Branch {
     float voltage;
     float power;
 
-    public Branch(int startNode, int endNode, float value) {
+    public Branch(String name, int startNode, int endNode, float value) {
     }
 
     float getCurrent() {
@@ -60,8 +60,9 @@ class Branch {
 }
 
 class Resistor extends Branch {
-    Resistor(int a, int b, float r) {
-        super(a, b, r);
+    Resistor(String n, int a, int b, float r) {
+        super(n, a, b, r);
+        this.name = name;
         port1 = a;
         port2 = b;
         this.resistance = r;
@@ -82,15 +83,21 @@ class Resistor extends Branch {
 }
 
 class CurrentSource extends Branch {
-    final float value;
+    float offset;
+    float amplitude;
+    float frequency;
+    float phase;
 
-    CurrentSource(int a, int b, float value) {
-        super(a, b, value);
+    CurrentSource(String name, int a, int b, float offset, float amplitude, float frequency, float phase) {
+        super(name, a, b, offset);
+        this.name = name;
         port1 = a;
         port2 = b;
         //this.voltage = (float) (port1.getVoltage() - port2.getVoltage());
-        this.current = value;
-        this.value = value;
+        this.offset = offset;
+        this.amplitude = amplitude;
+        this.frequency = frequency;
+        this.phase = phase;
     }
 
     @Override
@@ -100,17 +107,27 @@ class CurrentSource extends Branch {
 
     @Override
     void updateBranch(Node a, Node b, float dt, float dv) {
-        current = value;
+        current = offset;
         previousCurrent = current;
     }
 }
 
 class VoltageSource extends Branch {
-    VoltageSource(int a, int b, float value) {
-        super(a, b, value);
+    float offset;
+    float amplitude;
+    float frequency;
+    float phase;
+
+    VoltageSource(String name, int a, int b, float offset, float amplitude, float frequency, float phase) {
+        super(name, a, b, offset);
+        this.name = name;
         port1 = a;
         port2 = b;
-        this.voltage = value;
+        //this.voltage = (float) (port1.getVoltage() - port2.getVoltage());
+        this.offset = offset;
+        this.amplitude = amplitude;
+        this.frequency = frequency;
+        this.phase = phase;
     }
 
     void updateBranch(Node s, Node e, float dt, float dv) {
@@ -119,8 +136,9 @@ class VoltageSource extends Branch {
 }
 
 class Capacitor extends Branch {
-    Capacitor(int a, int b, float value) {
-        super(a, b, value);
+    Capacitor(String name, int a, int b, float value) {
+        super(name, a, b, value);
+        this.name = name;
         port1 = a;
         port2 = b;
         this.capacity = value;
@@ -137,8 +155,9 @@ class Capacitor extends Branch {
 }
 
 class Inductor extends Branch {
-    Inductor(int a, int b, float value) {
-        super(a, b, value);
+    Inductor(String name, int a, int b, float value) {
+        super(name, a, b, value);
+        this.name = name;
         port1 = a;
         port2 = b;
         this.inductance = value;
@@ -169,7 +188,14 @@ class Circuit {
         this.dv = dv;
     }
 
-    void add(String type, int startNode, int endNode, float value) {
+    void addElement(Branch element) {
+        adjMatrix[element.port1][element.port2] = 1;
+        adjMatrix[element.port1][element.port2] = -1;
+        numberOfNodes = Math.max(numberOfNodes, Math.max(element.port1, element.port2));
+        branchArray[numberOfBranches++] = element;
+    }
+
+    /*void add(String type, int startNode, int endNode, float value) {
         adjMatrix[startNode][endNode] = 1;
         adjMatrix[endNode][startNode] = -1;
         //nodeSet.add(startNode);
@@ -193,7 +219,7 @@ class Circuit {
                 branchArray[numberOfBranches++] = new Inductor(startNode, endNode, value);
                 break;
         }
-    }
+    }*/
 
     void add_currentDependentCS(String type, int startNode, int endNode, int k, int m, float value) {
         switch (type) {
@@ -245,9 +271,9 @@ class Circuit {
         System.out.println("--------");
     }
 
-    //getdata update
+    //getData update
     void readFile() throws FileNotFoundException {
-        File file = new File ("Circuit.txt");
+        File file = new File("Circuit.txt");
         Scanner sc;
         try {
             FileReader fileReader = new FileReader(file);
@@ -255,11 +281,48 @@ class Circuit {
             String line;
             String[] info = new String[10];
             line = br.readLine();
-            while(line!= null){
+            while (line != null) {
                 sc = new Scanner(line);
                 line = sc.nextLine();
-                info = line.split(" ");
-
+                info = line.split("\\s+");
+                String element_name = new String(info[0]);
+                if (element_name.matches("R(\\d)+")) {
+                    int startNode = Integer.parseInt(info[1]);
+                    int endNode = Integer.parseInt(info[2]);
+                    float value = Float.parseFloat(info[3]);
+                    Resistor resistor = new Resistor(element_name, startNode, endNode, value);
+                    addElement(resistor);
+                } else if (element_name.matches("L(\\d)+")) {
+                    int startNode = Integer.parseInt(info[1]);
+                    int endNode = Integer.parseInt(info[2]);
+                    float value = Float.parseFloat(info[3]);
+                    Inductor inductor = new Inductor(element_name, startNode, endNode, value);
+                    addElement(inductor);
+                } else if (element_name.matches("C(\\d)+")) {
+                    int startNode = Integer.parseInt(info[1]);
+                    int endNode = Integer.parseInt(info[2]);
+                    float value = Float.parseFloat(info[3]);
+                    Capacitor capacitor = new Capacitor(element_name, startNode, endNode, value);
+                    addElement(capacitor);
+                } else if (element_name.matches("I(\\d)+")) {
+                    int startNode = Integer.parseInt(info[1]);
+                    int endNode = Integer.parseInt(info[2]);
+                    float offset = Float.parseFloat(info[3]);
+                    float amplitude = Float.parseFloat(info[4]);
+                    float frequency = Float.parseFloat(info[5]);
+                    float phase = Float.parseFloat(info[6]);
+                    CurrentSource cs = new CurrentSource(element_name,startNode,endNode,offset,amplitude,frequency,phase);
+                    addElement(cs);
+                } else if (element_name.matches("V(\\d)+")) {
+                    int startNode = Integer.parseInt(info[1]);
+                    int endNode = Integer.parseInt(info[2]);
+                    float offset = Float.parseFloat(info[3]);
+                    float amplitude = Float.parseFloat(info[4]);
+                    float frequency = Float.parseFloat(info[5]);
+                    float phase = Float.parseFloat(info[6]);
+                    VoltageSource vs = new VoltageSource(element_name,startNode,endNode,offset,amplitude,frequency,phase);
+                    addElement(vs);
+                }
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -267,315 +330,26 @@ class Circuit {
             e.printStackTrace();
         }
     }
-    //getdata update
-
-    void GetData() throws FileNotFoundException {
-        File Data = new File("Data.txt");
-        Scanner sc;
-        String s , Name;
-        char [] c;
-        int i = 0 , Node1 = 0 , Node2 = 0 , Node1D = 0 , Node2D = 0 , Value = 0 , ValueAC = 0 , Frequency = 0 , Phase = 0;
-        sc = new Scanner(Data);
-        s = sc.nextLine();
-        while(s != null)
-        {
-            c = new char[s.length()];
-            s.getChars(0 , s.length() , c , 0);
-            if(c[0] == 'R')
-            {
-                Node1 = 0;
-                Node2 = 0;
-                Value = 0;
-                i = 1;
-                while(c[i] != ' ')
-                    i++;
-                Name = s.substring(1 , i);
-                i++;
-                while(c[i] != ' ')
-                {
-                    Node1 = Node1 * 10 + c[i] - 48;
-                    i++;
-                }
-                i++;
-                while (c[i] != ' ')
-                {
-                    Node2 = Node2 * 10 + c[i] - 48;
-                    i++;
-                }
-                i++;
-                while (i < s.length())
-                {
-                    Value = Value * 10 + c[i] - 48;
-                    i++;
-                }
-                add("R", Node1 , Node2 , Value);
-            }
-            else if(c[0] == 'C')
-            {
-                Node1 = 0;
-                Node2 = 0;
-                Value = 0;
-                i = 1;
-                while(c[i] != ' ')
-                    i++;
-                Name = s.substring(1 , i);
-                i++;
-                while(c[i] != ' ')
-                {
-                    Node1 = Node1 * 10 + c[i] - 48;
-                    i++;
-                }
-                i++;
-                while (c[i] != ' ')
-                {
-                    Node2 = Node2 * 10 + c[i] - 48;
-                    i++;
-                }
-                i++;
-                while (i < s.length())
-                {
-                    Value = Value * 10 + c[i] - 48;
-                    i++;
-                }
-                add("C", Node1 , Node2 , Value);
-            }
-            else if(c[0] == 'L')
-            {
-                Node1 = 0;
-                Node2 = 0;
-                Value = 0;
-                i = 1;
-                while(c[i] != ' ')
-                    i++;
-                Name = s.substring(1 , i);
-                i++;
-                while(c[i] != ' ')
-                {
-                    Node1 = Node1 * 10 + c[i] - 48;
-                    i++;
-                }
-                i++;
-                while (c[i] != ' ')
-                {
-                    Node2 = Node2 * 10 + c[i] - 48;
-                    i++;
-                }
-                i++;
-                while (i < s.length())
-                {
-                    Value = Value * 10 + c[i] - 48;
-                    i++;
-                }
-                add("L", Node1 , Node2 , Value);
-            }
-            else if(c[0] == 'I')
-            {
-                Node1 = 0;
-                Node2 = 0;
-                Node1D = 0;
-                Node2D = 0;
-                Value = 0;
-                ValueAC = 0;
-                Frequency = 0;
-                Phase = 0;
-                i = 1;
-                while(c[i] != ' ')
-                    i++;
-                Name = s.substring(1 , i);
-                i++;
-                while(c[i] != ' ')
-                {
-                    Node1 = Node1 * 10 + c[i] - 48;
-                    i++;
-                }
-                i++;
-                while (c[i] != ' ')
-                {
-                    Node2 = Node2 * 10 + c[i] - 48;
-                    i++;
-                }
-                i++;
-                while (c[i] != ' ')
-                {
-                    Node1D = Node1D * 10 + c[i] - 48;
-                    i++;
-                }
-                i++;
-                while (c[i] != ' ')
-                {
-                    Node2D = Node2D * 10 + c[i] - 48;
-                    i++;
-                }
-                i++;
-                while(c[i] != ' ')
-                {
-                    Value = Value * 10 + c[i] - 48;
-                    i++;
-                }
-                i++;
-                while(c[i] != ' ')
-                {
-                    ValueAC = ValueAC * 10 + c[i] - 48;
-                    i++;
-                }
-                i++;
-                while(c[i] != ' ')
-                {
-                    Frequency = Frequency * 10 + c[i] - 48;
-                    i++;
-                }
-                i++;
-                while (i < s.length())
-                {
-                    Phase = Phase * 10 + c[i] - 48;
-                    i++;
-                }
-            }
-            else if(c[0] == 'V')
-            {
-                Node1 = 0;
-                Node2 = 0;
-                Value = 0;
-                i = 1;
-                while(c[i] != ' ')
-                    i++;
-                Name = s.substring(1 , i);
-                i++;
-                while(c[i] != ' ')
-                {
-                    Node1 = Node1 * 10 + c[i] - 48;
-                    i++;
-                }
-                i++;
-                while (c[i] != ' ')
-                {
-                    Node2 = Node2 * 10 + c[i] - 48;
-                    i++;
-                }
-                i++;
-                while (i < s.length())
-                {
-                    Value = Value * 10 + c[i] - 48;
-                    i++;
-                }
-                add("V", Node1 , Node2 , Value);
-            }
-            else if(c[0] == 'G')
-            {
-                Node1 = 0;
-                Node2 = 0;
-                Node1D = 0;
-                Node2D = 0;
-                Value = 0;
-                i = 1;
-                while(c[i] != ' ')
-                    i++;
-                Name = s.substring(1 , i);
-                i++;
-                while(c[i] != ' ')
-                {
-                    Node1 = Node1 * 10 + c[i] - 48;
-                    i++;
-                }
-                i++;
-                while (c[i] != ' ')
-                {
-                    Node2 = Node2 * 10 + c[i] - 48;
-                    i++;
-                }
-                i++;
-                while (c[i] != ' ')
-                {
-                    Node1D = Node1D * 10 + c[i] - 48;
-                    i++;
-                }
-                i++;
-                while (c[i] != ' ')
-                {
-                    Node2D = Node2D * 10 + c[i] - 48;
-                    i++;
-                }
-                i++;
-                while(i < s.length())
-                {
-                    Value = Value * 10 + c[i] - 48;
-                    i++;
-                }
-            }
-            else if(c[0] == 'F')
-            {
-                Node1 = 0;
-                Node2 = 0;
-                Node1D = 0;
-                Node2D = 0;
-                Value = 0;
-                i = 1;
-                while(c[i] != ' ')
-                    i++;
-                Name = s.substring(1 , i);
-                i++;
-                while(c[i] != ' ')
-                {
-                    Node1 = Node1 * 10 + c[i] - 48;
-                    i++;
-                }
-                i++;
-                while (c[i] != ' ')
-                {
-                    Node2 = Node2 * 10 + c[i] - 48;
-                    i++;
-                }
-                i++;
-                while (c[i] != ' ')
-                {
-                    Node1D = Node1D * 10 + c[i] - 48;
-                    i++;
-                }
-                i++;
-                while (c[i] != ' ')
-                {
-                    Node2D = Node2D * 10 + c[i] - 48;
-                    i++;
-                }
-                i++;
-                while(i < s.length())
-                {
-                    Value = Value * 10 + c[i] - 48;
-                    i++;
-                }
-            }
-            s = sc.nextLine();
-        }
-    }
 }
 
 public class Main {
     public static void main(String[] args) {
         Circuit circuit = new Circuit(0.1f, 0.1f);
-        circuit.add("I", 0, 1, 10);
+        /*circuit.add("I", 0, 1, 10);
         circuit.add("R", 1, 2, 5);
         circuit.add("R", 2, 3, 6);
         circuit.add("L", 2, 0, 0.01f);
-        circuit.add("R", 3, 0, 4);
+        circuit.add("R", 3, 0, 4);*/
+        try {
+            circuit.readFile();
+        } catch (FileNotFoundException e) {
+            System.out.println("Data file doesn't exist!");
+        }
         circuit.initCircuit();
         for (int k = 0; k < 1000; k++) {
             circuit.updateBranches();
             circuit.updateNodes();
             if (k % 100 == 0) circuit.printData();
         }
-        
-        
-        //last update
-        
-        /*try
-        {
-            getdata();
-        }
-        catch (FileNotFoundException e)
-        {
-            System.out.println("Data file doesn't exist!");
-        }*/
-        
-        // last update
     }
 }
