@@ -245,7 +245,7 @@ class Circuit {
         System.out.println("--------");
     }
 
-    // new getData
+    //getdata update
     void readFile() throws FileNotFoundException {
         File file = new File ("Circuit.txt");
         Scanner sc;
@@ -267,93 +267,109 @@ class Circuit {
             e.printStackTrace();
         }
     }
+    //getdata update
 
-    //last update
-    void getData() throws FileNotFoundException {
-        File Data = new File("Circuit.txt");
+    void GetData() throws FileNotFoundException {
+        File Data = new File("Data.txt");
         Scanner sc;
-        String s, Name;
-        char[] c;
-        int i = 0, Node1 = 0, Node2 = 0, Node1D = 0, Node2D = 0, Value = 0, ValueAC = 0, Frequency = 0, Phase = 0;
+        String s , Name;
+        char [] c;
+        int i = 0 , Node1 = 0 , Node2 = 0 , Node1D = 0 , Node2D = 0 , Value = 0 , ValueAC = 0 , Frequency = 0 , Phase = 0;
         sc = new Scanner(Data);
         s = sc.nextLine();
-        while (s != null) {
+        while(s != null)
+        {
             c = new char[s.length()];
-            s.getChars(0, s.length(), c, 0);
-            System.out.println((" "+c));
-            if (c[0] == 'R') {
+            s.getChars(0 , s.length() , c , 0);
+            if(c[0] == 'R')
+            {
                 Node1 = 0;
                 Node2 = 0;
                 Value = 0;
                 i = 1;
-                while (c[i] != ' ')
+                while(c[i] != ' ')
                     i++;
-                Name = s.substring(1, i);
+                Name = s.substring(1 , i);
                 i++;
-                while (c[i] != ' ') {
+                while(c[i] != ' ')
+                {
                     Node1 = Node1 * 10 + c[i] - 48;
                     i++;
                 }
                 i++;
-                while (c[i] != ' ') {
+                while (c[i] != ' ')
+                {
                     Node2 = Node2 * 10 + c[i] - 48;
                     i++;
                 }
                 i++;
-                while (i < s.length()) {
+                while (i < s.length())
+                {
                     Value = Value * 10 + c[i] - 48;
                     i++;
                 }
-                add("R", Node1, Node2, Value);
-            } else if (c[0] == 'C') {
+                add("R", Node1 , Node2 , Value);
+            }
+            else if(c[0] == 'C')
+            {
                 Node1 = 0;
                 Node2 = 0;
                 Value = 0;
                 i = 1;
-                while (c[i] != ' ')
+                while(c[i] != ' ')
                     i++;
-                Name = s.substring(1, i);
+                Name = s.substring(1 , i);
                 i++;
-                while (c[i] != ' ') {
+                while(c[i] != ' ')
+                {
                     Node1 = Node1 * 10 + c[i] - 48;
                     i++;
                 }
                 i++;
-                while (c[i] != ' ') {
+                while (c[i] != ' ')
+                {
                     Node2 = Node2 * 10 + c[i] - 48;
                     i++;
                 }
                 i++;
-                while (i < s.length()) {
+                while (i < s.length())
+                {
                     Value = Value * 10 + c[i] - 48;
                     i++;
                 }
-                add("C", Node1, Node2, Value);
-            } else if (c[0] == 'L') {
+                add("C", Node1 , Node2 , Value);
+            }
+            else if(c[0] == 'L')
+            {
                 Node1 = 0;
                 Node2 = 0;
                 Value = 0;
                 i = 1;
-                while (c[i] != ' ')
+                while(c[i] != ' ')
                     i++;
-                Name = s.substring(1, i);
+                Name = s.substring(1 , i);
                 i++;
-                while (c[i] != ' ') {
+                while(c[i] != ' ')
+                {
                     Node1 = Node1 * 10 + c[i] - 48;
                     i++;
                 }
                 i++;
-                while (c[i] != ' ') {
+                while (c[i] != ' ')
+                {
                     Node2 = Node2 * 10 + c[i] - 48;
                     i++;
                 }
                 i++;
-                while (i < s.length()) {
+                while (i < s.length())
+                {
                     Value = Value * 10 + c[i] - 48;
                     i++;
                 }
-                add("L", Node1, Node2, Value);
-            } else if (c[0] == 'I') {
+                add("L", Node1 , Node2 , Value);
+            }
+            else if(c[0] == 'I')
+            {
                 Node1 = 0;
                 Node2 = 0;
                 Node1D = 0;
@@ -363,140 +379,167 @@ class Circuit {
                 Frequency = 0;
                 Phase = 0;
                 i = 1;
-                while (c[i] != ' ')
+                while(c[i] != ' ')
                     i++;
-                Name = s.substring(1, i);
+                Name = s.substring(1 , i);
                 i++;
-                while (c[i] != ' ') {
+                while(c[i] != ' ')
+                {
                     Node1 = Node1 * 10 + c[i] - 48;
                     i++;
                 }
                 i++;
-                while (c[i] != ' ') {
+                while (c[i] != ' ')
+                {
                     Node2 = Node2 * 10 + c[i] - 48;
                     i++;
                 }
                 i++;
-                while (c[i] != ' ') {
+                while (c[i] != ' ')
+                {
                     Node1D = Node1D * 10 + c[i] - 48;
                     i++;
                 }
                 i++;
-                while (c[i] != ' ') {
+                while (c[i] != ' ')
+                {
                     Node2D = Node2D * 10 + c[i] - 48;
                     i++;
                 }
                 i++;
-                while (c[i] != ' ') {
+                while(c[i] != ' ')
+                {
                     Value = Value * 10 + c[i] - 48;
                     i++;
                 }
                 i++;
-                while (c[i] != ' ') {
+                while(c[i] != ' ')
+                {
                     ValueAC = ValueAC * 10 + c[i] - 48;
                     i++;
                 }
                 i++;
-                while (c[i] != ' ') {
+                while(c[i] != ' ')
+                {
                     Frequency = Frequency * 10 + c[i] - 48;
                     i++;
                 }
                 i++;
-                while (i < s.length()) {
+                while (i < s.length())
+                {
                     Phase = Phase * 10 + c[i] - 48;
                     i++;
                 }
-            } else if (c[0] == 'V') {
+            }
+            else if(c[0] == 'V')
+            {
                 Node1 = 0;
                 Node2 = 0;
                 Value = 0;
                 i = 1;
-                while (c[i] != ' ')
+                while(c[i] != ' ')
                     i++;
-                Name = s.substring(1, i);
+                Name = s.substring(1 , i);
                 i++;
-                while (c[i] != ' ') {
+                while(c[i] != ' ')
+                {
                     Node1 = Node1 * 10 + c[i] - 48;
                     i++;
                 }
                 i++;
-                while (c[i] != ' ') {
+                while (c[i] != ' ')
+                {
                     Node2 = Node2 * 10 + c[i] - 48;
                     i++;
                 }
                 i++;
-                while (i < s.length()) {
+                while (i < s.length())
+                {
                     Value = Value * 10 + c[i] - 48;
                     i++;
                 }
-                add("V", Node1, Node2, Value);
-            } else if (c[0] == 'G') {
+                add("V", Node1 , Node2 , Value);
+            }
+            else if(c[0] == 'G')
+            {
                 Node1 = 0;
                 Node2 = 0;
                 Node1D = 0;
                 Node2D = 0;
                 Value = 0;
                 i = 1;
-                while (c[i] != ' ')
+                while(c[i] != ' ')
                     i++;
-                Name = s.substring(1, i);
+                Name = s.substring(1 , i);
                 i++;
-                while (c[i] != ' ') {
+                while(c[i] != ' ')
+                {
                     Node1 = Node1 * 10 + c[i] - 48;
                     i++;
                 }
                 i++;
-                while (c[i] != ' ') {
+                while (c[i] != ' ')
+                {
                     Node2 = Node2 * 10 + c[i] - 48;
                     i++;
                 }
                 i++;
-                while (c[i] != ' ') {
+                while (c[i] != ' ')
+                {
                     Node1D = Node1D * 10 + c[i] - 48;
                     i++;
                 }
                 i++;
-                while (c[i] != ' ') {
+                while (c[i] != ' ')
+                {
                     Node2D = Node2D * 10 + c[i] - 48;
                     i++;
                 }
                 i++;
-                while (i < s.length()) {
+                while(i < s.length())
+                {
                     Value = Value * 10 + c[i] - 48;
                     i++;
                 }
-            } else if (c[0] == 'F') {
+            }
+            else if(c[0] == 'F')
+            {
                 Node1 = 0;
                 Node2 = 0;
                 Node1D = 0;
                 Node2D = 0;
                 Value = 0;
                 i = 1;
-                while (c[i] != ' ')
+                while(c[i] != ' ')
                     i++;
-                Name = s.substring(1, i);
+                Name = s.substring(1 , i);
                 i++;
-                while (c[i] != ' ') {
+                while(c[i] != ' ')
+                {
                     Node1 = Node1 * 10 + c[i] - 48;
                     i++;
                 }
                 i++;
-                while (c[i] != ' ') {
+                while (c[i] != ' ')
+                {
                     Node2 = Node2 * 10 + c[i] - 48;
                     i++;
                 }
                 i++;
-                while (c[i] != ' ') {
+                while (c[i] != ' ')
+                {
                     Node1D = Node1D * 10 + c[i] - 48;
                     i++;
                 }
                 i++;
-                while (c[i] != ' ') {
+                while (c[i] != ' ')
+                {
                     Node2D = Node2D * 10 + c[i] - 48;
                     i++;
                 }
                 i++;
-                while (i < s.length()) {
+                while(i < s.length())
+                {
                     Value = Value * 10 + c[i] - 48;
                     i++;
                 }
@@ -505,28 +548,34 @@ class Circuit {
         }
     }
 }
-//last update
 
 public class Main {
     public static void main(String[] args) {
         Circuit circuit = new Circuit(0.1f, 0.1f);
-        /*circuit.add("I", 0, 1, 10);
+        circuit.add("I", 0, 1, 10);
         circuit.add("R", 1, 2, 5);
         circuit.add("R", 2, 3, 6);
         circuit.add("L", 2, 0, 0.01f);
-        circuit.add("R", 3, 0, 4);*/
-        try {
-            circuit.getData();
-        } catch (FileNotFoundException e) {
-            System.out.println("Data file doesn't exist!");
-        }
-
+        circuit.add("R", 3, 0, 4);
         circuit.initCircuit();
-
         for (int k = 0; k < 1000; k++) {
             circuit.updateBranches();
             circuit.updateNodes();
             if (k % 100 == 0) circuit.printData();
         }
+        
+        
+        //last update
+        
+        /*try
+        {
+            getdata();
+        }
+        catch (FileNotFoundException e)
+        {
+            System.out.println("Data file doesn't exist!");
+        }*/
+        
+        // last update
     }
 }
