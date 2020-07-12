@@ -5,6 +5,14 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.Scanner;
 import java.util.regex.Pattern;
+import javax.imageio.ImageIO;
+import javax.swing.*;
+import javax.swing.border.Border;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.*;
 
 class Node {
     int nodeNumber;
@@ -559,6 +567,881 @@ class Circuit {
     }
 }
 
+//Phase two
+class ResistorPanel extends JPanel
+{
+    int node1x , node1y , node2x , node2y;
+    ResistorPanel(int node1 , int node2)
+    {
+        node1x = ((node1 - 1) % 6) * 100 + 50;
+        node1y = 450 - (node1 - 1) / 6 * 100;
+        node2x = ((node2 - 1) % 6) * 100 + 50;
+        node2y = 450 - (node2 - 1) / 6 * 100;
+        System.out.printf("%d     %d\n%d     %d#\n" ,  node1x , node1y , node2x , node2y);
+        setBounds((node1x + node2x) / 2 - 50 , (node1y + node2y) / 2 - 55 , 100 ,105);
+        Color color = new Color(1 , 1  ,1 , 1);
+        setBackground(color);
+        BufferedImage ResistorImage;
+        JLabel ResistorLabel;
+        if(node1x == node2x)
+        {
+            try
+            {
+                ResistorImage = ImageIO.read(new File("icons/Vertical Resistor.png"));
+                ResistorLabel = new JLabel(new ImageIcon(ResistorImage));
+                add(ResistorLabel);
+            }
+            catch (IOException e)
+            {
+                e.printStackTrace();
+            }
+        }
+        else if(node1y == node2y)
+        {
+            try
+            {
+                ResistorImage = ImageIO.read(new File("icons/Horizontal Resistor.png"));
+                ResistorLabel = new JLabel(new ImageIcon(ResistorImage));
+                add(ResistorLabel);
+            }
+            catch (IOException e)
+            {
+                e.printStackTrace();
+            }
+        }
+    }
+}
+class CapacitorPanel extends JPanel
+{
+    int node1x , node1y , node2x , node2y;
+    CapacitorPanel(int node1 , int node2)
+    {
+        node1x = ((node1 - 1) % 6) * 100 + 50;
+        node1y = 450 - (node1 - 1) / 6 * 100;
+        node2x = ((node2 - 1) % 6) * 100 + 50;
+        node2y = 450 - (node2 - 1) / 6 * 100;
+        setBounds((node1x + node2x) / 2 - 50 , (node1y + node2y) / 2 - 55 , 100 ,105);
+        Color color = new Color(1 , 1  ,1 , 1);
+        setBackground(color);
+        BufferedImage CapacitorImage;
+        JLabel CapacitorLabel;
+        if(node1x == node2x)
+        {
+            try
+            {
+                CapacitorImage = ImageIO.read(new File("icons/Vertical Capacitor.png"));
+                CapacitorLabel = new JLabel(new ImageIcon(CapacitorImage));
+                add(CapacitorLabel);
+            }
+            catch (IOException e)
+            {
+                e.printStackTrace();
+            }
+        }
+        else if(node1y == node2y)
+        {
+            try
+            {
+                CapacitorImage = ImageIO.read(new File("icons/Horizontal Capacitor.png"));
+                CapacitorLabel = new JLabel(new ImageIcon(CapacitorImage));
+                add(CapacitorLabel);
+            }
+            catch (IOException e)
+            {
+                e.printStackTrace();
+            }
+        }
+    }
+}
+class InductorPanel extends JPanel
+{
+    int node1x , node1y , node2x , node2y;
+    InductorPanel(int node1 , int node2)
+    {
+        node1x = ((node1 - 1) % 6) * 100 + 50;
+        node1y = 450 - (node1 - 1) / 6 * 100;
+        node2x = ((node2 - 1) % 6) * 100 + 50;
+        node2y = 450 - (node2 - 1) / 6 * 100;
+        setBounds((node1x + node2x) / 2 - 50 , (node1y + node2y) / 2 - 55 , 100 ,105);
+        Color color = new Color(1 , 1  ,1 , 1);
+        setBackground(color);
+        BufferedImage InductorImage;
+        JLabel InductorLabel;
+        if(node1x == node2x)
+        {
+            try
+            {
+                InductorImage = ImageIO.read(new File("icons/Vertical Inductor.png"));
+                InductorLabel = new JLabel(new ImageIcon(InductorImage));
+                add(InductorLabel);
+            }
+            catch (IOException e)
+            {
+                e.printStackTrace();
+            }
+        }
+        else if(node1y == node2y)
+        {
+            try
+            {
+                InductorImage = ImageIO.read(new File("icons/Horizontal Inductor.png"));
+                InductorLabel = new JLabel(new ImageIcon(InductorImage));
+                add(InductorLabel);
+            }
+            catch (IOException e)
+            {
+                e.printStackTrace();
+            }
+        }
+    }
+}
+class VoltageDCPanel extends  JPanel
+{
+    int node1x , node1y , node2x , node2y;
+    VoltageDCPanel(int node1 , int node2)
+    {
+        node1x = ((node1 - 1) % 6) * 100 + 50;
+        node1y = 450 - (node1 - 1) / 6 * 100;
+        node2x = ((node2 - 1) % 6) * 100 + 50;
+        node2y = 450 - (node2 - 1) / 6 * 100;
+        setBounds((node1x + node2x) / 2 - 50 , (node1y + node2y) / 2 - 55 , 100 ,105);
+        Color color = new Color(1 , 1  ,1 , 1);
+        setBackground(color);
+        BufferedImage VoltageDCImage;
+        JLabel VoltageDCLabel;
+        if(node1x == node2x && node1y > node2y)
+        {
+            try
+            {
+                VoltageDCImage = ImageIO.read(new File("icons/Up side VoltageDC.png"));
+                VoltageDCLabel = new JLabel(new ImageIcon(VoltageDCImage));
+                add(VoltageDCLabel);
+            }
+            catch (IOException e)
+            {
+                e.printStackTrace();
+            }
+        }
+        else if(node1x == node2x && node2y > node1y)
+        {
+            try
+            {
+                VoltageDCImage = ImageIO.read(new File("icons/Down side VoltageDC.png"));
+                VoltageDCLabel = new JLabel(new ImageIcon(VoltageDCImage));
+                add(VoltageDCLabel);
+            }
+            catch (IOException e)
+            {
+                e.printStackTrace();
+            }
+        }
+        else if(node1y == node2y && node1x < node2x)
+        {
+            try
+            {
+                VoltageDCImage = ImageIO.read(new File("icons/Right side VoltageDC.png"));
+                VoltageDCLabel = new JLabel(new ImageIcon(VoltageDCImage));
+                add(VoltageDCLabel);
+            }
+            catch (IOException e)
+            {
+                e.printStackTrace();
+            }
+        }
+        else if(node1y == node2y && node1x > node2x)
+        {
+            try
+            {
+                VoltageDCImage = ImageIO.read(new File("icons/Left side VoltageDC.png"));
+                VoltageDCLabel = new JLabel(new ImageIcon(VoltageDCImage));
+                add(VoltageDCLabel);
+            }
+            catch (IOException e)
+            {
+                e.printStackTrace();
+            }
+        }
+    }
+}
+class VoltageACPanel extends  JPanel
+{
+    int node1x , node1y , node2x , node2y;
+    VoltageACPanel(int node1 , int node2)
+    {
+        node1x = ((node1 - 1) % 6) * 100 + 50;
+        node1y = 450 - (node1 - 1) / 6 * 100;
+        node2x = ((node2 - 1) % 6) * 100 + 50;
+        node2y = 450 - (node2 - 1) / 6 * 100;
+        setBounds((node1x + node2x) / 2 - 50 , (node1y + node2y) / 2 - 55 , 100 ,105);
+        Color color = new Color(1 , 1  ,1 , 1);
+        setBackground(color);
+        BufferedImage VoltageACImage;
+        JLabel VoltageACLabel;
+        if(node1x == node2x && node1y > node2y)
+        {
+            try
+            {
+                VoltageACImage = ImageIO.read(new File("icons/Up side VoltageAC.png"));
+                VoltageACLabel = new JLabel(new ImageIcon(VoltageACImage));
+                add(VoltageACLabel);
+            }
+            catch (IOException e)
+            {
+                e.printStackTrace();
+            }
+        }
+        else if(node1x == node2x && node2y > node1y)
+        {
+            try
+            {
+                VoltageACImage = ImageIO.read(new File("icons/Down side VoltageAC.png"));
+                VoltageACLabel = new JLabel(new ImageIcon(VoltageACImage));
+                add(VoltageACLabel);
+            }
+            catch (IOException e)
+            {
+                e.printStackTrace();
+            }
+        }
+        else if(node1y == node2y && node1x < node2x)
+        {
+            try
+            {
+                VoltageACImage = ImageIO.read(new File("icons/Right side VoltageAC.png"));
+                VoltageACLabel = new JLabel(new ImageIcon(VoltageACImage));
+                add(VoltageACLabel);
+            }
+            catch (IOException e)
+            {
+                e.printStackTrace();
+            }
+        }
+        else if(node1y == node2y && node1x > node2x)
+        {
+            try
+            {
+                VoltageACImage = ImageIO.read(new File("icons/Left side VoltageAC.png"));
+                VoltageACLabel = new JLabel(new ImageIcon(VoltageACImage));
+                add(VoltageACLabel);
+            }
+            catch (IOException e)
+            {
+                e.printStackTrace();
+            }
+        }
+    }
+}
+class CurrentDCPanel extends  JPanel
+{
+    int node1x , node1y , node2x , node2y;
+    CurrentDCPanel(int node1 , int node2)
+    {
+        node1x = ((node1 - 1) % 6) * 100 + 50;
+        node1y = 450 - (node1 - 1) / 6 * 100;
+        node2x = ((node2 - 1) % 6) * 100 + 50;
+        node2y = 450 - (node2 - 1) / 6 * 100;
+        setBounds((node1x + node2x) / 2 - 50 , (node1y + node2y) / 2 - 55 , 100 ,105);
+        Color color = new Color(1 , 1  ,1 , 1);
+        setBackground(color);
+        BufferedImage CurrentDCImage;
+        JLabel CurrentDCLabel;
+        if(node1x == node2x && node1y > node2y)
+        {
+            try
+            {
+                CurrentDCImage = ImageIO.read(new File("icons/Up side CurrentDC.png"));
+                CurrentDCLabel = new JLabel(new ImageIcon(CurrentDCImage));
+                add(CurrentDCLabel);
+            }
+            catch (IOException e)
+            {
+                e.printStackTrace();
+            }
+        }
+        else if(node1x == node2x && node2y > node1y)
+        {
+            try
+            {
+                CurrentDCImage = ImageIO.read(new File("icons/Down side CurrentDC.png"));
+                CurrentDCLabel = new JLabel(new ImageIcon(CurrentDCImage));
+                add(CurrentDCLabel);
+            }
+            catch (IOException e)
+            {
+                e.printStackTrace();
+            }
+        }
+        else if(node1y == node2y && node1x < node2x)
+        {
+            try
+            {
+                CurrentDCImage = ImageIO.read(new File("icons/Right side CurrentDC.png"));
+                CurrentDCLabel = new JLabel(new ImageIcon(CurrentDCImage));
+                add(CurrentDCLabel);
+            }
+            catch (IOException e)
+            {
+                e.printStackTrace();
+            }
+        }
+        else if(node1y == node2y && node1x > node2x)
+        {
+            try
+            {
+                CurrentDCImage = ImageIO.read(new File("icons/Left side CurrentDC.png"));
+                CurrentDCLabel = new JLabel(new ImageIcon(CurrentDCImage));
+                add(CurrentDCLabel);
+            }
+            catch (IOException e)
+            {
+                e.printStackTrace();
+            }
+        }
+    }
+}
+class CurrentACPanel extends  JPanel
+{
+    int node1x , node1y , node2x , node2y;
+    CurrentACPanel(int node1 , int node2)
+    {
+        node1x = ((node1 - 1) % 6) * 100 + 50;
+        node1y = 450 - (node1 - 1) / 6 * 100;
+        node2x = ((node2 - 1) % 6) * 100 + 50;
+        node2y = 450 - (node2 - 1) / 6 * 100;
+        setBounds((node1x + node2x) / 2 - 50 , (node1y + node2y) / 2 - 55 , 100 ,105);
+        Color color = new Color(1 , 1  ,1 , 1);
+        setBackground(color);
+        BufferedImage CurrentACImage;
+        JLabel CurrentACLabel;
+        if(node1x == node2x && node1y > node2y)
+        {
+            try
+            {
+                CurrentACImage = ImageIO.read(new File("icons/Up side CurrentAC.png"));
+                CurrentACLabel = new JLabel(new ImageIcon(CurrentACImage));
+                add(CurrentACLabel);
+            }
+            catch (IOException e)
+            {
+                e.printStackTrace();
+            }
+        }
+        else if(node1x == node2x && node2y > node1y)
+        {
+            try
+            {
+                CurrentACImage = ImageIO.read(new File("icons/Down side CurrentAC.png"));
+                CurrentACLabel = new JLabel(new ImageIcon(CurrentACImage));
+                add(CurrentACLabel);
+            }
+            catch (IOException e)
+            {
+                e.printStackTrace();
+            }
+        }
+        else if(node1y == node2y && node1x < node2x)
+        {
+            try
+            {
+                CurrentACImage = ImageIO.read(new File("icons/Right side CurrentAC.png"));
+                CurrentACLabel = new JLabel(new ImageIcon(CurrentACImage));
+                add(CurrentACLabel);
+            }
+            catch (IOException e)
+            {
+                e.printStackTrace();
+            }
+        }
+        else if(node1y == node2y && node1x > node2x)
+        {
+            try
+            {
+                CurrentACImage = ImageIO.read(new File("icons/Left side CurrentAC.png"));
+                CurrentACLabel = new JLabel(new ImageIcon(CurrentACImage));
+                add(CurrentACLabel);
+            }
+            catch (IOException e)
+            {
+                e.printStackTrace();
+            }
+        }
+    }
+}
+class DependentCurrentPanel extends  JPanel
+{
+    int node1x , node1y , node2x , node2y;
+    DependentCurrentPanel(int node1 , int node2)
+    {
+        node1x = ((node1 - 1) % 6) * 100 + 50;
+        node1y = 450 - (node1 - 1) / 6 * 100;
+        node2x = ((node2 - 1) % 6) * 100 + 50;
+        node2y = 450 - (node2 - 1) / 6 * 100;
+        setBounds((node1x + node2x) / 2 - 50 , (node1y + node2y) / 2 - 55 , 100 ,105);
+        Color color = new Color(1 , 1  ,1 , 1);
+        setBackground(color);
+        BufferedImage DependentCurrentImage;
+        JLabel DependentCurrentLabel;
+        if(node1x == node2x && node1y > node2y)
+        {
+            try
+            {
+                DependentCurrentImage = ImageIO.read(new File("icons/Up side DependentCurrent.png"));
+                DependentCurrentLabel = new JLabel(new ImageIcon(DependentCurrentImage));
+                add(DependentCurrentLabel);
+            }
+            catch (IOException e)
+            {
+                e.printStackTrace();
+            }
+        }
+        else if(node1x == node2x && node2y > node1y)
+        {
+            try
+            {
+                DependentCurrentImage = ImageIO.read(new File("icons/Down side DependentCurrent.png"));
+                DependentCurrentLabel = new JLabel(new ImageIcon(DependentCurrentImage));
+                add(DependentCurrentLabel);
+            }
+            catch (IOException e)
+            {
+                e.printStackTrace();
+            }
+        }
+        else if(node1y == node2y && node1x < node2x)
+        {
+            try
+            {
+                DependentCurrentImage = ImageIO.read(new File("icons/Right side DependentCurrent.png"));
+                DependentCurrentLabel = new JLabel(new ImageIcon(DependentCurrentImage));
+                add(DependentCurrentLabel);
+            }
+            catch (IOException e)
+            {
+                e.printStackTrace();
+            }
+        }
+        else if(node1y == node2y && node1x > node2x)
+        {
+            try
+            {
+                DependentCurrentImage = ImageIO.read(new File("icons/Left side DependentCurrent.png"));
+                DependentCurrentLabel = new JLabel(new ImageIcon(DependentCurrentImage));
+                add(DependentCurrentLabel);
+            }
+            catch (IOException e)
+            {
+                e.printStackTrace();
+            }
+        }
+    }
+}
+class DependentVoltagePanel extends  JPanel
+{
+    int node1x , node1y , node2x , node2y;
+    DependentVoltagePanel(int node1 , int node2)
+    {
+        node1x = ((node1 - 1) % 6) * 100 + 50;
+        node1y = 450 - (node1 - 1) / 6 * 100;
+        node2x = ((node2 - 1) % 6) * 100 + 50;
+        node2y = 450 - (node2 - 1) / 6 * 100;
+        setBounds((node1x + node2x) / 2 - 50 , (node1y + node2y) / 2 - 55 , 100 ,105);
+        Color color = new Color(1 , 1  ,1 , 1);
+        setBackground(color);
+        BufferedImage DependentVoltageImage;
+        JLabel DependentVoltageLabel;
+        if(node1x == node2x && node1y > node2y)
+        {
+            try
+            {
+                DependentVoltageImage = ImageIO.read(new File("icons/Up side DependentVoltage.png"));
+                DependentVoltageLabel = new JLabel(new ImageIcon(DependentVoltageImage));
+                add(DependentVoltageLabel);
+            }
+            catch (IOException e)
+            {
+                e.printStackTrace();
+            }
+        }
+        else if(node1x == node2x && node2y > node1y)
+        {
+            try
+            {
+                DependentVoltageImage = ImageIO.read(new File("icons/Down side DependentVoltage.png"));
+                DependentVoltageLabel = new JLabel(new ImageIcon(DependentVoltageImage));
+                add(DependentVoltageLabel);
+            }
+            catch (IOException e)
+            {
+                e.printStackTrace();
+            }
+        }
+        else if(node1y == node2y && node1x < node2x)
+        {
+            try
+            {
+                DependentVoltageImage = ImageIO.read(new File("icons/Right side DependentVoltage.png"));
+                DependentVoltageLabel = new JLabel(new ImageIcon(DependentVoltageImage));
+                add(DependentVoltageLabel);
+            }
+            catch (IOException e)
+            {
+                e.printStackTrace();
+            }
+        }
+        else if(node1y == node2y && node1x > node2x)
+        {
+            try
+            {
+                DependentVoltageImage = ImageIO.read(new File("icons/Left side DependentVoltage.png"));
+                DependentVoltageLabel = new JLabel(new ImageIcon(DependentVoltageImage));
+                add(DependentVoltageLabel);
+            }
+            catch (IOException e)
+            {
+                e.printStackTrace();
+            }
+        }
+    }
+}
+class GNDPanel extends JPanel
+{
+    int nodex , nodey;
+    GNDPanel(int node)
+    {
+        nodex = ((node - 1) % 6) * 100 + 50;
+        nodey = 450 - (node - 1) / 6 * 100;
+        setBounds(nodex , nodey - 5 , 100 , 100);
+        Color color = new Color(1 , 1  ,1 , 1);
+        setBackground(color);
+        BufferedImage GNDImage;
+        JLabel GNDLabel;
+        try
+        {
+            GNDImage = ImageIO.read(new File("icons/GND.png"));
+            GNDLabel = new JLabel(new ImageIcon(GNDImage));
+            add(GNDLabel);
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+    }
+}
+class WirePanel extends JPanel
+{
+    int node1x , node1y , node2x , node2y;
+    WirePanel(int node1 , int node2)
+    {
+        node1x = ((node1 - 1) % 6) * 100 + 50;
+        node1y = 450 - (node1 - 1) / 6 * 100;
+        node2x = ((node2 - 1) % 6) * 100 + 50;
+        node2y = 450 - (node2 - 1) / 6 * 100;
+        setBounds((node1x + node2x) / 2 - 50 , (node1y + node2y) / 2 - 50 , 100 ,100);
+        Color color = new Color(1 , 1  ,1 , 1);
+        setBackground(color);
+    }
+    public void paint(Graphics g)
+    {
+        Graphics2D graphics = (Graphics2D) g;
+        graphics.setStroke(new BasicStroke(2));
+        graphics.setColor(Color.BLACK);
+        if(node1x == node2x)
+            graphics.drawLine(50 , 0 , 50 , 100);
+        else if(node1y == node2y)
+            graphics.drawLine(0 , 50 , 100 , 50);
+    }
+}
+class Element
+{
+    int dx , dy , n1i , n1j , n2i , n2j;
+    Element(JComponent frame , int adjMatrix [][] , char type , int node1 , int node2)
+    {
+        dx = (node2 - 1) % 6 - (node1 - 1) % 6;
+        dy = (node1 - 1) / 6 - (node2 - 1) / 6;
+        n1i = (node1 - 1) % 6;
+        n1j = 4 - (node1 - 1) / 6;
+        n2i = (node2 - 1) % 6;
+        n2j = 4 - (node2 - 1) / 6;
+        if(node1 != 0 && node2 != 0)
+        {
+            adjMatrix[n1i][n1j] = 1;
+            adjMatrix[n2i][n2j] = 1;
+        }
+        Draw(frame , adjMatrix , type , node1 , node2 , dx , dy);
+    }
+    void Draw(JComponent frame , int adjMatrix [][] , char type , int node1 , int node2 , int dx , int dy)
+    {
+        int n1i , n1j;
+        n1i = (node1 - 1) % 6;
+        n1j = 4 - (node1 - 1) / 6;
+        n2i = (node2 - 1) % 6;
+        n2j = 4 - (node2 - 1) / 6;
+        if(node1 == 0)
+        {
+            if(n2i + 1 <= 5 && adjMatrix[n2i + 1][n2j] == 0)
+                node1 = node2 + 1;
+            else if(n2i - 1 >= 0 && adjMatrix[n2i - 1][n2j] == 0)
+                node1 = node2 - 1;
+            else if(n2j + 1 <= 4 && adjMatrix[n2i][n2j + 1] == 0)
+                node1 = node2 - 6;
+            else if(n2j - 1 >= 0 && adjMatrix[n2i][n2j - 1] == 0)
+                node1 = node2 + 6;
+            GNDPanel g = new GNDPanel(node1);
+            frame.add(g);
+            Draw(frame , adjMatrix , type , node1 , node2 , dx , dy);
+        }
+        else if(node2 == 0)
+        {
+            if(n1i + 1 <= 5 && adjMatrix[n1i + 1][n1j] == 0)
+                node2 = node1 + 1;
+            else if(n1i - 1 >= 0 && adjMatrix[n1i - 1][n1j] == 0)
+                node2 = node1 - 1;
+            else if(n1j + 1 <= 4 && adjMatrix[n1i][n1j + 1] == 0)
+                node2 = node1 - 6;
+            else if(n1j - 1 >= 0 && adjMatrix[n1i][n1j - 1] == 0)
+                node2 = node1 + 6;
+            GNDPanel g = new GNDPanel(node2);
+            frame.add(g);
+            Draw(frame , adjMatrix , type , node1 , node2 , dx , dy);
+        }
+        else if((Math.abs(n1i - n2i) == 1 && n1j == n2j) || (Math.abs(n1j - n2j) == 1 && n1i == n2i))
+        {
+            if(type == 'R')
+            {
+                ResistorPanel r = new ResistorPanel(node1 , node2);
+                frame.add(r);
+            }
+            else if(type == 'C')
+            {
+                CapacitorPanel c = new CapacitorPanel(node1 , node2);
+                frame.add(c);
+            }
+            else if(type == 'L')
+            {
+                InductorPanel l = new InductorPanel(node1 , node2);
+                frame.add(l);
+            }
+            else if(type == 'I')
+            {
+                CurrentDCPanel i = new CurrentDCPanel(node1 , node2);
+                frame.add(i);
+            }
+            else if(type == 'V')
+            {
+                VoltageDCPanel v = new VoltageDCPanel(node1 , node2);
+                frame.add(v);
+            }
+            else if(type == 'G')
+            {
+                DependentVoltagePanel g = new DependentVoltagePanel(node1 , node2);
+                frame.add(g);
+            }
+            else if(type == 'F')
+            {
+                DependentVoltagePanel f = new DependentVoltagePanel(node1 , node2);
+                frame.add(f);
+            }
+            else if(type == 'H')
+            {
+                DependentCurrentPanel h = new DependentCurrentPanel(node1 , node2);
+                frame.add(h);
+            }
+            else if(type == 'E')
+            {
+                DependentCurrentPanel e = new DependentCurrentPanel(node1 , node2);
+                frame.add(e);
+            }
+        }
+        else
+        {
+            if(dx == 0)
+            {
+                if(dy != 0 && adjMatrix[n1i][n1j + (dy / Math.abs(dy))] == 0)
+                {
+                    WirePanel w = new WirePanel(node1 , node1 - 6 * dy / Math.abs(dy));
+                    frame.add(w);
+                    adjMatrix[n1i][n1j + (dy / Math.abs(dy))] = 1;
+                    Draw(frame , adjMatrix , type , node1 - 6 * dy / Math.abs(dy) , node2 , dx , (dy / Math.abs(dy)) * (Math.abs(dy) - 1));
+                }
+                else if(adjMatrix[n1i + 1][n1j] == 0 && n1i + 1 <= 5)
+                {
+                    WirePanel w = new WirePanel(node1 , node1 + 1);
+                    frame.add(w);
+                    adjMatrix[n1i + 1][n1j] = 1;
+                    Draw(frame , adjMatrix , type , node1 + 1 , node2 , dx - 1 , dy);
+                }
+                else if(n1i - 1 >= 0 && adjMatrix[n1i - 1][n1j] == 0)
+                {
+                    WirePanel w = new WirePanel(node1 , node1 - 1);
+                    frame.add(w);
+                    adjMatrix[n1i - 1][n1j] = 1;
+                    Draw(frame , adjMatrix , type , node1 - 1 , node2 , dx + 1 , dy);
+                }
+            }
+            else if(dy == 0)
+            {
+                System.out.printf("%d    %d\n" , n1j , adjMatrix[n1i + (dx / Math.abs(dx))][n1j]);
+                if(dx != 0 && adjMatrix[n1i + (dx / Math.abs(dx))][n1j] == 0)
+                {
+                    WirePanel w = new WirePanel(node1 , node1 + dx / Math.abs(dx));
+                    frame.add(w);
+                    adjMatrix[n1i + (dx / Math.abs(dx))][n1j] = 1;
+                    Draw(frame , adjMatrix , type , node1 + dx / Math.abs(dx) , node2 , (dx / Math.abs(dx)) * (Math.abs(dx) - 1) , dy);
+                }
+                else if(n1j + 1 <= 4 && adjMatrix[n1i][n1j + 1] == 0)
+                {
+                    WirePanel w = new WirePanel(node1 , node1 - 6);
+                    frame.add(w);
+                    adjMatrix[n1i][n1j + 1] = 1;
+                    Draw(frame , adjMatrix , type , node1 - 6 , node2 , dx , dy - 1);
+                }
+                else if(n1j - 1 >= 0 && adjMatrix[n1i][n1j - 1] == 0)
+                {
+                    WirePanel w = new WirePanel(node1 , node1 + 6);
+                    frame.add(w);
+                    adjMatrix[n1i][n1j - 1] = 1;
+                    Draw(frame , adjMatrix , type , node1 + 6 , node2 , dx , dy + 1);
+                }
+            }
+            else
+            {
+                if(dy != 0 && adjMatrix[n1i][n1j + (dy / Math.abs(dy))] == 0)
+                {
+                    WirePanel w = new WirePanel(node1 , node1 - 6 * dy / Math.abs(dy));
+                    frame.add(w);
+                    adjMatrix[n1i][n1j + (dy / Math.abs(dy))] = 1;
+                    Draw(frame , adjMatrix , type , node1 - 6 * dy / Math.abs(dy) , node2 , dx , (dy / Math.abs(dy)) * (Math.abs(dy) - 1));
+                }
+                else if(dx != 0 && adjMatrix[n1i + (dx / Math.abs(dx))][n1j] == 0)
+                {
+                    WirePanel w = new WirePanel(node1 , node1 + dx / Math.abs(dx));
+                    frame.add(w);
+                    adjMatrix[n1i + (dx / Math.abs(dx))][n1j] = 1;
+                    Draw(frame , adjMatrix , type , node1 + dx / Math.abs(dx) , node2 , (dx / Math.abs(dx)) * (Math.abs(dx) - 1) , dy);
+                }
+                else if( n1i + 1 <= 5 && adjMatrix[n1i + 1][n1j] == 0)
+                {
+                    WirePanel w = new WirePanel(node1 , node1 + 1);
+                    frame.add(w);
+                    adjMatrix[n1i + 1][n1j] = 1;
+                    Draw(frame , adjMatrix , type , node1 + 1 , node2 , dx - 1 , dy);
+                }
+                else if(n1i - 1 >= 0 && adjMatrix[n1i - 1][n1j] == 0)
+                {
+                    WirePanel w = new WirePanel(node1 , node1 - 1);
+                    frame.add(w);
+                    adjMatrix[n1i - 1][n1j] = 1;
+                    Draw(frame , adjMatrix , type , node1 - 1 , node2 , dx + 1 , dy);
+                }
+                else if(n1j + 1 <= 4 && adjMatrix[n1i][n1j + 1] == 0)
+                {
+                    WirePanel w = new WirePanel(node1 , node1 - 6);
+                    frame.add(w);
+                    adjMatrix[n1i][n1j + 1] = 1;
+                    Draw(frame , adjMatrix , type , node1 - 6 , node2 , dx , dy - 1);
+                }
+                else if(n1j - 1 >= 0 && adjMatrix[n1i][n1j - 1] == 0)
+                {
+                    WirePanel w = new WirePanel(node1 , node1 + 6);
+                    frame.add(w);
+                    adjMatrix[n1i][n1j - 1] = 1;
+                    Draw(frame , adjMatrix , type , node1 + 6 , node2 , dx , dy + 1);
+                }
+            }
+        }
+    }
+}
+class DataPanel extends JComponent implements ActionListener
+{
+    JButton load_button, edit_button;
+    JTextArea textArea;
+    Border button_border , textArea_border;
+    String filePath;
+
+    DataPanel() {
+        setBounds(25 , 25 , 350 , 600);
+
+        button_border = BorderFactory.createLineBorder(Color.BLACK , 1);
+        load_button = new JButton("Load");
+        load_button.addActionListener(this);
+        int x_load_button = 50;
+        int y_load_button = 530;
+        int width_load_button = 100;
+        int height_load_button = 30;
+        load_button.setBounds(x_load_button, y_load_button, width_load_button, height_load_button);
+        load_button.setBackground(Color.orange);
+        load_button.setBorder(button_border);
+        add(load_button);
+
+        edit_button = new JButton("Edit");
+        edit_button.addActionListener(this);
+        int x_run_button = x_load_button + width_load_button + 50;
+        int y_run_button = 530;
+        int width_run_button = 100;
+        int height_run_button = 30;
+        edit_button.setBounds(x_run_button, y_run_button, width_run_button, height_run_button);
+        edit_button.setBackground(Color.lightGray);
+        edit_button.setBorder(button_border);
+        add(edit_button);
+
+        textArea = new JTextArea(450, 300);
+        textArea.setBounds(0, 0, 350, 500);
+        textArea.setBackground(Color.WHITE);
+        textArea_border = BorderFactory.createLineBorder(Color.black, 2);
+        textArea.setBorder(textArea_border);
+        add(textArea);
+    }
+
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == load_button) {
+            JFileChooser fc = new JFileChooser();
+            int i = fc.showOpenDialog(this);
+            if (i == JFileChooser.APPROVE_OPTION) {
+                File f = fc.getSelectedFile();
+                filePath = f.getPath();
+                try {
+                    BufferedReader br = new BufferedReader(new FileReader(filePath));
+                    String s1 = "", s2 = "";
+                    while ((s1 = br.readLine()) != null) s2 += s1 + "\n";
+                    textArea.setText(s2);
+                    br.close();
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+            }
+            textArea.setFont(textArea.getFont().deriveFont(20f));
+        }
+        if (e.getSource() == edit_button) {
+            try {
+                Writer w = new FileWriter(filePath);
+                textArea.write(w);
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        }
+    }
+}
+class CircuitPanel extends JComponent
+{
+    int a[][] = new int[10][10];
+    CircuitPanel()
+    {
+        setBounds(825 , 25 , 700 , 600);
+        setBackground(Color.WHITE);
+        Border border = BorderFactory.createLineBorder(Color.BLACK , 2);
+        setBorder(border);
+
+        Element e1 = new Element(this , a , 'R' , 1 , 18);
+    }
+    @Override
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        g.setColor(getBackground());
+        g.fillRect(0, 0, getWidth(), getHeight());
+        Graphics2D g2d = (Graphics2D) g;
+    }
+}
+
 public class Main {
     public static void main(String[] args) {
         Circuit circuit = new Circuit();
@@ -589,5 +1472,26 @@ public class Main {
             if (k % 100 == 0)
                 circuit.printData();
         }
+
+
+        /*phase two
+                JFrame Main = new JFrame("Circuit Analyzer");
+        Main.setSize(1570 , 700);
+        Main.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        Container content = Main.getContentPane();
+        content.setBackground(Color.DARK_GRAY);
+        JRootPane root;
+        root = Main.getRootPane();
+        LayoutManager mgr;
+        mgr = new GroupLayout(content);
+        Main.setLayout(mgr);
+
+        DataPanel d = new DataPanel();
+        Main.add(d);
+
+        CircuitPanel c = new CircuitPanel();
+        Main.add(c);
+        Main.setVisible(true);
+         */
     }
 }
