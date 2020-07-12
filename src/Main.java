@@ -1475,7 +1475,7 @@ public class Main {
 
 
         /*phase two
-                JFrame Main = new JFrame("Circuit Analyzer");
+         JFrame Main = new JFrame("Circuit Analyzer");
         Main.setSize(1570 , 700);
         Main.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         Container content = Main.getContentPane();
