@@ -1510,6 +1510,27 @@ class ResultPanel extends JComponent implements ActionListener
 
     }
 }
+class SharifIcon extends JPanel
+{
+    Image SharifImage;
+    JLabel SharifLabel;
+    SharifIcon()
+    {
+        Color color = new Color(1 , 1 , 1 , 1);
+        setBounds(0 , 650 , 150 , 150);
+        setBackground(color);
+        try
+        {
+            SharifImage = ImageIO.read(new File("icons/Sharif Icon.png"));
+            SharifLabel = new JLabel(new ImageIcon(SharifImage));
+            add(SharifLabel);
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+    }
+}
 
 public class Main {
     public static void main(String[] args) {
@@ -1545,7 +1566,7 @@ public class Main {
 
         /*phase two
         JFrame Main = new JFrame("Circuit Analyzer");
-        Main.setSize(1550 , 700);
+        Main.setSize(1550 , 800);
         Main.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         Container content = Main.getContentPane();
         content.setBackground(Color.DARK_GRAY);
@@ -1560,6 +1581,12 @@ public class Main {
 
         CircuitPanel c = new CircuitPanel();
         Main.add(c);
+
+        ResultPanel r = new ResultPanel();
+        Main.add(r);
+
+        SharifIcon s = new SharifIcon();
+        Main.add(s);
         Main.setVisible(true);
          */
     }
