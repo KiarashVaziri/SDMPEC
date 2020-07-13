@@ -12,7 +12,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
-import java.io.*;
+
 
 class Node {
     int nodeNumber;
@@ -1353,7 +1353,7 @@ class Element
 }
 class DataPanel extends JComponent implements ActionListener
 {
-    JButton load_button, edit_button;
+    JButton load_button, save_button;
     JTextArea textArea;
     Border button_border , textArea_border;
     String filePath;
@@ -1362,7 +1362,7 @@ class DataPanel extends JComponent implements ActionListener
         setBounds(25 , 25 , 350 , 600);
 
         button_border = BorderFactory.createLineBorder(Color.BLACK , 1);
-        load_button = new JButton("Load");
+        load_button = new JButton("     Load");
         load_button.addActionListener(this);
         int x_load_button = 50;
         int y_load_button = 530;
@@ -1371,18 +1371,42 @@ class DataPanel extends JComponent implements ActionListener
         load_button.setBounds(x_load_button, y_load_button, width_load_button, height_load_button);
         load_button.setBackground(Color.orange);
         load_button.setBorder(button_border);
+        Image Load_ButtonImage;
+        JLabel Load_ButtonLabel;
+        try
+        {
+            Load_ButtonImage = ImageIO.read(new File("icons/Load Button.png"));
+            Load_ButtonLabel = new JLabel(new ImageIcon(Load_ButtonImage));
+            load_button.add(Load_ButtonLabel);
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
         add(load_button);
 
-        edit_button = new JButton("Edit");
-        edit_button.addActionListener(this);
+        save_button = new JButton("     Save");
+        save_button.addActionListener(this);
         int x_run_button = x_load_button + width_load_button + 50;
         int y_run_button = 530;
         int width_run_button = 100;
         int height_run_button = 30;
-        edit_button.setBounds(x_run_button, y_run_button, width_run_button, height_run_button);
-        edit_button.setBackground(Color.lightGray);
-        edit_button.setBorder(button_border);
-        add(edit_button);
+        save_button.setBounds(x_run_button, y_run_button, width_run_button, height_run_button);
+        save_button.setBackground(Color.lightGray);
+        save_button.setBorder(button_border);
+        Image Save_ButtonImage;
+        JLabel Save_ButtonLabel;
+        try
+        {
+            Save_ButtonImage = ImageIO.read(new File("icons/Save Button.png"));
+            Save_ButtonLabel = new JLabel(new ImageIcon(Save_ButtonImage));
+            save_button.add(Save_ButtonLabel);
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+        add(save_button);
 
         textArea = new JTextArea(450, 300);
         textArea.setBounds(0, 0, 350, 500);
@@ -1411,7 +1435,7 @@ class DataPanel extends JComponent implements ActionListener
             }
             textArea.setFont(textArea.getFont().deriveFont(20f));
         }
-        if (e.getSource() == edit_button) {
+        if (e.getSource() == save_button) {
             try {
                 Writer w = new FileWriter(filePath);
                 textArea.write(w);
@@ -1426,7 +1450,7 @@ class CircuitPanel extends JComponent
     int a[][] = new int[10][10];
     CircuitPanel()
     {
-        setBounds(825 , 25 , 700 , 600);
+        setBounds(800 , 25 , 700 , 600);
         setBackground(Color.WHITE);
         Border border = BorderFactory.createLineBorder(Color.BLACK , 2);
         setBorder(border);
@@ -1439,6 +1463,51 @@ class CircuitPanel extends JComponent
         g.setColor(getBackground());
         g.fillRect(0, 0, getWidth(), getHeight());
         Graphics2D g2d = (Graphics2D) g;
+    }
+}
+class ResultPanel extends JComponent implements ActionListener
+{
+    JButton run_button;
+    JTextArea ResultArea;
+    ResultPanel ()
+    {
+        setBounds(400 , 25 , 350 , 600);
+
+        Border button_border = BorderFactory.createLineBorder(Color.BLACK , 1);
+        run_button = new JButton("     Run");
+        run_button.addActionListener(this);
+        int x_load_button = 50;
+        int y_load_button = 530;
+        int width_load_button = 100;
+        int height_load_button = 30;
+        run_button.setBounds(x_load_button, y_load_button, width_load_button, height_load_button);
+        run_button.setBackground(Color.GREEN);
+        run_button.setBorder(button_border);
+        BufferedImage Run_ButtonImage;
+        JLabel Run_ButtonLabel;
+        try
+        {
+            Run_ButtonImage = ImageIO.read(new File("icons/Run Button.png"));
+            Run_ButtonLabel = new JLabel(new ImageIcon(Run_ButtonImage));
+            run_button.add(Run_ButtonLabel);
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+        add(run_button);
+
+        ResultArea = new JTextArea(450, 300);
+        ResultArea.setBounds(0, 0, 350, 500);
+        ResultArea.setBackground(Color.WHITE);
+        Border ResultArea_border = BorderFactory.createLineBorder(Color.black, 2);
+        ResultArea.setBorder(ResultArea_border);
+        add(ResultArea);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
     }
 }
 
@@ -1475,8 +1544,8 @@ public class Main {
 
 
         /*phase two
-                JFrame Main = new JFrame("Circuit Analyzer");
-        Main.setSize(1570 , 700);
+        JFrame Main = new JFrame("Circuit Analyzer");
+        Main.setSize(1550 , 700);
         Main.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         Container content = Main.getContentPane();
         content.setBackground(Color.DARK_GRAY);
