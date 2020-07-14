@@ -58,8 +58,8 @@ class Branch {
     float inductance;
     float current = 0;
     float previousCurrent = 0;
-    float previousCurrent_plus = 0;
-    float previousCurrent_negative = 0;
+    float nextCurrent_plus = 0;
+    float nextCurrent_negative = 0;
     float newCurrent = 0;
     float voltage;
     float power;
@@ -85,146 +85,15 @@ class Branch {
     }
 }
 
-class Resistor extends Branch {
-    Resistor(String name, int a, int b, float r) {
-        super(name, a, b, r);
-        this.name = name;
-        port1 = a;
-        port2 = b;
-        this.resistance = r;
-        //this.voltage = (float) (port1.getVoltage() - port2.getVoltage());
-        this.current = voltage / r;
-    }
-
-    @Override
-    float getVoltage(Node a, Node b) {
-        return a.voltage - b.voltage;
-    }
-
-    @Override
-    void updateBranch(Node startNode, Node endNode, float dt, float dv) {
-        current = (startNode.voltage - endNode.voltage) / resistance;
-        previousCurrent = (startNode.voltage - endNode.voltage + dv) / resistance;
-        previousCurrent_plus = (startNode.voltage - endNode.voltage + dv) / resistance;
-        previousCurrent_negative = (startNode.voltage - endNode.voltage - dv) / resistance;
-    }
-}
-
-class CurrentSource extends Branch {
-    float offset;
-    float amplitude;
-    float frequency;
-    float phase;
-
-    CurrentSource(String name, int a, int b, float offset, float amplitude, float frequency, float phase) {
-        super(name, a, b, offset);
-        this.name = name;
-        port1 = b;
-        port2 = a;
-        //this.voltage = (float) (port1.getVoltage() - port2.getVoltage());
-        this.offset = offset;
-        this.amplitude = amplitude;
-        this.frequency = frequency;
-        this.phase = phase;
-    }
-
-    @Override
-    float getVoltage(Node a, Node b) {
-        return b.voltage - a.voltage;
-    }
-
-    int timeCS = 1;
-
-    @Override
-    void updateBranch(Node a, Node b, float dt, float dv) {
-        //System.out.println(offset + amplitude * Math.sin(2 * Math.PI * frequency * k * dt + Math.toRadians(phase)));
-        current = (float) (offset + amplitude * Math.sin(2 * Math.PI * frequency * timeCS * dt + Math.toRadians(phase)));
-        previousCurrent = current;
-        timeCS++;
-    }
-}
-
-class VoltageSource extends Branch {
-    float offset;
-    float amplitude;
-    float frequency;
-    float phase;
-
-    VoltageSource(String name, int a, int b, float offset, float amplitude, float frequency, float phase) {
-        super(name, a, b, offset);
-        this.name = name;
-        port1 = a;
-        port2 = b;
-        //this.voltage = (float) (port1.getVoltage() - port2.getVoltage());
-        this.offset = offset;
-        this.amplitude = amplitude;
-        this.frequency = frequency;
-        this.phase = phase;
-    }
-
-    int timeVS = 1;
-
-    void updateBranch(Node s, Node e, float dt, float dv) {
-        voltage = (float) (offset + amplitude * Math.sin(2 * Math.PI * frequency * timeVS * dt + Math.toRadians(phase)));
-        timeVS++;
-    }
-}
-
-class Capacitor extends Branch {
-    Capacitor(String name, int a, int b, float value) {
-        super(name, a, b, value);
-        this.name = name;
-        port1 = a;
-        port2 = b;
-        this.capacity = value;
-    }
-
-    float getVoltage(Node s, Node e) {
-        return s.voltage - e.voltage;
-    }
-
-    void updateBranch(Node s, Node e, float dt, float dv) {
-        current = (capacity * (s.voltage - s.previousVoltage - e.voltage + e.previousVoltage)) / dt;
-        previousCurrent = (capacity * (s.voltage - s.previousVoltage - e.voltage + e.previousVoltage + dv)) / dt;
-        previousCurrent_plus = (capacity * (s.voltage - s.previousVoltage - e.voltage + e.previousVoltage + dv)) / dt;
-        previousCurrent_negative = (capacity * (s.voltage - s.previousVoltage - e.voltage + e.previousVoltage - dv)) / dt;
-    }
-}
-
-class Inductor extends Branch {
-    Inductor(String name, int a, int b, float value) {
-        super(name, a, b, value);
-        this.name = name;
-        port1 = a;
-        port2 = b;
-        this.inductance = value;
-    }
-
-    float getVoltage(Node s, Node e) {
-        return s.voltage - e.voltage;
-    }
-
-    void updateBranch(Node s, Node e, float dt, float dv) {
-        current += ((s.voltage - s.previousVoltage - e.voltage + e.previousVoltage) * dt) / inductance;
-        previousCurrent += ((s.voltage - s.previousVoltage - e.voltage + e.previousVoltage + dv) * dt) / inductance;
-    }
-}
-
 class Circuit {
     int numberOfNodes = 0;
     int numberOfBranches = 0;
     int numberOfUnions = 0;
-    float dt, dv, di = 0.1f;
+    float dt, dv, di;
     int[][] adjMatrix = new int[100][100];
     Node[] nodeArray = new Node[100];
     Branch[] branchArray = new Branch[100];
     Union[] unionArray = new Union[50];
-
-    Circuit(float dt, float dv) {
-        this.dt = dt;
-        this.dv = dv;
-        for (int i = 0; i < 100; i++) for (int j = 0; j < 100; j++) adjMatrix[i][j] = 0;
-    }
 
     Circuit() {
         for (int i = 0; i < 100; i++) for (int j = 0; j < 100; j++) adjMatrix[i][j] = 0;
@@ -239,7 +108,7 @@ class Circuit {
         //for solution
         float newCurrent = 0;
         float current = 0;
-        float previousCurrent = 0;
+        float nextCurrent = 0;
 
         Union(int a) {
             unionNumber = a;
@@ -261,7 +130,7 @@ class Circuit {
                     nodeArray[0].previousVoltage = 0;
                 } else if (k == 0) {
                     nodes[0].previousVoltage = nodes[0].voltage;
-                    nodes[0].voltage -= dv * (Math.abs(newCurrent) - Math.abs(previousCurrent)) / di;
+                    nodes[0].voltage += dv * (Math.abs(newCurrent) - Math.abs(nextCurrent)) / di;
                     //nodes[0].voltage -= dv * newCurrent;
                 } else {
                     if (nodes[k].parentNode == nodes[k].parentElement.port1) {
@@ -301,21 +170,22 @@ class Circuit {
     void updateUnions() {
         for (int k = 0; k < numberOfUnions; k++) {
             unionArray[k].newCurrent = 0;
-            unionArray[k].previousCurrent = 0;
+            unionArray[k].nextCurrent = 0;
             for (int i = 0; unionArray[k].nodes[i] != null; i++) {
                 for (int j = 0; j < numberOfBranches; j++) {
                     if (branchArray[j].port1 == unionArray[k].nodes[i].nodeNumber && branchArray[j].getClass() != VoltageSource.class) {
                         unionArray[k].newCurrent += branchArray[j].current;
-                        //unionArray[k].previousCurrent += branchArray[j].previousCurrent;
-                        unionArray[k].previousCurrent += branchArray[j].previousCurrent_plus;
+                        //unionArray[k].nextCurrent += branchArray[j].previousCurrent;
+                        unionArray[k].nextCurrent += branchArray[j].nextCurrent_plus;
                     } else if (branchArray[j].port2 == unionArray[k].nodes[i].nodeNumber && branchArray[j].getClass() != VoltageSource.class) {
                         unionArray[k].newCurrent -= branchArray[j].current;
-                        //unionArray[k].previousCurrent -= branchArray[j].previousCurrent;
-                        unionArray[k].previousCurrent -= branchArray[j].previousCurrent_negative;
+                        //unionArray[k].nextCurrent -= branchArray[j].previousCurrent;
+                        unionArray[k].nextCurrent -= branchArray[j].nextCurrent_negative;
                     }
                 }
+
             }
-            unionArray[k].current = (unionArray[k].newCurrent + unionArray[k].previousCurrent) / 2;
+            unionArray[k].current = (unionArray[k].newCurrent + unionArray[k].nextCurrent) / 2;
             unionArray[k].updateVoltages();
         }
     }
@@ -545,17 +415,13 @@ class Circuit {
     }
 
     void set_connections(int node_number) {
-        for (int j = 0; j < numberOfBranches; j++) {
-            if (adjMatrix[j][node_number] == 1 || adjMatrix[j][node_number] == -1) {
-                for (int i = 0; i <= numberOfNodes; i++) {
+        for (int j = 0; j < numberOfBranches; j++)
+            if (adjMatrix[j][node_number] == 1 || adjMatrix[j][node_number] == -1)
+                for (int i = 0; i <= numberOfNodes; i++)
                     if ((adjMatrix[j][i] == 1 || adjMatrix[j][i] == -1) && nodeArray[i].connected == false) {
                         nodeArray[i].connected = true;
                         set_connections(i);
                     }
-
-                }
-            }
-        }
     }
 }
 
@@ -568,24 +434,10 @@ public class Main {
             System.out.println("Data file doesn't exist!");
         }
         //System.out.println(circuit.checkIfConnected());
-        /*circuit.gatherUnions();
-        for (int k = 0; k < circuit.numberOfUnions; k++) {
-            System.out.println(circuit.unionArray[k].unionNumber + " " + circuit.unionArray[k].non);
-        }*/
-        /*for(int i=0;i<=circuit.numberOfNodes;i++){
-            //if(circuit.nodeArray[i].parentNode!=circuit.nodeArray[i].nodeNumber) System.out.println(circuit.nodeArray[i].parentElement);
-            System.out.println(circuit.nodeArray[i].parent_element);
-        }*/
         circuit.gatherUnions();
-        /*for (int k = 0; k < circuit.numberOfUnions; k++) {
-            System.out.print(k+":");
-            for(int i =0;i<circuit.unionArray[k].non;i++) System.out.print(circuit.unionArray[k].parent_node+" ");
-            System.out.println();
-        }*/
-        for (int k = 0; k <= 1000; k++) {
+        for (int k = 0; k <= 10000; k++) {
             circuit.updateUnions();
             circuit.updateBranches();
-
             if (k % 100 == 0)
                 circuit.printData();
         }
