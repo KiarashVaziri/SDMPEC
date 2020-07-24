@@ -1647,6 +1647,6 @@ public class Main {
         }
 
         //Phase two
-        JFrame Main = new MainPanel(circuit);
+        //JFrame Main = new MainPanel(circuit);
     }
 }
