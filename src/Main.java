@@ -1154,7 +1154,7 @@ class WirePanel extends JPanel
 class Element
 {
     int dx , dy , n1i , n1j , n2i , n2j;
-    Element(JComponent frame , int adjMatrix [][] , char type , int node1 , int node2)
+    Element(JComponent frame , int locationMatrix [][] , char type , int node1 , int node2)
     {
         dx = (node2 - 1) % 6 - (node1 - 1) % 6;
         dy = (node1 - 1) / 6 - (node2 - 1) / 6;
@@ -1164,12 +1164,12 @@ class Element
         n2j = 4 - (node2 - 1) / 6;
         if(node1 != 0 && node2 != 0)
         {
-            adjMatrix[n1i][n1j] = 1;
-            adjMatrix[n2i][n2j] = 1;
+            locationMatrix[n1i][n1j] = 1;
+            locationMatrix[n2i][n2j] = 1;
         }
-        Draw(frame , adjMatrix , type , node1 , node2 , dx , dy);
+        Draw(frame , locationMatrix , type , node1 , node2 , dx , dy);
     }
-    void Draw(JComponent frame , int adjMatrix [][] , char type , int node1 , int node2 , int dx , int dy)
+    void Draw(JComponent frame , int locationMatrix [][] , char type , int node1 , int node2 , int dx , int dy)
     {
         int n1i , n1j;
         n1i = (node1 - 1) % 6;
@@ -1178,31 +1178,31 @@ class Element
         n2j = 4 - (node2 - 1) / 6;
         if(node1 == 0)
         {
-            if(n2i + 1 <= 5 && adjMatrix[n2i + 1][n2j] == 0)
+            if(n2i + 1 <= 5 && locationMatrix[n2i + 1][n2j] == 0)
                 node1 = node2 + 1;
-            else if(n2i - 1 >= 0 && adjMatrix[n2i - 1][n2j] == 0)
+            else if(n2i - 1 >= 0 && locationMatrix[n2i - 1][n2j] == 0)
                 node1 = node2 - 1;
-            else if(n2j + 1 <= 4 && adjMatrix[n2i][n2j + 1] == 0)
+            else if(n2j + 1 <= 4 && locationMatrix[n2i][n2j + 1] == 0)
                 node1 = node2 - 6;
-            else if(n2j - 1 >= 0 && adjMatrix[n2i][n2j - 1] == 0)
+            else if(n2j - 1 >= 0 && locationMatrix[n2i][n2j - 1] == 0)
                 node1 = node2 + 6;
             GNDPanel g = new GNDPanel(node1);
             frame.add(g);
-            Draw(frame , adjMatrix , type , node1 , node2 , dx , dy);
+            Draw(frame , locationMatrix , type , node1 , node2 , dx , dy);
         }
         else if(node2 == 0)
         {
-            if(n1i + 1 <= 5 && adjMatrix[n1i + 1][n1j] == 0)
+            if(n1i + 1 <= 5 && locationMatrix[n1i + 1][n1j] == 0)
                 node2 = node1 + 1;
-            else if(n1i - 1 >= 0 && adjMatrix[n1i - 1][n1j] == 0)
+            else if(n1i - 1 >= 0 && locationMatrix[n1i - 1][n1j] == 0)
                 node2 = node1 - 1;
-            else if(n1j + 1 <= 4 && adjMatrix[n1i][n1j + 1] == 0)
+            else if(n1j + 1 <= 4 && locationMatrix[n1i][n1j + 1] == 0)
                 node2 = node1 - 6;
-            else if(n1j - 1 >= 0 && adjMatrix[n1i][n1j - 1] == 0)
+            else if(n1j - 1 >= 0 && locationMatrix[n1i][n1j - 1] == 0)
                 node2 = node1 + 6;
             GNDPanel g = new GNDPanel(node2);
             frame.add(g);
-            Draw(frame , adjMatrix , type , node1 , node2 , dx , dy);
+            Draw(frame , locationMatrix , type , node1 , node2 , dx , dy);
         }
         else if((Math.abs(n1i - n2i) == 1 && n1j == n2j) || (Math.abs(n1j - n2j) == 1 && n1i == n2i))
         {
@@ -1256,96 +1256,96 @@ class Element
         {
             if(dx == 0)
             {
-                if(dy != 0 && adjMatrix[n1i][n1j + (dy / Math.abs(dy))] == 0)
+                if(dy != 0 && locationMatrix[n1i][n1j + (dy / Math.abs(dy))] == 0)
                 {
                     WirePanel w = new WirePanel(node1 , node1 - 6 * dy / Math.abs(dy));
                     frame.add(w);
-                    adjMatrix[n1i][n1j + (dy / Math.abs(dy))] = 1;
-                    Draw(frame , adjMatrix , type , node1 - 6 * dy / Math.abs(dy) , node2 , dx , (dy / Math.abs(dy)) * (Math.abs(dy) - 1));
+                    locationMatrix[n1i][n1j + (dy / Math.abs(dy))] = 1;
+                    Draw(frame , locationMatrix , type , node1 - 6 * dy / Math.abs(dy) , node2 , dx , (dy / Math.abs(dy)) * (Math.abs(dy) - 1));
                 }
-                else if(adjMatrix[n1i + 1][n1j] == 0 && n1i + 1 <= 5)
+                else if(locationMatrix[n1i + 1][n1j] == 0 && n1i + 1 <= 5)
                 {
                     WirePanel w = new WirePanel(node1 , node1 + 1);
                     frame.add(w);
-                    adjMatrix[n1i + 1][n1j] = 1;
-                    Draw(frame , adjMatrix , type , node1 + 1 , node2 , dx - 1 , dy);
+                    locationMatrix[n1i + 1][n1j] = 1;
+                    Draw(frame , locationMatrix , type , node1 + 1 , node2 , dx - 1 , dy);
                 }
-                else if(n1i - 1 >= 0 && adjMatrix[n1i - 1][n1j] == 0)
+                else if(n1i - 1 >= 0 && locationMatrix[n1i - 1][n1j] == 0)
                 {
                     WirePanel w = new WirePanel(node1 , node1 - 1);
                     frame.add(w);
-                    adjMatrix[n1i - 1][n1j] = 1;
-                    Draw(frame , adjMatrix , type , node1 - 1 , node2 , dx + 1 , dy);
+                    locationMatrix[n1i - 1][n1j] = 1;
+                    Draw(frame , locationMatrix , type , node1 - 1 , node2 , dx + 1 , dy);
                 }
             }
             else if(dy == 0)
             {
-                System.out.printf("%d    %d\n" , n1j , adjMatrix[n1i + (dx / Math.abs(dx))][n1j]);
-                if(dx != 0 && adjMatrix[n1i + (dx / Math.abs(dx))][n1j] == 0)
+                System.out.printf("%d    %d\n" , n1j , locationMatrix[n1i + (dx / Math.abs(dx))][n1j]);
+                if(dx != 0 && locationMatrix[n1i + (dx / Math.abs(dx))][n1j] == 0)
                 {
                     WirePanel w = new WirePanel(node1 , node1 + dx / Math.abs(dx));
                     frame.add(w);
-                    adjMatrix[n1i + (dx / Math.abs(dx))][n1j] = 1;
-                    Draw(frame , adjMatrix , type , node1 + dx / Math.abs(dx) , node2 , (dx / Math.abs(dx)) * (Math.abs(dx) - 1) , dy);
+                    locationMatrix[n1i + (dx / Math.abs(dx))][n1j] = 1;
+                    Draw(frame , locationMatrix , type , node1 + dx / Math.abs(dx) , node2 , (dx / Math.abs(dx)) * (Math.abs(dx) - 1) , dy);
                 }
-                else if(n1j + 1 <= 4 && adjMatrix[n1i][n1j + 1] == 0)
+                else if(n1j + 1 <= 4 && locationMatrix[n1i][n1j + 1] == 0)
                 {
                     WirePanel w = new WirePanel(node1 , node1 - 6);
                     frame.add(w);
-                    adjMatrix[n1i][n1j + 1] = 1;
-                    Draw(frame , adjMatrix , type , node1 - 6 , node2 , dx , dy - 1);
+                    locationMatrix[n1i][n1j + 1] = 1;
+                    Draw(frame , locationMatrix , type , node1 - 6 , node2 , dx , dy - 1);
                 }
-                else if(n1j - 1 >= 0 && adjMatrix[n1i][n1j - 1] == 0)
+                else if(n1j - 1 >= 0 && locationMatrix[n1i][n1j - 1] == 0)
                 {
                     WirePanel w = new WirePanel(node1 , node1 + 6);
                     frame.add(w);
-                    adjMatrix[n1i][n1j - 1] = 1;
-                    Draw(frame , adjMatrix , type , node1 + 6 , node2 , dx , dy + 1);
+                    locationMatrix[n1i][n1j - 1] = 1;
+                    Draw(frame , locationMatrix , type , node1 + 6 , node2 , dx , dy + 1);
                 }
             }
             else
             {
-                if(dy != 0 && adjMatrix[n1i][n1j + (dy / Math.abs(dy))] == 0)
+                if(dy != 0 && locationMatrix[n1i][n1j + (dy / Math.abs(dy))] == 0)
                 {
                     WirePanel w = new WirePanel(node1 , node1 - 6 * dy / Math.abs(dy));
                     frame.add(w);
-                    adjMatrix[n1i][n1j + (dy / Math.abs(dy))] = 1;
-                    Draw(frame , adjMatrix , type , node1 - 6 * dy / Math.abs(dy) , node2 , dx , (dy / Math.abs(dy)) * (Math.abs(dy) - 1));
+                    locationMatrix[n1i][n1j + (dy / Math.abs(dy))] = 1;
+                    Draw(frame , locationMatrix , type , node1 - 6 * dy / Math.abs(dy) , node2 , dx , (dy / Math.abs(dy)) * (Math.abs(dy) - 1));
                 }
-                else if(dx != 0 && adjMatrix[n1i + (dx / Math.abs(dx))][n1j] == 0)
+                else if(dx != 0 && locationMatrix[n1i + (dx / Math.abs(dx))][n1j] == 0)
                 {
                     WirePanel w = new WirePanel(node1 , node1 + dx / Math.abs(dx));
                     frame.add(w);
-                    adjMatrix[n1i + (dx / Math.abs(dx))][n1j] = 1;
-                    Draw(frame , adjMatrix , type , node1 + dx / Math.abs(dx) , node2 , (dx / Math.abs(dx)) * (Math.abs(dx) - 1) , dy);
+                    locationMatrix[n1i + (dx / Math.abs(dx))][n1j] = 1;
+                    Draw(frame , locationMatrix , type , node1 + dx / Math.abs(dx) , node2 , (dx / Math.abs(dx)) * (Math.abs(dx) - 1) , dy);
                 }
-                else if( n1i + 1 <= 5 && adjMatrix[n1i + 1][n1j] == 0)
+                else if( n1i + 1 <= 5 && locationMatrix[n1i + 1][n1j] == 0)
                 {
                     WirePanel w = new WirePanel(node1 , node1 + 1);
                     frame.add(w);
-                    adjMatrix[n1i + 1][n1j] = 1;
-                    Draw(frame , adjMatrix , type , node1 + 1 , node2 , dx - 1 , dy);
+                    locationMatrix[n1i + 1][n1j] = 1;
+                    Draw(frame , locationMatrix , type , node1 + 1 , node2 , dx - 1 , dy);
                 }
-                else if(n1i - 1 >= 0 && adjMatrix[n1i - 1][n1j] == 0)
+                else if(n1i - 1 >= 0 && locationMatrix[n1i - 1][n1j] == 0)
                 {
                     WirePanel w = new WirePanel(node1 , node1 - 1);
                     frame.add(w);
-                    adjMatrix[n1i - 1][n1j] = 1;
-                    Draw(frame , adjMatrix , type , node1 - 1 , node2 , dx + 1 , dy);
+                    locationMatrix[n1i - 1][n1j] = 1;
+                    Draw(frame , locationMatrix , type , node1 - 1 , node2 , dx + 1 , dy);
                 }
-                else if(n1j + 1 <= 4 && adjMatrix[n1i][n1j + 1] == 0)
+                else if(n1j + 1 <= 4 && locationMatrix[n1i][n1j + 1] == 0)
                 {
                     WirePanel w = new WirePanel(node1 , node1 - 6);
                     frame.add(w);
-                    adjMatrix[n1i][n1j + 1] = 1;
-                    Draw(frame , adjMatrix , type , node1 - 6 , node2 , dx , dy - 1);
+                    locationMatrix[n1i][n1j + 1] = 1;
+                    Draw(frame , locationMatrix , type , node1 - 6 , node2 , dx , dy - 1);
                 }
-                else if(n1j - 1 >= 0 && adjMatrix[n1i][n1j - 1] == 0)
+                else if(n1j - 1 >= 0 && locationMatrix[n1i][n1j - 1] == 0)
                 {
                     WirePanel w = new WirePanel(node1 , node1 + 6);
                     frame.add(w);
-                    adjMatrix[n1i][n1j - 1] = 1;
-                    Draw(frame , adjMatrix , type , node1 + 6 , node2 , dx , dy + 1);
+                    locationMatrix[n1i][n1j - 1] = 1;
+                    Draw(frame , locationMatrix , type , node1 + 6 , node2 , dx , dy + 1);
                 }
             }
         }
@@ -1369,7 +1369,7 @@ class DataPanel extends JComponent implements ActionListener
         int width_load_button = 100;
         int height_load_button = 30;
         load_button.setBounds(x_load_button, y_load_button, width_load_button, height_load_button);
-        load_button.setBackground(Color.orange);
+        load_button.setBackground(Color.ORANGE);
         load_button.setBorder(button_border);
         Image Load_ButtonImage;
         JLabel Load_ButtonLabel;
@@ -1392,7 +1392,7 @@ class DataPanel extends JComponent implements ActionListener
         int width_run_button = 100;
         int height_run_button = 30;
         save_button.setBounds(x_run_button, y_run_button, width_run_button, height_run_button);
-        save_button.setBackground(Color.lightGray);
+        save_button.setBackground(Color.ORANGE);
         save_button.setBorder(button_border);
         Image Save_ButtonImage;
         JLabel Save_ButtonLabel;
@@ -1448,14 +1448,23 @@ class DataPanel extends JComponent implements ActionListener
 class CircuitPanel extends JComponent
 {
     int a[][] = new int[10][10];
-    CircuitPanel()
+    int startNode , endNode;
+    int locationMatrix[][] = new int[6][5];
+    int adjMatrix[][];
+    Branch branchArray[];
+    CircuitPanel(int [][] matrix , Branch[] Array)
     {
+        adjMatrix = matrix;
+        branchArray = Array;
         setBounds(800 , 25 , 700 , 600);
         setBackground(Color.WHITE);
         Border border = BorderFactory.createLineBorder(Color.BLACK , 2);
         setBorder(border);
-
-        Element e1 = new Element(this , a , 'R' , 1 , 18);
+        for(int i = 0 ; i < 6 ; i++)
+        {
+            for(int j = 0 ; j < 5 ; j++)
+                locationMatrix[i][j] = 0;
+        }
     }
     @Override
     public void paintComponent(Graphics g) {
@@ -1464,15 +1473,34 @@ class CircuitPanel extends JComponent
         g.fillRect(0, 0, getWidth(), getHeight());
         Graphics2D g2d = (Graphics2D) g;
     }
+    void DrawCircuit()
+    {
+        for(int j = 0 ; j < adjMatrix[0].length ; j++)
+        {
+            for(int i = 0 ; i < adjMatrix.length ; i++)
+            {
+                if(adjMatrix[i][j] == 1)
+                    startNode = i;
+                else if(adjMatrix[i][j] == -1)
+                    endNode = i;
+            }
+            new Element(this , locationMatrix , branchArray[j].name.charAt(0) , startNode , endNode);
+        }
+    }
 }
 class ResultPanel extends JComponent implements ActionListener
 {
-    JButton run_button;
+    JButton run_button , draw_button;
     JTextArea ResultArea;
-    ResultPanel ()
+    // adjMatrix bayad be resultpanel dade shavad
+    int [][] adjMatrix;
+    Branch branchArray[];
+    CircuitPanel c;
+    ResultPanel (int [][] Matrix , Branch [] Array)
     {
+        adjMatrix = Matrix;
+        branchArray = Array;
         setBounds(400 , 25 , 350 , 600);
-
         Border button_border = BorderFactory.createLineBorder(Color.BLACK , 1);
         run_button = new JButton("     Run");
         run_button.addActionListener(this);
@@ -1481,7 +1509,7 @@ class ResultPanel extends JComponent implements ActionListener
         int width_load_button = 100;
         int height_load_button = 30;
         run_button.setBounds(x_load_button, y_load_button, width_load_button, height_load_button);
-        run_button.setBackground(Color.GREEN);
+        run_button.setBackground(Color.ORANGE);
         run_button.setBorder(button_border);
         BufferedImage Run_ButtonImage;
         JLabel Run_ButtonLabel;
@@ -1497,6 +1525,29 @@ class ResultPanel extends JComponent implements ActionListener
         }
         add(run_button);
 
+        draw_button = new JButton("     Draw");
+        draw_button.addActionListener(this);
+        int x_run_button = x_load_button + width_load_button + 50;
+        int y_run_button = 530;
+        int width_run_button = 100;
+        int height_run_button = 30;
+        draw_button.setBounds(x_run_button, y_run_button, width_run_button, height_run_button);
+        draw_button.setBackground(Color.ORANGE);
+        draw_button.setBorder(button_border);
+        Image Draw_ButtonImage;
+        JLabel Draw_ButtonLabel;
+        try
+        {
+            Draw_ButtonImage = ImageIO.read(new File("icons/Draw Button.png"));
+            Draw_ButtonLabel = new JLabel(new ImageIcon(Draw_ButtonImage));
+            draw_button.add(Draw_ButtonLabel);
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+        add(draw_button);
+
         ResultArea = new JTextArea(450, 300);
         ResultArea.setBounds(0, 0, 350, 500);
         ResultArea.setBackground(Color.WHITE);
@@ -1506,15 +1557,19 @@ class ResultPanel extends JComponent implements ActionListener
     }
 
     @Override
-    public void actionPerformed(ActionEvent e) {
-
+    public void actionPerformed(ActionEvent e)
+    {
+        if(e.getSource() == draw_button)
+        {
+            c = new CircuitPanel(adjMatrix , branchArray);
+        }
     }
 }
-class SharifIcon extends JPanel
+class SharifPanel extends JPanel
 {
     Image SharifImage;
     JLabel SharifLabel;
-    SharifIcon()
+    SharifPanel()
     {
         Color color = new Color(1 , 1 , 1 , 1);
         setBounds(0 , 650 , 150 , 150);
@@ -1529,6 +1584,34 @@ class SharifIcon extends JPanel
         {
             e.printStackTrace();
         }
+    }
+}
+class MainPanel extends JFrame
+{
+    MainPanel(Circuit circuit)
+    {
+        setSize(1550 , 800);
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        Container content = this.getContentPane();
+        content.setBackground(Color.DARK_GRAY);
+        JRootPane root;
+        root = this.getRootPane();
+        LayoutManager mgr;
+        mgr = new GroupLayout(content);
+        setLayout(mgr);
+
+        DataPanel d = new DataPanel();
+        add(d);
+
+        //CircuitPanel c = new CircuitPanel();
+        //add(c);
+
+        ResultPanel r = new ResultPanel(circuit.adjMatrix , circuit.branchArray);
+        add(r);
+
+        SharifPanel s = new SharifPanel();
+        add(s);
+        setVisible(true);
     }
 }
 
@@ -1563,31 +1646,7 @@ public class Main {
                 circuit.printData();
         }
 
-
-        /*phase two
-        JFrame Main = new JFrame("Circuit Analyzer");
-        Main.setSize(1550 , 800);
-        Main.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-        Container content = Main.getContentPane();
-        content.setBackground(Color.DARK_GRAY);
-        JRootPane root;
-        root = Main.getRootPane();
-        LayoutManager mgr;
-        mgr = new GroupLayout(content);
-        Main.setLayout(mgr);
-
-        DataPanel d = new DataPanel();
-        Main.add(d);
-
-        CircuitPanel c = new CircuitPanel();
-        Main.add(c);
-
-        ResultPanel r = new ResultPanel();
-        Main.add(r);
-
-        SharifIcon s = new SharifIcon();
-        Main.add(s);
-        Main.setVisible(true);
-         */
+        //Phase two
+        JFrame Main = new MainPanel(circuit);
     }
 }
