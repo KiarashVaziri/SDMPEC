@@ -9,7 +9,6 @@ class Node {
     float previousVoltage_t = 0;
     float voltage = 0;
     ArrayList<Float> voltage_t = new ArrayList<Float>();
-    float newVoltage = 0;
     float previousCurrent = 0;
     float current = 0;
     float newCurrent = 0;
@@ -55,7 +54,8 @@ class Ground extends Node {
 class Branch {
     String name;
     int port1, port2;
-    boolean independence = true;
+    boolean independent = true;
+    //independence type
     int type = 0;
     float resistance;
     float capacity;
@@ -97,11 +97,11 @@ class Branch {
     void updateBranch(Node startNode, Node endNode, float dt, float dv, float time) {
     }
 
-    //dependent type 1
+    //dependent type 1 & 3
     void updateBranch(Node[] nodes, float dt, float dv) {
     }
 
-    //dependent type2
+    //dependent type 2 & 4
     void updateBranch(Branch[] branches, float dt, float dv) {
     }
 
@@ -238,7 +238,7 @@ class Circuit {
 
     void updateBranches() {
         for (int j = 0; branchArray[j] != null; j++) {
-            if (branchArray[j].independence)
+            if (branchArray[j].independent)
                 branchArray[j].updateBranch(nodeArray[branchArray[j].port1], nodeArray[branchArray[j].port2], dt, dv, time);
             else if (branchArray[j].type == 1)
                 branchArray[j].updateBranch(nodeArray, dt, dv);
@@ -618,7 +618,7 @@ class Circuit {
     }
 }
 
-public class Main {
+public class  Main {
     public static void main(String[] args) throws IOException {
         Circuit circuit = new Circuit();
         try {

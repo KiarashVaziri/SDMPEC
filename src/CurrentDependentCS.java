@@ -12,7 +12,7 @@ public class CurrentDependentCS extends Branch {
     CurrentDependentCS(String name, int i, int j, String elementName, float value) {
         super(name, i, j, value);
         this.name = name;
-        independence = false;
+        independent = false;
         type = 2;//F
         type_of_source = 1;//KCL
         port1 = j;

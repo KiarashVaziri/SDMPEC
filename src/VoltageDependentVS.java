@@ -11,7 +11,7 @@ class VoltageDependentVS extends Branch {
     VoltageDependentVS(String name, int i, int j, int k, int m, float value) {
         super(name, i, j, value);
         this.name = name;
-        independence = false;
+        independent = false;
         type = 3;//E
         type_of_source = 2;
         port1 = i;

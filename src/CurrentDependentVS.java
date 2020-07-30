@@ -12,7 +12,7 @@ class CurrentDependentVS extends Branch{
     CurrentDependentVS(String name, int i, int j, String elementName, float value) {
         super(name, i, j, value);
         this.name = name;
-        independence = false;
+        independent = false;
         type = 4;//H
         type_of_source = 2;
         port1 = i;
