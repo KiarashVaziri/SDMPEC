@@ -1,21 +1,20 @@
 import java.io.*;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Set;
+import java.util.*;
 import java.util.regex.Matcher;
-import java.util.Scanner;
 import java.util.regex.Pattern;
 
 class Node {
     int nodeNumber;
     float previousVoltage = 0;
+    float previousVoltage_t = 0;
     float voltage = 0;
+    ArrayList<Float> voltage_t = new ArrayList<Float>();
     float newVoltage = 0;
     float previousCurrent = 0;
     float current = 0;
     float newCurrent = 0;
 
-    //for bloody unions
+    //for unions
     boolean needs_parent = false;
     int parentNode;
     int unionNumber;
@@ -23,6 +22,10 @@ class Node {
     Set<Node> neighbors = new HashSet<Node>();
     Branch parentElement;
     int parent_element;
+
+    //-2 error
+    boolean toBeChecked = true;
+    Set<Branch> neighborCurrentSources = new HashSet<Branch>();
 
     //-5 error
     boolean connected = false;
@@ -32,6 +35,7 @@ class Node {
         nodeNumber = a;
         unionNumber = nodeNumber;
         parentNode = nodeNumber;
+        voltage_t.add(0f);
     }
 
     double getVoltage() {
@@ -56,13 +60,27 @@ class Branch {
     float resistance;
     float capacity;
     float inductance;
+
     float current = 0;
     float previousCurrent = 0;
+    float previousCurrent_t = 0;
     float nextCurrent_plus = 0;
     float nextCurrent_negative = 0;
-    float newCurrent = 0;
+    ArrayList<Float> current_t = new ArrayList<Float>();
+
     float voltage;
+    float previousVoltage;
+    float previousVoltage_t;
+    ArrayList<Float> voltage_t = new ArrayList<Float>();
+
     float power;
+    ArrayList<Float> power_t = new ArrayList<Float>();
+
+    //for KCL & KVL
+    int type_of_source = 0;
+    /* two types of sources:
+       1. Current source
+       2. Voltage source */
 
     public Branch(String name, int startNode, int endNode, float value) {
     }
@@ -72,16 +90,23 @@ class Branch {
     }
 
     float getVoltage(Node a, Node b) {
-        return voltage;
+        return a.voltage - b.voltage;
     }
 
-    void updateBranch(Node startNode, Node endNode, float dt, float dv) {
+    //for independent ones
+    void updateBranch(Node startNode, Node endNode, float dt, float dv, float time) {
     }
 
+    //dependent type 1
     void updateBranch(Node[] nodes, float dt, float dv) {
     }
 
+    //dependent type2
     void updateBranch(Branch[] branches, float dt, float dv) {
+    }
+
+    //for each step
+    void updateBranchFinal(Node startNode, Node endNode, float dt, float dv, float time, int step) {
     }
 }
 
@@ -89,7 +114,8 @@ class Circuit {
     int numberOfNodes = 0;
     int numberOfBranches = 0;
     int numberOfUnions = 0;
-    float dt, dv, di;
+    float dt, dv, di, duration, time = 0;
+    int step = 0;
     int[][] adjMatrix = new int[100][100];
     Node[] nodeArray = new Node[100];
     Branch[] branchArray = new Branch[100];
@@ -106,9 +132,10 @@ class Circuit {
         int non = 0;
 
         //for solution
-        float newCurrent = 0;
+        float totalCurrent1 = 0;
         float current = 0;
-        float nextCurrent = 0;
+        float totalCurrent2 = 0;
+
 
         Union(int a) {
             unionNumber = a;
@@ -124,13 +151,13 @@ class Circuit {
         }
 
         void updateVoltages() {
-            for (int k = 0; k < non; k++) {
+            for (int k = 0; nodes[k] != null; k++) {
                 if (k == 0 && parent_node == 0) {
-                    nodeArray[0].voltage = 0;
-                    nodeArray[0].previousVoltage = 0;
+                    nodes[0].voltage = 0;
+                    nodes[0].previousVoltage = 0;
                 } else if (k == 0) {
                     nodes[0].previousVoltage = nodes[0].voltage;
-                    nodes[0].voltage += dv * (Math.abs(newCurrent) - Math.abs(nextCurrent)) / di;
+                    nodes[0].voltage += dv * (Math.abs(totalCurrent1) - Math.abs(totalCurrent2)) / di;
                     //nodes[0].voltage -= dv * newCurrent;
                 } else {
                     if (nodes[k].parentNode == nodes[k].parentElement.port1) {
@@ -139,6 +166,26 @@ class Circuit {
                     } else if (nodes[k].parentNode == nodes[k].parentElement.port2) {
                         nodes[k].previousVoltage = nodes[k].voltage;
                         nodes[k].voltage = nodeArray[nodes[k].parentNode].voltage + nodes[k].parentElement.voltage;
+                    }
+                }
+            }
+        }
+
+        void updateVoltagesFinal() {
+            for (int k = 0; nodes[k] != null; k++) {
+                if (k == 0 && parent_node == 0) {
+                    nodes[0].voltage_t.add(0f);
+                    nodes[0].previousVoltage_t = nodes[0].voltage_t.get(step);
+                } else if (k == 0) {
+                    nodes[0].voltage_t.add(nodes[0].voltage);
+                    nodes[0].previousVoltage_t = nodes[0].voltage_t.get(step + 1);
+                } else {
+                    if (nodes[k].parentNode == nodes[k].parentElement.port1) {
+                        nodes[k].voltage_t.add(nodeArray[nodes[k].parentNode].voltage - nodes[k].parentElement.voltage);
+                        nodes[k].previousVoltage = nodes[k].voltage_t.get(step + 1);
+                    } else if (nodes[k].parentNode == nodes[k].parentElement.port2) {
+                        nodes[k].voltage_t.add(nodeArray[nodes[k].parentNode].voltage + nodes[k].parentElement.voltage);
+                        nodes[k].previousVoltage = nodes[k].voltage_t.get(step + 1);
                     }
                 }
             }
@@ -156,38 +203,92 @@ class Circuit {
         for (int j = 0; j <= numberOfNodes; j++) nodeArray[j] = new Node(j);
     }
 
+    void updateCircuit() throws IOException {
+        gatherUnions();
+        File output = new File("Output.txt");
+        FileWriter fileWriter = new FileWriter(output);
+        BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+        int stepSize = (int) (duration / dt) / 100;
+
+        if (check_error5()) {
+            //updateBranches();
+            for (time = 0; time <= duration; time += dt) {
+                for (int cnt = 0; cnt < 50000; cnt++) {
+                    boolean flag = false;
+                    updateBranches();
+                    //updateNodes();
+                    updateUnions();
+                    for (int k = 0; k < numberOfUnions; k++)
+                        if (unionArray[k].current > di) flag = true;
+                    if (!flag) break;
+                }
+                updateUnionsFinal();
+                updateBranchesFinal();
+                if (stepSize == 0 || step % stepSize == 0) {
+                    //printData(bufferedWriter);
+                    printDataFinal(bufferedWriter);
+                    //System.out.println(stepSize+" "+step);
+                }
+                step++;
+            }
+        } else bufferedWriter.write("The circuit is not valid; error -5.\n");
+        bufferedWriter.close();
+        fileWriter.close();
+    }
+
     void updateBranches() {
         for (int j = 0; branchArray[j] != null; j++) {
             if (branchArray[j].independence)
-                branchArray[j].updateBranch(nodeArray[branchArray[j].port1], nodeArray[branchArray[j].port2], dt, dv);
+                branchArray[j].updateBranch(nodeArray[branchArray[j].port1], nodeArray[branchArray[j].port2], dt, dv, time);
             else if (branchArray[j].type == 1)
                 branchArray[j].updateBranch(nodeArray, dt, dv);
             else if (branchArray[j].type == 2)
                 branchArray[j].updateBranch(branchArray, dt, dv);
+            else if (branchArray[j].type == 3)
+                branchArray[j].updateBranch(nodeArray, dt, dv);
+            else if (branchArray[j].type == 4)
+                branchArray[j].updateBranch(branchArray, dt, dv);
+        }
+    }
+
+    void updateBranchesFinal() {
+        for (int j = 0; branchArray[j] != null; j++) {
+            //if (branchArray[j].independence)
+            branchArray[j].updateBranchFinal(nodeArray[branchArray[j].port1], nodeArray[branchArray[j].port2], dt, dv, time, step);
+            /*else if (branchArray[j].type == 1)
+                branchArray[j].updateBranchFinal(nodeArray, dt, dv, step);
+            else if (branchArray[j].type == 2)
+                branchArray[j].updateBranchFinal(branchArray, dt, dv);*/
         }
     }
 
     void updateUnions() {
-        for (int k = 0; k < numberOfUnions; k++) {
-            unionArray[k].newCurrent = 0;
-            unionArray[k].nextCurrent = 0;
+        for (int k = 0; unionArray[k] != null; k++) {
+            unionArray[k].totalCurrent1 = 0;
+            unionArray[k].totalCurrent2 = 0;
             for (int i = 0; unionArray[k].nodes[i] != null; i++) {
-                for (int j = 0; j < numberOfBranches; j++) {
+                for (int j = 0; branchArray[j] != null; j++) {
                     if (branchArray[j].port1 == unionArray[k].nodes[i].nodeNumber && branchArray[j].getClass() != VoltageSource.class) {
-                        unionArray[k].newCurrent += branchArray[j].current;
+                        unionArray[k].totalCurrent1 += branchArray[j].current;
+                        System.out.println("Element: " + branchArray[j].name + " current to be add: " + branchArray[j].current);
                         //unionArray[k].nextCurrent += branchArray[j].previousCurrent;
-                        unionArray[k].nextCurrent += branchArray[j].nextCurrent_plus;
+                        unionArray[k].totalCurrent2 += branchArray[j].nextCurrent_plus;
                     } else if (branchArray[j].port2 == unionArray[k].nodes[i].nodeNumber && branchArray[j].getClass() != VoltageSource.class) {
-                        unionArray[k].newCurrent -= branchArray[j].current;
+                        unionArray[k].totalCurrent1 -= branchArray[j].current;
+                        System.out.println("Element: " + branchArray[j].name + " current to be add: " + branchArray[j].current);
                         //unionArray[k].nextCurrent -= branchArray[j].previousCurrent;
-                        unionArray[k].nextCurrent -= branchArray[j].nextCurrent_negative;
+                        unionArray[k].totalCurrent2 -= branchArray[j].nextCurrent_negative;
                     }
                 }
-
             }
-            unionArray[k].current = (unionArray[k].newCurrent + unionArray[k].nextCurrent) / 2;
-            unionArray[k].updateVoltages();
+            unionArray[k].current = unionArray[k].totalCurrent1;
         }
+        for (int k = 0; k < numberOfUnions; k++) unionArray[k].updateVoltages();
+    }
+
+    void updateUnionsFinal() {
+        for (int k = 0; k < numberOfUnions; k++)
+            unionArray[k].updateVoltagesFinal();
     }
 
     void updateNodes() {
@@ -199,51 +300,89 @@ class Circuit {
                 if (branchArray[j].port1 == cnt) {
                     nodeArray[i].newCurrent += branchArray[j].current;
                     nodeArray[i].previousCurrent += branchArray[j].previousCurrent;
+                    System.out.println("pCurrent: " + branchArray[j].previousCurrent + " nCurrent_plus:" + branchArray[j].nextCurrent_plus);
+                    //nodeArray[i].previousCurrent += branchArray[j].nextCurrent_plus;
                 } else if (branchArray[j].port2 == cnt) {
                     nodeArray[i].newCurrent -= branchArray[j].current;
                     nodeArray[i].previousCurrent -= branchArray[j].previousCurrent;
+                    System.out.println("pCurrent: " + branchArray[j].previousCurrent + " nCurrent_neg:" + branchArray[j].nextCurrent_negative);
+                    //nodeArray[i].previousCurrent -= branchArray[j].nextCurrent_negative;
                 }
             }
+            cnt++;
+        }
+        for (int i = 0; nodeArray[i] != null; i++) {
             nodeArray[i].previousVoltage = nodeArray[i].voltage;
+            nodeArray[i].voltage += dv * (Math.abs(nodeArray[i].newCurrent) - Math.abs(nodeArray[i].previousCurrent)) / di;
             nodeArray[i].current = (nodeArray[i].newCurrent + nodeArray[i].previousCurrent) / 2;
-
             /*if(nodeArray[i].newCurrent < 0.5);
             else if (nodeArray[i].newCurrent > nodeArray[i].previousCurrent)
                 nodeArray[i].voltage += dv;
             else if (nodeArray[i].newCurrent < nodeArray[i].previousCurrent)
                 nodeArray[i].voltage -= dv;*/
-
-            nodeArray[i].voltage -= dv * nodeArray[i].newCurrent;
-            if (cnt == 0) {
+            if (i == 0) {
                 nodeArray[i].voltage = 0;
                 nodeArray[i].previousVoltage = 0;
             }
-            cnt++;
         }
     }
 
-    void printData() {
-        for (int i = 0; nodeArray[i] != null; i++)
-            System.out.println("Node: " + nodeArray[i].nodeNumber + " voltage:" + nodeArray[i].voltage + " current:" + nodeArray[i].current);
-        System.out.println();
-        for (int k = 0; k < numberOfUnions; k++)
-            System.out.println("Union: " + unionArray[k].unionNumber + " current:" + unionArray[k].current);
-        System.out.println();
-        for (int j = 0; branchArray[j] != null; j++)
-            System.out.println("Branch: " + branchArray[j].name + " voltage:" + branchArray[j].getVoltage(nodeArray[branchArray[j].port1], nodeArray[branchArray[j].port2]) + " current:" + branchArray[j].getCurrent());
-        System.out.println("--------");
+    void printData(BufferedWriter bufferedWriter) throws IOException {
+        bufferedWriter.write("---------- Time:" + time + " ----------\n");
+        for (int i = 0; nodeArray[i] != null; i++) {
+            //System.out.println("Node: " + nodeArray[i].nodeNumber + " voltage:" + nodeArray[i].voltage);
+            bufferedWriter.write("Node: " + nodeArray[i].nodeNumber + " voltage:" + nodeArray[i].voltage + " previousVoltage:" + nodeArray[i].previousVoltage + "\n");
+        }
+
+        //System.out.println();
+        bufferedWriter.write("\n");
+        for (int k = 0; k < numberOfUnions; k++) {
+            //System.out.println("Union: " + unionArray[k].unionNumber + " current:" + unionArray[k].current);
+            bufferedWriter.write("Union: " + unionArray[k].unionNumber + " current:" + unionArray[k].current + " totalCurrent1:" + unionArray[k].totalCurrent1 + " totalCurrent2:" + unionArray[k].totalCurrent2 + "\n");
+        }
+        //System.out.println();
+        bufferedWriter.write("\n");
+        for (int j = 0; branchArray[j] != null; j++) {
+            //System.out.println("Branch: " + branchArray[j].name + " voltage:" + branchArray[j].getVoltage(nodeArray[branchArray[j].port1], nodeArray[branchArray[j].port2]) + " current:" + branchArray[j].getCurrent());
+            bufferedWriter.write("Branch: " + branchArray[j].name + " voltage:" + branchArray[j].getVoltage(nodeArray[branchArray[j].port1], nodeArray[branchArray[j].port2]) + " current:" + branchArray[j].getCurrent() + "\n");
+        }
+        //System.out.println("----------");
+    }
+
+    void printDataFinal(BufferedWriter bufferedWriter) throws IOException {
+        bufferedWriter.write("---------- Time:" + time + ", step:" + step + " ----------\n");
+        for (int i = 0; nodeArray[i] != null; i++) {
+            //System.out.println("Node: " + nodeArray[i].nodeNumber + " voltage:" + nodeArray[i].voltage);
+            bufferedWriter.write("Node: " + nodeArray[i].nodeNumber + " voltage:" + nodeArray[i].voltage_t.get(step + 1) + " previousVoltage_t:" + nodeArray[i].previousVoltage_t + "\n");
+        }
+
+        //System.out.println();
+        bufferedWriter.write("\n");
+        for (int k = 0; k < numberOfUnions; k++) {
+            //System.out.println("Union: " + unionArray[k].unionNumber + " current:" + unionArray[k].current);
+            bufferedWriter.write("Union: " + unionArray[k].unionNumber + " current:" + unionArray[k].current + " totalCurrent1:" + unionArray[k].totalCurrent1 + "\n");
+        }
+        //System.out.println();
+        bufferedWriter.write("\n");
+        for (int j = 0; branchArray[j] != null; j++) {
+            //System.out.println("Branch: " + branchArray[j].name + " voltage:" + branchArray[j].getVoltage(nodeArray[branchArray[j].port1], nodeArray[branchArray[j].port2]) + " current:" + branchArray[j].getCurrent());
+            bufferedWriter.write("Branch: " + branchArray[j].name + " voltage:" + branchArray[j].voltage_t.get(step) + " current:" + branchArray[j].current_t.get(step) + "\n");
+        }
+        //System.out.println("----------");
     }
 
     float aFloat(String str) {
         float result = 0;
-        Pattern num = Pattern.compile("[.\\d]+");
+        Pattern num = Pattern.compile("[\\.\\d]+");
         Matcher matcher = num.matcher(str);
         matcher.find();
-        if (str.matches("[.\\d]+G")) result = 1000000000 * Float.parseFloat(matcher.group());
-        if (str.matches("[.\\d]+M")) result = 1000000 * Float.parseFloat(matcher.group());
-        if (str.matches("[.\\d]+k")) result = 1000 * Float.parseFloat(matcher.group());
-        if (str.matches("[.\\d]+")) result = Float.parseFloat(matcher.group());
-        if (str.matches("[.\\d]+m")) result = 0.001f * Float.parseFloat(matcher.group());
+        if (str.matches("[\\.\\d]+G")) result = (float) (1E9 * Float.parseFloat(matcher.group()));
+        if (str.matches("[\\.\\d]+M")) result = (float) (1E6 * Float.parseFloat(matcher.group()));
+        if (str.matches("[\\.\\d]+k")) result = (float) (1E3 * Float.parseFloat(matcher.group()));
+        if (str.matches("[\\.\\d]+")) result = Float.parseFloat(matcher.group());
+        if (str.matches("[\\.\\d]+m")) result = (float) (1E-3 * Float.parseFloat(matcher.group()));
+        if (str.matches("[\\.\\d]+u")) result = (float) (1E-6 * Float.parseFloat(matcher.group()));
+        if (str.matches("[\\.\\d]+n")) result = (float) (1E-9 * Float.parseFloat(matcher.group()));
         return result;
     }
 
@@ -316,16 +455,37 @@ class Circuit {
                     float gain = aFloat(info[4]);
                     CurrentDependentCS currentDependentCS = new CurrentDependentCS(element_name, startNode, endNode, dependentElementName, gain);
                     addElement(currentDependentCS);
-                } else if (element_name.matches("dv")) dv = Float.parseFloat(info[1]);
-                else if (element_name.matches("dt")) dt = Float.parseFloat(info[1]);
-                else if (element_name.matches("di")) di = Float.parseFloat(info[1]);
+                } else if (element_name.matches("E(\\d)+")) {
+                    int startNode = Integer.parseInt(info[1]);
+                    int endNode = Integer.parseInt(info[2]);
+
+                    int related_port1 = Integer.parseInt(info[3]);
+                    int related_port2 = Integer.parseInt(info[4]);
+                    float gain = aFloat(info[5]);
+                    VoltageDependentVS voltageDependentVS = new VoltageDependentVS(element_name, startNode, endNode, related_port1, related_port2, gain);
+                    addElement(voltageDependentVS);
+                } else if (element_name.matches("H(\\d)+")) {
+                    int startNode = Integer.parseInt(info[1]);
+                    int endNode = Integer.parseInt(info[2]);
+
+                    String dependentElementName = info[3];
+                    float gain = aFloat(info[4]);
+                    CurrentDependentVS currentDependentVS = new CurrentDependentVS(element_name, startNode, endNode, dependentElementName, gain);
+                    addElement(currentDependentVS);
+                } else if (element_name.matches("dv")) dv = aFloat(info[1]);
+                else if (element_name.matches("dt")) dt = aFloat(info[1]);
+                else if (element_name.matches("di")) di = aFloat(info[1]);
+                else if (element_name.matches("\\.tran")) duration = aFloat(info[1]);
                 line = br.readLine();
             }
-        } catch (FileNotFoundException e) {
+        } catch (
+                FileNotFoundException e) {
             e.printStackTrace();
-        } catch (IOException e) {
+        } catch (
+                IOException e) {
             e.printStackTrace();
         }
+
     }
 
     void makeNeighbors(int startNode, int endNode) {
@@ -337,11 +497,9 @@ class Circuit {
         initCircuit();
         int start = 0, end = 0;
         for (int j = 0; j < numberOfBranches; j++) {
-            if (branchArray[j].getClass() == VoltageSource.class) {
-                for (int i = 0; i <= numberOfNodes; i++) {
-                    if (adjMatrix[j][i] == 1) start = i;
-                    if (adjMatrix[j][i] == -1) end = i;
-                }
+            if (branchArray[j].type_of_source == 2) {
+                start = branchArray[j].port1;
+                end = branchArray[j].port2;
                 makeNeighbors(start, end);
                 nodeArray[start].needs_parent = true;
                 nodeArray[end].needs_parent = true;
@@ -373,11 +531,9 @@ class Circuit {
         setUnions();
         int start = 0, end = 0;
         for (int j = 0; j < numberOfBranches; j++) {
-            if (branchArray[j].getClass() == VoltageSource.class) {
-                for (int i = 0; i <= numberOfNodes; i++) {
-                    if (adjMatrix[j][i] == 1) start = i;
-                    if (adjMatrix[j][i] == -1) end = i;
-                }
+            if (branchArray[j].type_of_source == 2) {
+                start = branchArray[j].port1;
+                end = branchArray[j].port2;
                 if (nodeArray[start].parentNode == end) {
                     nodeArray[start].parent_element = j;
                     nodeArray[start].parentElement = branchArray[j];
@@ -404,13 +560,44 @@ class Circuit {
                     if (nodeArray[i].unionNumber == unionArray[k].parent_node)
                         unionArray[k].addNode(nodeArray[i]);
         }
+        for (int k = 0; k < numberOfUnions; k++) {
+            unionArray[k].updateVoltages();
+        }
     }
 
-    boolean checkIfConnected() {
+    boolean check_error2() {
+        boolean flag = true;
+        prepareNodesToBeChecked();
+        for (int i = 0; i <= numberOfNodes; i++) {
+            float sum = 0;
+            for (Branch cs : nodeArray[i].neighborCurrentSources) {
+                if (nodeArray[i].nodeNumber == cs.port1) sum += cs.current;
+                else sum -= cs.current;
+            }
+            flag = sum <= di;
+        }
+        return flag;
+    }
+
+    void prepareNodesToBeChecked() {
+        for (int j = 0; j < numberOfBranches; j++) {
+            int port1 = branchArray[j].port1;
+            int port2 = branchArray[j].port2;
+            if (branchArray[j].type_of_source == 1) {
+                nodeArray[port1].neighborCurrentSources.add(branchArray[j]);
+                nodeArray[port2].neighborCurrentSources.add(branchArray[j]);
+            } else {
+                nodeArray[port1].toBeChecked = false;
+                nodeArray[port2].toBeChecked = false;
+            }
+        }
+    }
+
+    boolean check_error5() {
         boolean flag = true;
         nodeArray[0].connected = true;
         set_connections(0);
-        for (int i = 0; i <= numberOfNodes && nodeArray[i].connected == false; i++) flag = false;
+        for (int i = 0; i <= numberOfNodes; i++) if (!nodeArray[i].connected) flag = false;
         return flag;
     }
 
@@ -418,28 +605,36 @@ class Circuit {
         for (int j = 0; j < numberOfBranches; j++)
             if (adjMatrix[j][node_number] == 1 || adjMatrix[j][node_number] == -1)
                 for (int i = 0; i <= numberOfNodes; i++)
-                    if ((adjMatrix[j][i] == 1 || adjMatrix[j][i] == -1) && nodeArray[i].connected == false) {
+                    if (adjMatrix[j][node_number] * adjMatrix[j][i] == -1 && !nodeArray[i].connected) {
                         nodeArray[i].connected = true;
                         set_connections(i);
                     }
+        for (int i = 0; i <= numberOfNodes; i++) {
+            int number_of_neighbors = 0;
+            for (int j = 0; j < numberOfBranches; j++)
+                if (adjMatrix[j][i] == 1 || adjMatrix[j][i] == -1) number_of_neighbors++;
+            if (number_of_neighbors <= 1) nodeArray[i].connected = false;
+        }
     }
 }
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         Circuit circuit = new Circuit();
         try {
             circuit.readFile();
         } catch (FileNotFoundException e) {
             System.out.println("Data file doesn't exist!");
         }
-        //System.out.println(circuit.checkIfConnected());
-        circuit.gatherUnions();
-        for (int k = 0; k <= 10000; k++) {
-            circuit.updateUnions();
-            circuit.updateBranches();
-            if (k % 100 == 0)
-                circuit.printData();
-        }
+        /*circuit.gatherUnions();
+        for (int k = 0; circuit.unionArray[k] != null; k++) {
+            System.out.print("Union: " + k + ",parent node: " + circuit.unionArray[k].parent_node);
+            for (int i = 1; circuit.unionArray[k].nodes[i] != null; i++) {
+                System.out.print(". node[" + circuit.unionArray[k].nodes[i].nodeNumber + "]'s parent element: " + circuit.unionArray[k].nodes[i].parent_element + " ");
+            }
+            System.out.println();
+        }*/
+        circuit.updateCircuit();
+        //System.out.println(circuit.check_error2());
     }
 }
