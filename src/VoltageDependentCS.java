@@ -11,14 +11,14 @@ class VoltageDependentCS extends Branch {
     VoltageDependentCS(String name, int i, int j, int k, int m, float value) {
         super(name, i, j, value);
         this.name = name;
-        independence = false;
+        independent = false;
         type = 1;//G
+        type_of_source = 1;//KCL
         port1 = j;
         port2 = i;
         this.gain = value;
         related_port1 = k;
         related_port2 = m;
-
         //this.current=value*(nodeArray[related_port1]-nodeArray[related_port2]);
     }
 
@@ -27,13 +27,18 @@ class VoltageDependentCS extends Branch {
     }
 
     void updateBranch(Node[] nodes, float dt, float dv) {
-        //previousCurrent = gain * (nodes[related_port1].previousVoltage - nodes[related_port2].previousVoltage);
-        previousCurrent = current;
-
         current = gain * (nodes[related_port1].voltage - nodes[related_port2].voltage);
-        //System.out.println("vdcs current: "+current+" ,nodes[related_port1].voltage: "+nodes[related_port1].voltage);
-        //should "dv" be added to the voltage difference?
-        //previousCurrent = gain * (nodes[related_port1].voltage - nodes[related_port2].voltage + dv);
+        nextCurrent_plus = current;
+        nextCurrent_negative = current;
+        previousCurrent = current;
+        power = current * voltage;
+    }
 
+    @Override
+    void updateBranchFinal(Node startNode, Node endNode, float dt, float dv, float time, int step) {
+        voltage = startNode.voltage - endNode.voltage;
+        current_t.add(current);
+        voltage_t.add(voltage);
+        power_t.add(power);
     }
 }

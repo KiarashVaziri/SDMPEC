@@ -1,4 +1,4 @@
-public class CurrentDependentCS extends Branch {
+class CurrentDependentVS extends Branch{
 
     /*there are two types:
     1. dependent to a certain voltage
@@ -9,14 +9,14 @@ public class CurrentDependentCS extends Branch {
     Branch element;
     String dependent_element;
 
-    CurrentDependentCS(String name, int i, int j, String elementName, float value) {
+    CurrentDependentVS(String name, int i, int j, String elementName, float value) {
         super(name, i, j, value);
         this.name = name;
         independent = false;
-        type = 2;//F
-        type_of_source = 1;//KCL
-        port1 = j;
-        port2 = i;
+        type = 4;//H
+        type_of_source = 2;
+        port1 = i;
+        port2 = j;
         this.gain = value;
         this.dependent_element = elementName;
     }
@@ -32,18 +32,15 @@ public class CurrentDependentCS extends Branch {
 
     void updateBranch(Branch[] branches, float dt, float dv) {
         updateRelatedElement(branches);
-        current = gain * element.current;
-        nextCurrent_negative = current;
-        nextCurrent_plus = current;
-        previousCurrent = gain * element.previousCurrent;
+        voltage = gain * element.current;
+        System.out.println("Voltage:"+voltage);
         power = current * voltage;
     }
 
     @Override
     void updateBranchFinal(Node startNode, Node endNode, float dt, float dv, float time, int step) {
-        voltage = startNode.voltage - endNode.voltage;
-        current_t.add(current);
         voltage_t.add(voltage);
+        current_t.add(0f);
         power_t.add(power);
     }
 }
