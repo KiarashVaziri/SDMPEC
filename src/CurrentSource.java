@@ -1,6 +1,5 @@
-import com.sun.org.apache.xpath.internal.objects.XNodeSet;
-
 class CurrentSource extends Branch {
+
     float offset;
     float amplitude;
     float frequency;

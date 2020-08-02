@@ -1,4 +1,5 @@
 class Inductor extends Branch {
+
     Inductor(String name, int a, int b, float value) {
         super(name, a, b, value);
         this.name = name;
@@ -9,10 +10,6 @@ class Inductor extends Branch {
 
     float getVoltage(Node s, Node e) {
         return s.voltage - e.voltage;
-    }
-
-    float getVoltage() {
-        return voltage;
     }
 
     void updateBranch(Node s, Node e, float dt, float dv, float time) {

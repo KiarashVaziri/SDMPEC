@@ -1,4 +1,5 @@
 class Resistor extends Branch {
+
     Resistor(String name, int a, int b, float r) {
         super(name, a, b, r);
         this.name = name;
@@ -11,8 +12,6 @@ class Resistor extends Branch {
     float getVoltage(Node a, Node b) {
         return a.voltage - b.voltage;
     }
-
-    float getVoltage() { return voltage; }
 
     @Override
     void updateBranch(Node startNode, Node endNode, float dt, float dv, float time) {

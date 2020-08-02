@@ -1,4 +1,5 @@
 class Capacitor extends Branch {
+
     Capacitor(String name, int a, int b, float value) {
         super(name, a, b, value);
         this.name = name;
