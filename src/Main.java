@@ -379,23 +379,23 @@ class Circuit {
     }
 
     void printDataFinal(BufferedWriter bufferedWriter) throws IOException {
-        bufferedWriter.write("---------- Time:" + time + ", step:" + step + " ----------\n");
+        bufferedWriter.write("                      ---------- Time:" + time + ", step:" + step + " ----------\n");
         for (int i = 0; nodeArray[i] != null; i++) {
             //System.out.println("Node: " + nodeArray[i].nodeNumber + " voltage:" + nodeArray[i].voltage);
-            bufferedWriter.write("Node: " + nodeArray[i].nodeNumber + " voltage:" + String.format("%.2f", nodeArray[i].voltage_t.get(step + 1)) + "\n");
+            bufferedWriter.write("                  Node: " + nodeArray[i].nodeNumber + " voltage:" + String.format("%.2f", nodeArray[i].voltage_t.get(step + 1)) + "\n");
         }
 
         //System.out.println();
         bufferedWriter.write("\n");
         for (int k = 0; k < numberOfUnions; k++) {
             //System.out.println("Union: " + unionArray[k].unionNumber + " current:" + unionArray[k].current);
-            bufferedWriter.write("Union: " + unionArray[k].unionNumber + " current:" + String.format("%.1f", unionArray[k].current) + "\n");
+            bufferedWriter.write("                  Union: " + unionArray[k].unionNumber + " current:" + String.format("%.1f", unionArray[k].current) + "\n");
         }
         //System.out.println();
         bufferedWriter.write("\n");
         for (int j = 0; branchArray[j] != null; j++) {
             //System.out.println("Branch: " + branchArray[j].name + " voltage:" + branchArray[j].getVoltage(nodeArray[branchArray[j].port1], nodeArray[branchArray[j].port2]) + " current:" + branchArray[j].getCurrent());
-            bufferedWriter.write("Branch: " + branchArray[j].name + " voltage:" + String.format("%.2f", branchArray[j].voltage_t.get(step)) + " current:" + String.format("%.2f", branchArray[j].current_t.get(step)) + "\n");
+            bufferedWriter.write("                  Branch: " + branchArray[j].name + " voltage:" + String.format("%.2f", branchArray[j].voltage_t.get(step)) + " current:" + String.format("%.2f", branchArray[j].current_t.get(step)) + "\n");
         }
         //System.out.println("----------");
     }
@@ -1778,7 +1778,7 @@ class DataPanel extends JComponent implements ActionListener
                     ex.printStackTrace();
                 }
             }
-            textArea.setFont(textArea.getFont().deriveFont(20f));
+            textArea.setFont(textArea.getFont().deriveFont(16f));
         }
         if (e.getSource() == save_button)
         {
@@ -1854,11 +1854,16 @@ class ResultPanel extends JComponent implements ActionListener
 {
     JButton run_button , draw_button , graph_button;
     JTextArea ResultArea;
-    CircuitPanel circuitPanel;
     Circuit circuit;
     MainFrame MainFrame;
-    ResultPanel ()
+    CircuitPanel circuitPanel;
+    DataPanel dataPanel;
+    String outPutPath = "Output.txt";
+    ResultPanel (MainFrame frame , CircuitPanel cp , DataPanel dp)
     {
+        MainFrame = frame;
+        circuitPanel = cp;
+        dataPanel = dp;
         setBounds(275 , 25 , 500 , 600);
         Border button_border = BorderFactory.createLineBorder(Color.BLACK , 1);
         run_button = new JButton("     Run");
@@ -1937,21 +1942,45 @@ class ResultPanel extends JComponent implements ActionListener
         ResultArea.setBorder(ResultArea_border);
         add(ResultArea);
     }
+
     @Override
     public void actionPerformed(ActionEvent e)
     {
+        if(e.getSource() == run_button)
+        {
+            //Phase one
+            circuit = new Circuit(dataPanel.filePath);
+            try {
+                circuit.readFile();
+            } catch (FileNotFoundException ex) {
+                ex.printStackTrace();
+            }
+            try {
+                circuit.updateCircuit();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+            try {
+                ResultArea.setFont(ResultArea.getFont().deriveFont(15f));
+                BufferedReader br = new BufferedReader(new FileReader(outPutPath));
+                String s1 = "", s2 = "";
+                while ((s1 = br.readLine()) != null) s2 += s1 + "\n";
+                ResultArea.setText(s2);
+                br.close();
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        }
         if(e.getSource() == draw_button)
         {
             circuitPanel.DrawCircuit(circuit , MainFrame);
             MainFrame.setVisible(true);
         }
-        if(e.getSource() == run_button)
-        {
-            //Phase one
-        }
         if(e.getSource() == graph_button)
         {
-
+            JFrame questionFrame = new JFrame("Input");
+            String name = JOptionPane.showInputDialog(questionFrame, "Enter the name of your element");
+            if (name != null) circuit.openCharts(name);
         }
     }
 }
@@ -1996,7 +2025,7 @@ class MainFrame extends JFrame implements Cloneable
         CircuitPanel c = new CircuitPanel();
         add(c);
 
-        ResultPanel r = new ResultPanel();
+        ResultPanel r = new ResultPanel(this , c , d);
         add(r);
 
         SharifPanel s = new SharifPanel();
