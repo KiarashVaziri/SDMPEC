@@ -1,1100 +1,1100 @@
-                      ---------- Time:0.0, step:0 ----------
-                  Node: 0 voltage:0.00
-                  Node: 1 voltage:10.00
-                  Node: 2 voltage:0.50
-
-                  Union: 0 current:3.1
-                  Union: 1 current:-3.1
-
-                  Branch: V1 voltage:10.00 current:3.17
-                  Branch: R1 voltage:9.50 current:3.17
-                  Branch: L1 voltage:0.50 current:0.03
-                      ---------- Time:4.0E-4, step:4 ----------
-                  Node: 0 voltage:0.00
-                  Node: 1 voltage:11.24
-                  Node: 2 voltage:2.50
-
-                  Union: 0 current:2.4
-                  Union: 1 current:-2.4
-
-                  Branch: V1 voltage:11.24 current:2.91
-                  Branch: R1 voltage:8.74 current:2.91
-                  Branch: L1 voltage:2.50 current:0.50
-                      ---------- Time:8.0E-4, step:8 ----------
-                  Node: 0 voltage:0.00
-                  Node: 1 voltage:12.41
-                  Node: 2 voltage:4.51
-
-                  Union: 0 current:1.1
-                  Union: 1 current:-1.1
-
-                  Branch: V1 voltage:12.41 current:2.63
-                  Branch: R1 voltage:7.90 current:2.63
-                  Branch: L1 voltage:4.51 current:1.50
-                      ---------- Time:0.0011999998, step:12 ----------
-                  Node: 0 voltage:0.00
-                  Node: 1 voltage:13.42
-                  Node: 2 voltage:5.01
-
-                  Union: 0 current:-0.1
-                  Union: 1 current:0.1
-
-                  Branch: V1 voltage:13.42 current:2.81
-                  Branch: R1 voltage:8.42 current:2.81
-                  Branch: L1 voltage:5.01 current:2.90
-                      ---------- Time:0.0015999996, step:16 ----------
-                  Node: 0 voltage:0.00
-                  Node: 1 voltage:14.22
-                  Node: 2 voltage:3.00
-
-                  Union: 0 current:-0.2
-                  Union: 1 current:0.2
-
-                  Branch: V1 voltage:14.22 current:3.74
-                  Branch: R1 voltage:11.22 current:3.74
-                  Branch: L1 voltage:3.00 current:3.90
-                      ---------- Time:0.0019999994, step:20 ----------
-                  Node: 0 voltage:0.00
-                  Node: 1 voltage:14.76
-                  Node: 2 voltage:1.52
-
-                  Union: 0 current:-0.0
-                  Union: 1 current:0.0
-
-                  Branch: V1 voltage:14.76 current:4.41
-                  Branch: R1 voltage:13.23 current:4.41
-                  Branch: L1 voltage:1.52 current:4.42
-                      ---------- Time:0.0023999996, step:24 ----------
-                  Node: 0 voltage:0.00
-                  Node: 1 voltage:14.99
-                  Node: 2 voltage:0.87
-
-                  Union: 0 current:-0.0
-                  Union: 1 current:0.0
-
-                  Branch: V1 voltage:14.99 current:4.71
-                  Branch: R1 voltage:14.12 current:4.71
-                  Branch: L1 voltage:0.87 current:4.72
-                      ---------- Time:0.0028, step:28 ----------
-                  Node: 0 voltage:0.00
-                  Node: 1 voltage:14.91
-                  Node: 2 voltage:0.36
-
-                  Union: 0 current:-0.0
-                  Union: 1 current:0.0
-
-                  Branch: V1 voltage:14.91 current:4.85
-                  Branch: R1 voltage:14.55 current:4.85
-                  Branch: L1 voltage:0.36 current:4.86
-                      ---------- Time:0.0032000002, step:32 ----------
-                  Node: 0 voltage:0.00
-                  Node: 1 voltage:14.52
-                  Node: 2 voltage:-0.09
-
-                  Union: 0 current:-0.0
-                  Union: 1 current:0.0
-
-                  Branch: V1 voltage:14.52 current:4.87
-                  Branch: R1 voltage:14.61 current:4.87
-                  Branch: L1 voltage:-0.09 current:4.88
-                      ---------- Time:0.0036000004, step:36 ----------
-                  Node: 0 voltage:0.00
-                  Node: 1 voltage:13.85
-                  Node: 2 voltage:-0.50
-
-                  Union: 0 current:-0.0
-                  Union: 1 current:0.0
-
-                  Branch: V1 voltage:13.85 current:4.78
-                  Branch: R1 voltage:14.35 current:4.78
-                  Branch: L1 voltage:-0.50 current:4.79
-                      ---------- Time:0.0040000007, step:40 ----------
-                  Node: 0 voltage:0.00
-                  Node: 1 voltage:12.94
-                  Node: 2 voltage:-0.84
-
-                  Union: 0 current:-0.0
-                  Union: 1 current:0.0
-
-                  Branch: V1 voltage:12.94 current:4.59
-                  Branch: R1 voltage:13.78 current:4.59
-                  Branch: L1 voltage:-0.84 current:4.60
-                      ---------- Time:0.0044, step:44 ----------
-                  Node: 0 voltage:0.00
-                  Node: 1 voltage:11.84
-                  Node: 2 voltage:-1.12
-
-                  Union: 0 current:-0.0
-                  Union: 1 current:0.0
-
-                  Branch: V1 voltage:11.84 current:4.32
-                  Branch: R1 voltage:12.96 current:4.32
-                  Branch: L1 voltage:-1.12 current:4.33
-                      ---------- Time:0.0047999993, step:48 ----------
-                  Node: 0 voltage:0.00
-                  Node: 1 voltage:10.63
-                  Node: 2 voltage:-1.33
-
-                  Union: 0 current:-0.0
-                  Union: 1 current:0.0
-
-                  Branch: V1 voltage:10.63 current:3.99
-                  Branch: R1 voltage:11.96 current:3.99
-                  Branch: L1 voltage:-1.33 current:4.00
-                      ---------- Time:0.0051999986, step:52 ----------
-                  Node: 0 voltage:0.00
-                  Node: 1 voltage:9.37
-                  Node: 2 voltage:-1.45
-
-                  Union: 0 current:-0.0
-                  Union: 1 current:0.0
-
-                  Branch: V1 voltage:9.37 current:3.61
-                  Branch: R1 voltage:10.83 current:3.61
-                  Branch: L1 voltage:-1.45 current:3.62
-                      ---------- Time:0.005599998, step:56 ----------
-                  Node: 0 voltage:0.00
-                  Node: 1 voltage:8.16
-                  Node: 2 voltage:-1.48
-
-                  Union: 0 current:-0.0
-                  Union: 1 current:0.0
-
-                  Branch: V1 voltage:8.16 current:3.31
-                  Branch: R1 voltage:9.64 current:3.21
-                  Branch: L1 voltage:-1.48 current:3.22
-                      ---------- Time:0.0059999973, step:60 ----------
-                  Node: 0 voltage:0.00
-                  Node: 1 voltage:7.06
-                  Node: 2 voltage:-1.46
-
-                  Union: 0 current:0.0
-                  Union: 1 current:-0.0
-
-                  Branch: V1 voltage:7.06 current:2.84
-                  Branch: R1 voltage:8.52 current:2.84
-                  Branch: L1 voltage:-1.46 current:2.83
-                      ---------- Time:0.0063999966, step:64 ----------
-                  Node: 0 voltage:0.00
-                  Node: 1 voltage:6.15
-                  Node: 2 voltage:-1.29
-
-                  Union: 0 current:0.0
-                  Union: 1 current:-0.0
-
-                  Branch: V1 voltage:6.15 current:2.48
-                  Branch: R1 voltage:7.43 current:2.48
-                  Branch: L1 voltage:-1.29 current:2.47
-                      ---------- Time:0.006799996, step:68 ----------
-                  Node: 0 voltage:0.00
-                  Node: 1 voltage:5.48
-                  Node: 2 voltage:-1.05
-
-                  Union: 0 current:0.0
-                  Union: 1 current:-0.0
-
-                  Branch: V1 voltage:5.48 current:2.17
-                  Branch: R1 voltage:6.52 current:2.17
-                  Branch: L1 voltage:-1.05 current:2.16
-                      ---------- Time:0.007199995, step:72 ----------
-                  Node: 0 voltage:0.00
-                  Node: 1 voltage:5.09
-                  Node: 2 voltage:-0.74
-
-                  Union: 0 current:0.0
-                  Union: 1 current:-0.0
-
-                  Branch: V1 voltage:5.09 current:1.94
-                  Branch: R1 voltage:5.83 current:1.94
-                  Branch: L1 voltage:-0.74 current:1.93
-                      ---------- Time:0.0075999945, step:76 ----------
-                  Node: 0 voltage:0.00
-                  Node: 1 voltage:5.01
-                  Node: 2 voltage:-0.40
-
-                  Union: 0 current:0.0
-                  Union: 1 current:-0.0
-
-                  Branch: V1 voltage:5.01 current:1.80
-                  Branch: R1 voltage:5.41 current:1.80
-                  Branch: L1 voltage:-0.40 current:1.79
-                      ---------- Time:0.007999994, step:80 ----------
-                  Node: 0 voltage:0.00
-                  Node: 1 voltage:5.24
-                  Node: 2 voltage:-0.03
-
-                  Union: 0 current:0.0
-                  Union: 1 current:-0.0
-
-                  Branch: V1 voltage:5.24 current:1.76
-                  Branch: R1 voltage:5.27 current:1.76
-                  Branch: L1 voltage:-0.03 current:1.75
-                      ---------- Time:0.008399993, step:84 ----------
-                  Node: 0 voltage:0.00
-                  Node: 1 voltage:5.78
-                  Node: 2 voltage:0.27
-
-                  Union: 0 current:-0.0
-                  Union: 1 current:0.0
-
-                  Branch: V1 voltage:5.78 current:1.78
-                  Branch: R1 voltage:5.35 current:1.78
-                  Branch: L1 voltage:0.27 current:1.79
-                      ---------- Time:0.0087999925, step:88 ----------
-                  Node: 0 voltage:0.00
-                  Node: 1 voltage:6.58
-                  Node: 2 voltage:0.71
-
-                  Union: 0 current:0.0
-                  Union: 1 current:-0.0
-
-                  Branch: V1 voltage:6.58 current:1.96
-                  Branch: R1 voltage:5.87 current:1.96
-                  Branch: L1 voltage:0.71 current:1.95
-                      ---------- Time:0.009199992, step:92 ----------
-                  Node: 0 voltage:0.00
-                  Node: 1 voltage:7.59
-                  Node: 2 voltage:1.00
-
-                  Union: 0 current:0.0
-                  Union: 1 current:-0.0
-
-                  Branch: V1 voltage:7.59 current:2.20
-                  Branch: R1 voltage:6.59 current:2.20
-                  Branch: L1 voltage:1.00 current:2.19
-                      ---------- Time:0.009599991, step:96 ----------
-                  Node: 0 voltage:0.00
-                  Node: 1 voltage:8.76
-                  Node: 2 voltage:1.24
-
-                  Union: 0 current:0.0
-                  Union: 1 current:-0.0
-
-                  Branch: V1 voltage:8.76 current:2.50
-                  Branch: R1 voltage:7.51 current:2.50
-                  Branch: L1 voltage:1.24 current:2.49
-                      ---------- Time:0.00999999, step:100 ----------
-                  Node: 0 voltage:0.00
-                  Node: 1 voltage:10.00
-                  Node: 2 voltage:1.41
-
-                  Union: 0 current:0.0
-                  Union: 1 current:-0.0
-
-                  Branch: V1 voltage:10.00 current:2.86
-                  Branch: R1 voltage:8.59 current:2.86
-                  Branch: L1 voltage:1.41 current:2.85
-                      ---------- Time:0.01039999, step:104 ----------
-                  Node: 0 voltage:0.00
-                  Node: 1 voltage:11.24
-                  Node: 2 voltage:1.48
-
-                  Union: 0 current:0.0
-                  Union: 1 current:-0.0
-
-                  Branch: V1 voltage:11.24 current:3.25
-                  Branch: R1 voltage:9.76 current:3.25
-                  Branch: L1 voltage:1.48 current:3.24
-                      ---------- Time:0.010799989, step:108 ----------
-                  Node: 0 voltage:0.00
-                  Node: 1 voltage:12.41
-                  Node: 2 voltage:1.49
-
-                  Union: 0 current:0.0
-                  Union: 1 current:-0.0
-
-                  Branch: V1 voltage:12.41 current:3.55
-                  Branch: R1 voltage:10.92 current:3.64
-                  Branch: L1 voltage:1.49 current:3.64
-                      ---------- Time:0.011199988, step:112 ----------
-                  Node: 0 voltage:0.00
-                  Node: 1 voltage:13.42
-                  Node: 2 voltage:1.38
-
-                  Union: 0 current:-0.0
-                  Union: 1 current:0.0
-
-                  Branch: V1 voltage:13.42 current:4.01
-                  Branch: R1 voltage:12.04 current:4.01
-                  Branch: L1 voltage:1.38 current:4.02
-                      ---------- Time:0.011599988, step:116 ----------
-                  Node: 0 voltage:0.00
-                  Node: 1 voltage:14.22
-                  Node: 2 voltage:1.17
-
-                  Union: 0 current:-0.0
-                  Union: 1 current:0.0
-
-                  Branch: V1 voltage:14.22 current:4.35
-                  Branch: R1 voltage:13.05 current:4.35
-                  Branch: L1 voltage:1.17 current:4.36
-                      ---------- Time:0.011999987, step:120 ----------
-                  Node: 0 voltage:0.00
-                  Node: 1 voltage:14.76
-                  Node: 2 voltage:0.90
-
-                  Union: 0 current:-0.0
-                  Union: 1 current:0.0
-
-                  Branch: V1 voltage:14.76 current:4.62
-                  Branch: R1 voltage:13.85 current:4.62
-                  Branch: L1 voltage:0.90 current:4.63
-                      ---------- Time:0.012399986, step:124 ----------
-                  Node: 0 voltage:0.00
-                  Node: 1 voltage:14.99
-                  Node: 2 voltage:0.58
-
-                  Union: 0 current:-0.0
-                  Union: 1 current:0.0
-
-                  Branch: V1 voltage:14.99 current:4.80
-                  Branch: R1 voltage:14.41 current:4.80
-                  Branch: L1 voltage:0.58 current:4.81
-                      ---------- Time:0.012799986, step:128 ----------
-                  Node: 0 voltage:0.00
-                  Node: 1 voltage:14.91
-                  Node: 2 voltage:0.22
-
-                  Union: 0 current:-0.0
-                  Union: 1 current:0.0
-
-                  Branch: V1 voltage:14.91 current:4.90
-                  Branch: R1 voltage:14.70 current:4.90
-                  Branch: L1 voltage:0.22 current:4.91
-                      ---------- Time:0.013199985, step:132 ----------
-                  Node: 0 voltage:0.00
-                  Node: 1 voltage:14.52
-                  Node: 2 voltage:-0.06
-
-                  Union: 0 current:-0.0
-                  Union: 1 current:0.0
-
-                  Branch: V1 voltage:14.52 current:4.90
-                  Branch: R1 voltage:14.71 current:4.90
-                  Branch: L1 voltage:-0.06 current:4.91
-                      ---------- Time:0.013599984, step:136 ----------
-                  Node: 0 voltage:0.00
-                  Node: 1 voltage:13.85
-                  Node: 2 voltage:-0.54
-
-                  Union: 0 current:-0.0
-                  Union: 1 current:0.0
-
-                  Branch: V1 voltage:13.85 current:4.80
-                  Branch: R1 voltage:14.39 current:4.80
-                  Branch: L1 voltage:-0.54 current:4.81
-                      ---------- Time:0.013999984, step:140 ----------
-                  Node: 0 voltage:0.00
-                  Node: 1 voltage:12.94
-                  Node: 2 voltage:-0.86
-
-                  Union: 0 current:-0.0
-                  Union: 1 current:0.0
-
-                  Branch: V1 voltage:12.94 current:4.60
-                  Branch: R1 voltage:13.80 current:4.60
-                  Branch: L1 voltage:-0.86 current:4.61
-                      ---------- Time:0.014399983, step:144 ----------
-                  Node: 0 voltage:0.00
-                  Node: 1 voltage:11.84
-                  Node: 2 voltage:-1.13
-
-                  Union: 0 current:-0.0
-                  Union: 1 current:0.0
-
-                  Branch: V1 voltage:11.84 current:4.32
-                  Branch: R1 voltage:12.97 current:4.32
-                  Branch: L1 voltage:-1.13 current:4.33
-                      ---------- Time:0.014799982, step:148 ----------
-                  Node: 0 voltage:0.00
-                  Node: 1 voltage:10.63
-                  Node: 2 voltage:-1.33
-
-                  Union: 0 current:-0.0
-                  Union: 1 current:0.0
-
-                  Branch: V1 voltage:10.63 current:3.99
-                  Branch: R1 voltage:11.96 current:3.99
-                  Branch: L1 voltage:-1.33 current:4.00
-                      ---------- Time:0.015199982, step:152 ----------
-                  Node: 0 voltage:0.00
-                  Node: 1 voltage:9.37
-                  Node: 2 voltage:-1.45
-
-                  Union: 0 current:-0.0
-                  Union: 1 current:0.0
-
-                  Branch: V1 voltage:9.37 current:3.61
-                  Branch: R1 voltage:10.83 current:3.61
-                  Branch: L1 voltage:-1.45 current:3.62
-                      ---------- Time:0.015599981, step:156 ----------
-                  Node: 0 voltage:0.00
-                  Node: 1 voltage:8.16
-                  Node: 2 voltage:-1.49
-
-                  Union: 0 current:-0.0
-                  Union: 1 current:0.0
-
-                  Branch: V1 voltage:8.16 current:3.31
-                  Branch: R1 voltage:9.64 current:3.21
-                  Branch: L1 voltage:-1.49 current:3.22
-                      ---------- Time:0.01599998, step:160 ----------
-                  Node: 0 voltage:0.00
-                  Node: 1 voltage:7.06
-                  Node: 2 voltage:-1.46
-
-                  Union: 0 current:0.0
-                  Union: 1 current:-0.0
-
-                  Branch: V1 voltage:7.06 current:2.84
-                  Branch: R1 voltage:8.52 current:2.84
-                  Branch: L1 voltage:-1.46 current:2.83
-                      ---------- Time:0.01639998, step:164 ----------
-                  Node: 0 voltage:0.00
-                  Node: 1 voltage:6.15
-                  Node: 2 voltage:-1.29
-
-                  Union: 0 current:0.0
-                  Union: 1 current:-0.0
-
-                  Branch: V1 voltage:6.15 current:2.48
-                  Branch: R1 voltage:7.43 current:2.48
-                  Branch: L1 voltage:-1.29 current:2.47
-                      ---------- Time:0.016799979, step:168 ----------
-                  Node: 0 voltage:0.00
-                  Node: 1 voltage:5.48
-                  Node: 2 voltage:-1.05
-
-                  Union: 0 current:0.0
-                  Union: 1 current:-0.0
-
-                  Branch: V1 voltage:5.48 current:2.17
-                  Branch: R1 voltage:6.52 current:2.17
-                  Branch: L1 voltage:-1.05 current:2.16
-                      ---------- Time:0.017199978, step:172 ----------
-                  Node: 0 voltage:0.00
-                  Node: 1 voltage:5.09
-                  Node: 2 voltage:-0.74
-
-                  Union: 0 current:0.0
-                  Union: 1 current:-0.0
-
-                  Branch: V1 voltage:5.09 current:1.94
-                  Branch: R1 voltage:5.83 current:1.94
-                  Branch: L1 voltage:-0.74 current:1.93
-                      ---------- Time:0.017599978, step:176 ----------
-                  Node: 0 voltage:0.00
-                  Node: 1 voltage:5.01
-                  Node: 2 voltage:-0.40
-
-                  Union: 0 current:0.0
-                  Union: 1 current:-0.0
-
-                  Branch: V1 voltage:5.01 current:1.80
-                  Branch: R1 voltage:5.41 current:1.80
-                  Branch: L1 voltage:-0.40 current:1.79
-                      ---------- Time:0.017999977, step:180 ----------
-                  Node: 0 voltage:0.00
-                  Node: 1 voltage:5.24
-                  Node: 2 voltage:-0.03
-
-                  Union: 0 current:0.0
-                  Union: 1 current:-0.0
-
-                  Branch: V1 voltage:5.24 current:1.76
-                  Branch: R1 voltage:5.27 current:1.76
-                  Branch: L1 voltage:-0.03 current:1.75
-                      ---------- Time:0.018399976, step:184 ----------
-                  Node: 0 voltage:0.00
-                  Node: 1 voltage:5.78
-                  Node: 2 voltage:0.27
-
-                  Union: 0 current:-0.0
-                  Union: 1 current:0.0
-
-                  Branch: V1 voltage:5.78 current:1.78
-                  Branch: R1 voltage:5.35 current:1.78
-                  Branch: L1 voltage:0.27 current:1.79
-                      ---------- Time:0.018799976, step:188 ----------
-                  Node: 0 voltage:0.00
-                  Node: 1 voltage:6.58
-                  Node: 2 voltage:0.71
-
-                  Union: 0 current:0.0
-                  Union: 1 current:-0.0
-
-                  Branch: V1 voltage:6.58 current:1.96
-                  Branch: R1 voltage:5.87 current:1.96
-                  Branch: L1 voltage:0.71 current:1.95
-                      ---------- Time:0.019199975, step:192 ----------
-                  Node: 0 voltage:0.00
-                  Node: 1 voltage:7.59
-                  Node: 2 voltage:1.00
-
-                  Union: 0 current:0.0
-                  Union: 1 current:-0.0
-
-                  Branch: V1 voltage:7.59 current:2.20
-                  Branch: R1 voltage:6.59 current:2.20
-                  Branch: L1 voltage:1.00 current:2.19
-                      ---------- Time:0.019599974, step:196 ----------
-                  Node: 0 voltage:0.00
-                  Node: 1 voltage:8.76
-                  Node: 2 voltage:1.24
-
-                  Union: 0 current:0.0
-                  Union: 1 current:-0.0
-
-                  Branch: V1 voltage:8.76 current:2.50
-                  Branch: R1 voltage:7.51 current:2.50
-                  Branch: L1 voltage:1.24 current:2.49
-                      ---------- Time:0.019999973, step:200 ----------
-                  Node: 0 voltage:0.00
-                  Node: 1 voltage:10.00
-                  Node: 2 voltage:1.41
-
-                  Union: 0 current:0.0
-                  Union: 1 current:-0.0
-
-                  Branch: V1 voltage:10.00 current:2.86
-                  Branch: R1 voltage:8.59 current:2.86
-                  Branch: L1 voltage:1.41 current:2.85
-                      ---------- Time:0.020399973, step:204 ----------
-                  Node: 0 voltage:0.00
-                  Node: 1 voltage:11.24
-                  Node: 2 voltage:1.48
-
-                  Union: 0 current:0.0
-                  Union: 1 current:-0.0
-
-                  Branch: V1 voltage:11.24 current:3.25
-                  Branch: R1 voltage:9.76 current:3.25
-                  Branch: L1 voltage:1.48 current:3.24
-                      ---------- Time:0.020799972, step:208 ----------
-                  Node: 0 voltage:0.00
-                  Node: 1 voltage:12.41
-                  Node: 2 voltage:1.49
-
-                  Union: 0 current:0.0
-                  Union: 1 current:-0.0
-
-                  Branch: V1 voltage:12.41 current:3.55
-                  Branch: R1 voltage:10.92 current:3.64
-                  Branch: L1 voltage:1.49 current:3.64
-                      ---------- Time:0.021199971, step:212 ----------
-                  Node: 0 voltage:0.00
-                  Node: 1 voltage:13.42
-                  Node: 2 voltage:1.38
-
-                  Union: 0 current:-0.0
-                  Union: 1 current:0.0
-
-                  Branch: V1 voltage:13.42 current:4.01
-                  Branch: R1 voltage:12.04 current:4.01
-                  Branch: L1 voltage:1.38 current:4.02
-                      ---------- Time:0.02159997, step:216 ----------
-                  Node: 0 voltage:0.00
-                  Node: 1 voltage:14.22
-                  Node: 2 voltage:1.17
-
-                  Union: 0 current:-0.0
-                  Union: 1 current:0.0
-
-                  Branch: V1 voltage:14.22 current:4.35
-                  Branch: R1 voltage:13.05 current:4.35
-                  Branch: L1 voltage:1.17 current:4.36
-                      ---------- Time:0.02199997, step:220 ----------
-                  Node: 0 voltage:0.00
-                  Node: 1 voltage:14.76
-                  Node: 2 voltage:0.90
-
-                  Union: 0 current:-0.0
-                  Union: 1 current:0.0
-
-                  Branch: V1 voltage:14.76 current:4.62
-                  Branch: R1 voltage:13.85 current:4.62
-                  Branch: L1 voltage:0.90 current:4.63
-                      ---------- Time:0.02239997, step:224 ----------
-                  Node: 0 voltage:0.00
-                  Node: 1 voltage:14.99
-                  Node: 2 voltage:0.58
-
-                  Union: 0 current:-0.0
-                  Union: 1 current:0.0
-
-                  Branch: V1 voltage:14.99 current:4.80
-                  Branch: R1 voltage:14.41 current:4.80
-                  Branch: L1 voltage:0.58 current:4.81
-                      ---------- Time:0.022799969, step:228 ----------
-                  Node: 0 voltage:0.00
-                  Node: 1 voltage:14.91
-                  Node: 2 voltage:0.22
-
-                  Union: 0 current:-0.0
-                  Union: 1 current:0.0
-
-                  Branch: V1 voltage:14.91 current:4.90
-                  Branch: R1 voltage:14.70 current:4.90
-                  Branch: L1 voltage:0.22 current:4.91
-                      ---------- Time:0.023199968, step:232 ----------
-                  Node: 0 voltage:0.00
-                  Node: 1 voltage:14.52
-                  Node: 2 voltage:-0.06
-
-                  Union: 0 current:-0.0
-                  Union: 1 current:0.0
-
-                  Branch: V1 voltage:14.52 current:4.90
-                  Branch: R1 voltage:14.71 current:4.90
-                  Branch: L1 voltage:-0.06 current:4.91
-                      ---------- Time:0.023599967, step:236 ----------
-                  Node: 0 voltage:0.00
-                  Node: 1 voltage:13.85
-                  Node: 2 voltage:-0.54
-
-                  Union: 0 current:-0.0
-                  Union: 1 current:0.0
-
-                  Branch: V1 voltage:13.85 current:4.80
-                  Branch: R1 voltage:14.39 current:4.80
-                  Branch: L1 voltage:-0.54 current:4.81
-                      ---------- Time:0.023999967, step:240 ----------
-                  Node: 0 voltage:0.00
-                  Node: 1 voltage:12.94
-                  Node: 2 voltage:-0.86
-
-                  Union: 0 current:-0.0
-                  Union: 1 current:0.0
-
-                  Branch: V1 voltage:12.94 current:4.60
-                  Branch: R1 voltage:13.80 current:4.60
-                  Branch: L1 voltage:-0.86 current:4.61
-                      ---------- Time:0.024399966, step:244 ----------
-                  Node: 0 voltage:0.00
-                  Node: 1 voltage:11.84
-                  Node: 2 voltage:-1.13
-
-                  Union: 0 current:-0.0
-                  Union: 1 current:0.0
-
-                  Branch: V1 voltage:11.84 current:4.32
-                  Branch: R1 voltage:12.97 current:4.32
-                  Branch: L1 voltage:-1.13 current:4.33
-                      ---------- Time:0.024799965, step:248 ----------
-                  Node: 0 voltage:0.00
-                  Node: 1 voltage:10.63
-                  Node: 2 voltage:-1.33
-
-                  Union: 0 current:-0.0
-                  Union: 1 current:0.0
-
-                  Branch: V1 voltage:10.63 current:3.99
-                  Branch: R1 voltage:11.96 current:3.99
-                  Branch: L1 voltage:-1.33 current:4.00
-                      ---------- Time:0.025199965, step:252 ----------
-                  Node: 0 voltage:0.00
-                  Node: 1 voltage:9.37
-                  Node: 2 voltage:-1.45
-
-                  Union: 0 current:-0.0
-                  Union: 1 current:0.0
-
-                  Branch: V1 voltage:9.37 current:3.61
-                  Branch: R1 voltage:10.83 current:3.61
-                  Branch: L1 voltage:-1.45 current:3.62
-                      ---------- Time:0.025599964, step:256 ----------
-                  Node: 0 voltage:0.00
-                  Node: 1 voltage:8.16
-                  Node: 2 voltage:-1.49
-
-                  Union: 0 current:-0.0
-                  Union: 1 current:0.0
-
-                  Branch: V1 voltage:8.16 current:3.31
-                  Branch: R1 voltage:9.64 current:3.21
-                  Branch: L1 voltage:-1.49 current:3.22
-                      ---------- Time:0.025999963, step:260 ----------
-                  Node: 0 voltage:0.00
-                  Node: 1 voltage:7.06
-                  Node: 2 voltage:-1.46
-
-                  Union: 0 current:0.0
-                  Union: 1 current:-0.0
-
-                  Branch: V1 voltage:7.06 current:2.84
-                  Branch: R1 voltage:8.52 current:2.84
-                  Branch: L1 voltage:-1.46 current:2.83
-                      ---------- Time:0.026399963, step:264 ----------
-                  Node: 0 voltage:0.00
-                  Node: 1 voltage:6.15
-                  Node: 2 voltage:-1.29
-
-                  Union: 0 current:0.0
-                  Union: 1 current:-0.0
-
-                  Branch: V1 voltage:6.15 current:2.48
-                  Branch: R1 voltage:7.43 current:2.48
-                  Branch: L1 voltage:-1.29 current:2.47
-                      ---------- Time:0.026799962, step:268 ----------
-                  Node: 0 voltage:0.00
-                  Node: 1 voltage:5.48
-                  Node: 2 voltage:-1.05
-
-                  Union: 0 current:0.0
-                  Union: 1 current:-0.0
-
-                  Branch: V1 voltage:5.48 current:2.17
-                  Branch: R1 voltage:6.52 current:2.17
-                  Branch: L1 voltage:-1.05 current:2.16
-                      ---------- Time:0.027199961, step:272 ----------
-                  Node: 0 voltage:0.00
-                  Node: 1 voltage:5.09
-                  Node: 2 voltage:-0.74
-
-                  Union: 0 current:0.0
-                  Union: 1 current:-0.0
-
-                  Branch: V1 voltage:5.09 current:1.94
-                  Branch: R1 voltage:5.83 current:1.94
-                  Branch: L1 voltage:-0.74 current:1.93
-                      ---------- Time:0.02759996, step:276 ----------
-                  Node: 0 voltage:0.00
-                  Node: 1 voltage:5.01
-                  Node: 2 voltage:-0.40
-
-                  Union: 0 current:0.0
-                  Union: 1 current:-0.0
-
-                  Branch: V1 voltage:5.01 current:1.80
-                  Branch: R1 voltage:5.41 current:1.80
-                  Branch: L1 voltage:-0.40 current:1.79
-                      ---------- Time:0.02799996, step:280 ----------
-                  Node: 0 voltage:0.00
-                  Node: 1 voltage:5.24
-                  Node: 2 voltage:-0.03
-
-                  Union: 0 current:0.0
-                  Union: 1 current:-0.0
-
-                  Branch: V1 voltage:5.24 current:1.76
-                  Branch: R1 voltage:5.27 current:1.76
-                  Branch: L1 voltage:-0.03 current:1.75
-                      ---------- Time:0.02839996, step:284 ----------
-                  Node: 0 voltage:0.00
-                  Node: 1 voltage:5.78
-                  Node: 2 voltage:0.27
-
-                  Union: 0 current:-0.0
-                  Union: 1 current:0.0
-
-                  Branch: V1 voltage:5.78 current:1.78
-                  Branch: R1 voltage:5.35 current:1.78
-                  Branch: L1 voltage:0.27 current:1.79
-                      ---------- Time:0.028799959, step:288 ----------
-                  Node: 0 voltage:0.00
-                  Node: 1 voltage:6.58
-                  Node: 2 voltage:0.71
-
-                  Union: 0 current:0.0
-                  Union: 1 current:-0.0
-
-                  Branch: V1 voltage:6.58 current:1.96
-                  Branch: R1 voltage:5.87 current:1.96
-                  Branch: L1 voltage:0.71 current:1.95
-                      ---------- Time:0.029199958, step:292 ----------
-                  Node: 0 voltage:0.00
-                  Node: 1 voltage:7.59
-                  Node: 2 voltage:1.00
-
-                  Union: 0 current:0.0
-                  Union: 1 current:-0.0
-
-                  Branch: V1 voltage:7.59 current:2.20
-                  Branch: R1 voltage:6.59 current:2.20
-                  Branch: L1 voltage:1.00 current:2.19
-                      ---------- Time:0.029599957, step:296 ----------
-                  Node: 0 voltage:0.00
-                  Node: 1 voltage:8.76
-                  Node: 2 voltage:1.24
-
-                  Union: 0 current:0.0
-                  Union: 1 current:-0.0
-
-                  Branch: V1 voltage:8.76 current:2.50
-                  Branch: R1 voltage:7.51 current:2.50
-                  Branch: L1 voltage:1.24 current:2.49
-                      ---------- Time:0.029999956, step:300 ----------
-                  Node: 0 voltage:0.00
-                  Node: 1 voltage:10.00
-                  Node: 2 voltage:1.41
-
-                  Union: 0 current:0.0
-                  Union: 1 current:-0.0
-
-                  Branch: V1 voltage:10.00 current:2.86
-                  Branch: R1 voltage:8.59 current:2.86
-                  Branch: L1 voltage:1.41 current:2.85
-                      ---------- Time:0.030399956, step:304 ----------
-                  Node: 0 voltage:0.00
-                  Node: 1 voltage:11.24
-                  Node: 2 voltage:1.48
-
-                  Union: 0 current:0.0
-                  Union: 1 current:-0.0
-
-                  Branch: V1 voltage:11.24 current:3.25
-                  Branch: R1 voltage:9.76 current:3.25
-                  Branch: L1 voltage:1.48 current:3.24
-                      ---------- Time:0.030799955, step:308 ----------
-                  Node: 0 voltage:0.00
-                  Node: 1 voltage:12.41
-                  Node: 2 voltage:1.49
-
-                  Union: 0 current:0.0
-                  Union: 1 current:-0.0
-
-                  Branch: V1 voltage:12.41 current:3.55
-                  Branch: R1 voltage:10.92 current:3.64
-                  Branch: L1 voltage:1.49 current:3.64
-                      ---------- Time:0.031199954, step:312 ----------
-                  Node: 0 voltage:0.00
-                  Node: 1 voltage:13.42
-                  Node: 2 voltage:1.38
-
-                  Union: 0 current:-0.0
-                  Union: 1 current:0.0
-
-                  Branch: V1 voltage:13.42 current:4.01
-                  Branch: R1 voltage:12.04 current:4.01
-                  Branch: L1 voltage:1.38 current:4.02
-                      ---------- Time:0.03159996, step:316 ----------
-                  Node: 0 voltage:0.00
-                  Node: 1 voltage:14.22
-                  Node: 2 voltage:1.17
-
-                  Union: 0 current:-0.0
-                  Union: 1 current:0.0
-
-                  Branch: V1 voltage:14.22 current:4.35
-                  Branch: R1 voltage:13.05 current:4.35
-                  Branch: L1 voltage:1.17 current:4.36
-                      ---------- Time:0.031999968, step:320 ----------
-                  Node: 0 voltage:0.00
-                  Node: 1 voltage:14.76
-                  Node: 2 voltage:0.90
-
-                  Union: 0 current:-0.0
-                  Union: 1 current:0.0
-
-                  Branch: V1 voltage:14.76 current:4.62
-                  Branch: R1 voltage:13.85 current:4.62
-                  Branch: L1 voltage:0.90 current:4.63
-                      ---------- Time:0.032399975, step:324 ----------
-                  Node: 0 voltage:0.00
-                  Node: 1 voltage:14.99
-                  Node: 2 voltage:0.58
-
-                  Union: 0 current:-0.0
-                  Union: 1 current:0.0
-
-                  Branch: V1 voltage:14.99 current:4.80
-                  Branch: R1 voltage:14.41 current:4.80
-                  Branch: L1 voltage:0.58 current:4.81
-                      ---------- Time:0.03279998, step:328 ----------
-                  Node: 0 voltage:0.00
-                  Node: 1 voltage:14.91
-                  Node: 2 voltage:0.22
-
-                  Union: 0 current:-0.0
-                  Union: 1 current:0.0
-
-                  Branch: V1 voltage:14.91 current:4.90
-                  Branch: R1 voltage:14.70 current:4.90
-                  Branch: L1 voltage:0.22 current:4.91
-                      ---------- Time:0.03319999, step:332 ----------
-                  Node: 0 voltage:0.00
-                  Node: 1 voltage:14.52
-                  Node: 2 voltage:-0.06
-
-                  Union: 0 current:-0.0
-                  Union: 1 current:0.0
-
-                  Branch: V1 voltage:14.52 current:4.90
-                  Branch: R1 voltage:14.71 current:4.90
-                  Branch: L1 voltage:-0.06 current:4.91
-                      ---------- Time:0.033599995, step:336 ----------
-                  Node: 0 voltage:0.00
-                  Node: 1 voltage:13.85
-                  Node: 2 voltage:-0.54
-
-                  Union: 0 current:-0.0
-                  Union: 1 current:0.0
-
-                  Branch: V1 voltage:13.85 current:4.80
-                  Branch: R1 voltage:14.39 current:4.80
-                  Branch: L1 voltage:-0.54 current:4.81
-                      ---------- Time:0.034, step:340 ----------
-                  Node: 0 voltage:0.00
-                  Node: 1 voltage:12.94
-                  Node: 2 voltage:-0.86
-
-                  Union: 0 current:-0.0
-                  Union: 1 current:0.0
-
-                  Branch: V1 voltage:12.94 current:4.60
-                  Branch: R1 voltage:13.80 current:4.60
-                  Branch: L1 voltage:-0.86 current:4.61
-                      ---------- Time:0.03440001, step:344 ----------
-                  Node: 0 voltage:0.00
-                  Node: 1 voltage:11.84
-                  Node: 2 voltage:-1.13
-
-                  Union: 0 current:-0.0
-                  Union: 1 current:0.0
-
-                  Branch: V1 voltage:11.84 current:4.32
-                  Branch: R1 voltage:12.97 current:4.32
-                  Branch: L1 voltage:-1.13 current:4.33
-                      ---------- Time:0.034800015, step:348 ----------
-                  Node: 0 voltage:0.00
-                  Node: 1 voltage:10.63
-                  Node: 2 voltage:-1.33
-
-                  Union: 0 current:-0.0
-                  Union: 1 current:0.0
-
-                  Branch: V1 voltage:10.63 current:3.99
-                  Branch: R1 voltage:11.96 current:3.99
-                  Branch: L1 voltage:-1.33 current:4.00
-                      ---------- Time:0.035200022, step:352 ----------
-                  Node: 0 voltage:0.00
-                  Node: 1 voltage:9.37
-                  Node: 2 voltage:-1.45
-
-                  Union: 0 current:-0.0
-                  Union: 1 current:0.0
-
-                  Branch: V1 voltage:9.37 current:3.61
-                  Branch: R1 voltage:10.83 current:3.61
-                  Branch: L1 voltage:-1.45 current:3.62
-                      ---------- Time:0.03560003, step:356 ----------
-                  Node: 0 voltage:0.00
-                  Node: 1 voltage:8.16
-                  Node: 2 voltage:-1.49
-
-                  Union: 0 current:-0.0
-                  Union: 1 current:0.0
-
-                  Branch: V1 voltage:8.16 current:3.31
-                  Branch: R1 voltage:9.64 current:3.21
-                  Branch: L1 voltage:-1.49 current:3.22
-                      ---------- Time:0.036000036, step:360 ----------
-                  Node: 0 voltage:0.00
-                  Node: 1 voltage:7.06
-                  Node: 2 voltage:-1.46
-
-                  Union: 0 current:0.0
-                  Union: 1 current:-0.0
-
-                  Branch: V1 voltage:7.06 current:2.84
-                  Branch: R1 voltage:8.52 current:2.84
-                  Branch: L1 voltage:-1.46 current:2.83
-                      ---------- Time:0.036400042, step:364 ----------
-                  Node: 0 voltage:0.00
-                  Node: 1 voltage:6.15
-                  Node: 2 voltage:-1.29
-
-                  Union: 0 current:0.0
-                  Union: 1 current:-0.0
-
-                  Branch: V1 voltage:6.15 current:2.48
-                  Branch: R1 voltage:7.43 current:2.48
-                  Branch: L1 voltage:-1.29 current:2.47
-                      ---------- Time:0.03680005, step:368 ----------
-                  Node: 0 voltage:0.00
-                  Node: 1 voltage:5.48
-                  Node: 2 voltage:-1.05
-
-                  Union: 0 current:0.0
-                  Union: 1 current:-0.0
-
-                  Branch: V1 voltage:5.48 current:2.17
-                  Branch: R1 voltage:6.52 current:2.17
-                  Branch: L1 voltage:-1.05 current:2.16
-                      ---------- Time:0.037200056, step:372 ----------
-                  Node: 0 voltage:0.00
-                  Node: 1 voltage:5.09
-                  Node: 2 voltage:-0.74
-
-                  Union: 0 current:0.0
-                  Union: 1 current:-0.0
-
-                  Branch: V1 voltage:5.09 current:1.94
-                  Branch: R1 voltage:5.83 current:1.94
-                  Branch: L1 voltage:-0.74 current:1.93
-                      ---------- Time:0.037600063, step:376 ----------
-                  Node: 0 voltage:0.00
-                  Node: 1 voltage:5.01
-                  Node: 2 voltage:-0.40
-
-                  Union: 0 current:0.0
-                  Union: 1 current:-0.0
-
-                  Branch: V1 voltage:5.01 current:1.80
-                  Branch: R1 voltage:5.41 current:1.80
-                  Branch: L1 voltage:-0.40 current:1.79
-                      ---------- Time:0.03800007, step:380 ----------
-                  Node: 0 voltage:0.00
-                  Node: 1 voltage:5.24
-                  Node: 2 voltage:-0.03
-
-                  Union: 0 current:0.0
-                  Union: 1 current:-0.0
-
-                  Branch: V1 voltage:5.24 current:1.76
-                  Branch: R1 voltage:5.27 current:1.76
-                  Branch: L1 voltage:-0.03 current:1.75
-                      ---------- Time:0.038400076, step:384 ----------
-                  Node: 0 voltage:0.00
-                  Node: 1 voltage:5.78
-                  Node: 2 voltage:0.27
-
-                  Union: 0 current:-0.0
-                  Union: 1 current:0.0
-
-                  Branch: V1 voltage:5.78 current:1.78
-                  Branch: R1 voltage:5.35 current:1.78
-                  Branch: L1 voltage:0.27 current:1.79
-                      ---------- Time:0.038800083, step:388 ----------
-                  Node: 0 voltage:0.00
-                  Node: 1 voltage:6.58
-                  Node: 2 voltage:0.71
-
-                  Union: 0 current:0.0
-                  Union: 1 current:-0.0
-
-                  Branch: V1 voltage:6.58 current:1.96
-                  Branch: R1 voltage:5.87 current:1.96
-                  Branch: L1 voltage:0.71 current:1.95
-                      ---------- Time:0.03920009, step:392 ----------
-                  Node: 0 voltage:0.00
-                  Node: 1 voltage:7.59
-                  Node: 2 voltage:1.00
-
-                  Union: 0 current:0.0
-                  Union: 1 current:-0.0
-
-                  Branch: V1 voltage:7.59 current:2.20
-                  Branch: R1 voltage:6.59 current:2.20
-                  Branch: L1 voltage:1.00 current:2.19
-                      ---------- Time:0.039600097, step:396 ----------
-                  Node: 0 voltage:0.00
-                  Node: 1 voltage:8.76
-                  Node: 2 voltage:1.24
-
-                  Union: 0 current:0.0
-                  Union: 1 current:-0.0
-
-                  Branch: V1 voltage:8.76 current:2.50
-                  Branch: R1 voltage:7.51 current:2.50
-                  Branch: L1 voltage:1.24 current:2.49
+      ---------- Time:0.0, step:0 ----------
+  Node: 0 voltage:0.00
+  Node: 1 voltage:3.00
+  Node: 2 voltage:0.50
+
+  Union: 0 current:0.8
+  Union: 1 current:-0.8
+
+  Branch: V1 voltage:3.00 current:0.83
+  Branch: R1 voltage:2.50 current:0.83
+  Branch: L1 voltage:0.50 current:0.03
+      ---------- Time:4.0E-4, step:4 ----------
+  Node: 0 voltage:0.00
+  Node: 1 voltage:3.00
+  Node: 2 voltage:1.70
+
+  Union: 0 current:-0.0
+  Union: 1 current:0.0
+
+  Branch: V1 voltage:3.00 current:0.43
+  Branch: R1 voltage:1.30 current:0.43
+  Branch: L1 voltage:1.70 current:0.44
+      ---------- Time:8.0E-4, step:8 ----------
+  Node: 0 voltage:0.00
+  Node: 1 voltage:3.00
+  Node: 2 voltage:0.82
+
+  Union: 0 current:-0.0
+  Union: 1 current:0.0
+
+  Branch: V1 voltage:3.00 current:0.73
+  Branch: R1 voltage:2.18 current:0.73
+  Branch: L1 voltage:0.82 current:0.74
+      ---------- Time:0.0011999998, step:12 ----------
+  Node: 0 voltage:0.00
+  Node: 1 voltage:3.00
+  Node: 2 voltage:0.39
+
+  Union: 0 current:-0.0
+  Union: 1 current:0.0
+
+  Branch: V1 voltage:3.00 current:0.87
+  Branch: R1 voltage:2.61 current:0.87
+  Branch: L1 voltage:0.39 current:0.88
+      ---------- Time:0.0015999996, step:16 ----------
+  Node: 0 voltage:0.00
+  Node: 1 voltage:3.00
+  Node: 2 voltage:0.19
+
+  Union: 0 current:-0.0
+  Union: 1 current:0.0
+
+  Branch: V1 voltage:3.00 current:0.94
+  Branch: R1 voltage:2.81 current:0.94
+  Branch: L1 voltage:0.19 current:0.95
+      ---------- Time:0.0019999994, step:20 ----------
+  Node: 0 voltage:0.00
+  Node: 1 voltage:3.00
+  Node: 2 voltage:0.09
+
+  Union: 0 current:-0.0
+  Union: 1 current:0.0
+
+  Branch: V1 voltage:3.00 current:0.97
+  Branch: R1 voltage:2.91 current:0.97
+  Branch: L1 voltage:0.09 current:0.98
+      ---------- Time:0.0023999996, step:24 ----------
+  Node: 0 voltage:0.00
+  Node: 1 voltage:3.00
+  Node: 2 voltage:0.04
+
+  Union: 0 current:-0.0
+  Union: 1 current:0.0
+
+  Branch: V1 voltage:3.00 current:0.99
+  Branch: R1 voltage:2.96 current:0.99
+  Branch: L1 voltage:0.04 current:1.00
+      ---------- Time:0.0028, step:28 ----------
+  Node: 0 voltage:0.00
+  Node: 1 voltage:3.00
+  Node: 2 voltage:0.02
+
+  Union: 0 current:-0.0
+  Union: 1 current:0.0
+
+  Branch: V1 voltage:3.00 current:0.99
+  Branch: R1 voltage:2.98 current:0.99
+  Branch: L1 voltage:0.02 current:1.00
+      ---------- Time:0.0032000002, step:32 ----------
+  Node: 0 voltage:0.00
+  Node: 1 voltage:3.00
+  Node: 2 voltage:0.01
+
+  Union: 0 current:-0.0
+  Union: 1 current:0.0
+
+  Branch: V1 voltage:3.00 current:1.00
+  Branch: R1 voltage:2.99 current:1.00
+  Branch: L1 voltage:0.01 current:1.01
+      ---------- Time:0.0036000004, step:36 ----------
+  Node: 0 voltage:0.00
+  Node: 1 voltage:3.00
+  Node: 2 voltage:0.00
+
+  Union: 0 current:-0.0
+  Union: 1 current:0.0
+
+  Branch: V1 voltage:3.00 current:1.00
+  Branch: R1 voltage:3.00 current:1.00
+  Branch: L1 voltage:0.00 current:1.01
+      ---------- Time:0.0040000007, step:40 ----------
+  Node: 0 voltage:0.00
+  Node: 1 voltage:3.00
+  Node: 2 voltage:0.00
+
+  Union: 0 current:-0.0
+  Union: 1 current:0.0
+
+  Branch: V1 voltage:3.00 current:1.00
+  Branch: R1 voltage:3.00 current:1.00
+  Branch: L1 voltage:0.00 current:1.01
+      ---------- Time:0.0044, step:44 ----------
+  Node: 0 voltage:0.00
+  Node: 1 voltage:3.00
+  Node: 2 voltage:0.00
+
+  Union: 0 current:-0.0
+  Union: 1 current:0.0
+
+  Branch: V1 voltage:3.00 current:1.00
+  Branch: R1 voltage:3.00 current:1.00
+  Branch: L1 voltage:0.00 current:1.01
+      ---------- Time:0.0047999993, step:48 ----------
+  Node: 0 voltage:0.00
+  Node: 1 voltage:3.00
+  Node: 2 voltage:0.00
+
+  Union: 0 current:-0.0
+  Union: 1 current:0.0
+
+  Branch: V1 voltage:3.00 current:1.00
+  Branch: R1 voltage:3.00 current:1.00
+  Branch: L1 voltage:0.00 current:1.01
+      ---------- Time:0.0051999986, step:52 ----------
+  Node: 0 voltage:0.00
+  Node: 1 voltage:3.00
+  Node: 2 voltage:0.00
+
+  Union: 0 current:-0.0
+  Union: 1 current:0.0
+
+  Branch: V1 voltage:3.00 current:1.00
+  Branch: R1 voltage:3.00 current:1.00
+  Branch: L1 voltage:0.00 current:1.01
+      ---------- Time:0.005599998, step:56 ----------
+  Node: 0 voltage:0.00
+  Node: 1 voltage:3.00
+  Node: 2 voltage:0.00
+
+  Union: 0 current:-0.0
+  Union: 1 current:0.0
+
+  Branch: V1 voltage:3.00 current:1.00
+  Branch: R1 voltage:3.00 current:1.00
+  Branch: L1 voltage:0.00 current:1.01
+      ---------- Time:0.0059999973, step:60 ----------
+  Node: 0 voltage:0.00
+  Node: 1 voltage:3.00
+  Node: 2 voltage:0.00
+
+  Union: 0 current:-0.0
+  Union: 1 current:0.0
+
+  Branch: V1 voltage:3.00 current:1.00
+  Branch: R1 voltage:3.00 current:1.00
+  Branch: L1 voltage:0.00 current:1.01
+      ---------- Time:0.0063999966, step:64 ----------
+  Node: 0 voltage:0.00
+  Node: 1 voltage:3.00
+  Node: 2 voltage:0.00
+
+  Union: 0 current:-0.0
+  Union: 1 current:0.0
+
+  Branch: V1 voltage:3.00 current:1.00
+  Branch: R1 voltage:3.00 current:1.00
+  Branch: L1 voltage:0.00 current:1.01
+      ---------- Time:0.006799996, step:68 ----------
+  Node: 0 voltage:0.00
+  Node: 1 voltage:3.00
+  Node: 2 voltage:-0.00
+
+  Union: 0 current:-0.0
+  Union: 1 current:0.0
+
+  Branch: V1 voltage:3.00 current:1.00
+  Branch: R1 voltage:3.00 current:1.00
+  Branch: L1 voltage:-0.00 current:1.01
+      ---------- Time:0.007199995, step:72 ----------
+  Node: 0 voltage:0.00
+  Node: 1 voltage:3.00
+  Node: 2 voltage:-0.00
+
+  Union: 0 current:-0.0
+  Union: 1 current:0.0
+
+  Branch: V1 voltage:3.00 current:1.00
+  Branch: R1 voltage:3.00 current:1.00
+  Branch: L1 voltage:-0.00 current:1.01
+      ---------- Time:0.0075999945, step:76 ----------
+  Node: 0 voltage:0.00
+  Node: 1 voltage:3.00
+  Node: 2 voltage:-0.00
+
+  Union: 0 current:-0.0
+  Union: 1 current:0.0
+
+  Branch: V1 voltage:3.00 current:1.00
+  Branch: R1 voltage:3.00 current:1.00
+  Branch: L1 voltage:-0.00 current:1.01
+      ---------- Time:0.007999994, step:80 ----------
+  Node: 0 voltage:0.00
+  Node: 1 voltage:3.00
+  Node: 2 voltage:-0.00
+
+  Union: 0 current:-0.0
+  Union: 1 current:0.0
+
+  Branch: V1 voltage:3.00 current:1.00
+  Branch: R1 voltage:3.00 current:1.00
+  Branch: L1 voltage:-0.00 current:1.01
+      ---------- Time:0.008399993, step:84 ----------
+  Node: 0 voltage:0.00
+  Node: 1 voltage:3.00
+  Node: 2 voltage:-0.00
+
+  Union: 0 current:-0.0
+  Union: 1 current:0.0
+
+  Branch: V1 voltage:3.00 current:1.00
+  Branch: R1 voltage:3.00 current:1.00
+  Branch: L1 voltage:-0.00 current:1.01
+      ---------- Time:0.0087999925, step:88 ----------
+  Node: 0 voltage:0.00
+  Node: 1 voltage:3.00
+  Node: 2 voltage:-0.00
+
+  Union: 0 current:-0.0
+  Union: 1 current:0.0
+
+  Branch: V1 voltage:3.00 current:1.00
+  Branch: R1 voltage:3.00 current:1.00
+  Branch: L1 voltage:-0.00 current:1.01
+      ---------- Time:0.009199992, step:92 ----------
+  Node: 0 voltage:0.00
+  Node: 1 voltage:3.00
+  Node: 2 voltage:-0.00
+
+  Union: 0 current:-0.0
+  Union: 1 current:0.0
+
+  Branch: V1 voltage:3.00 current:1.00
+  Branch: R1 voltage:3.00 current:1.00
+  Branch: L1 voltage:-0.00 current:1.01
+      ---------- Time:0.009599991, step:96 ----------
+  Node: 0 voltage:0.00
+  Node: 1 voltage:3.00
+  Node: 2 voltage:-0.00
+
+  Union: 0 current:-0.0
+  Union: 1 current:0.0
+
+  Branch: V1 voltage:3.00 current:1.00
+  Branch: R1 voltage:3.00 current:1.00
+  Branch: L1 voltage:-0.00 current:1.01
+      ---------- Time:0.00999999, step:100 ----------
+  Node: 0 voltage:0.00
+  Node: 1 voltage:3.00
+  Node: 2 voltage:-0.00
+
+  Union: 0 current:-0.0
+  Union: 1 current:0.0
+
+  Branch: V1 voltage:3.00 current:1.00
+  Branch: R1 voltage:3.00 current:1.00
+  Branch: L1 voltage:-0.00 current:1.01
+      ---------- Time:0.01039999, step:104 ----------
+  Node: 0 voltage:0.00
+  Node: 1 voltage:3.00
+  Node: 2 voltage:-0.00
+
+  Union: 0 current:-0.0
+  Union: 1 current:0.0
+
+  Branch: V1 voltage:3.00 current:1.00
+  Branch: R1 voltage:3.00 current:1.00
+  Branch: L1 voltage:-0.00 current:1.01
+      ---------- Time:0.010799989, step:108 ----------
+  Node: 0 voltage:0.00
+  Node: 1 voltage:3.00
+  Node: 2 voltage:-0.00
+
+  Union: 0 current:-0.0
+  Union: 1 current:0.0
+
+  Branch: V1 voltage:3.00 current:1.00
+  Branch: R1 voltage:3.00 current:1.00
+  Branch: L1 voltage:-0.00 current:1.01
+      ---------- Time:0.011199988, step:112 ----------
+  Node: 0 voltage:0.00
+  Node: 1 voltage:3.00
+  Node: 2 voltage:-0.00
+
+  Union: 0 current:-0.0
+  Union: 1 current:0.0
+
+  Branch: V1 voltage:3.00 current:1.00
+  Branch: R1 voltage:3.00 current:1.00
+  Branch: L1 voltage:-0.00 current:1.01
+      ---------- Time:0.011599988, step:116 ----------
+  Node: 0 voltage:0.00
+  Node: 1 voltage:3.00
+  Node: 2 voltage:-0.00
+
+  Union: 0 current:-0.0
+  Union: 1 current:0.0
+
+  Branch: V1 voltage:3.00 current:1.00
+  Branch: R1 voltage:3.00 current:1.00
+  Branch: L1 voltage:-0.00 current:1.01
+      ---------- Time:0.011999987, step:120 ----------
+  Node: 0 voltage:0.00
+  Node: 1 voltage:3.00
+  Node: 2 voltage:-0.00
+
+  Union: 0 current:-0.0
+  Union: 1 current:0.0
+
+  Branch: V1 voltage:3.00 current:1.00
+  Branch: R1 voltage:3.00 current:1.00
+  Branch: L1 voltage:-0.00 current:1.01
+      ---------- Time:0.012399986, step:124 ----------
+  Node: 0 voltage:0.00
+  Node: 1 voltage:3.00
+  Node: 2 voltage:-0.00
+
+  Union: 0 current:-0.0
+  Union: 1 current:0.0
+
+  Branch: V1 voltage:3.00 current:1.00
+  Branch: R1 voltage:3.00 current:1.00
+  Branch: L1 voltage:-0.00 current:1.01
+      ---------- Time:0.012799986, step:128 ----------
+  Node: 0 voltage:0.00
+  Node: 1 voltage:3.00
+  Node: 2 voltage:-0.00
+
+  Union: 0 current:-0.0
+  Union: 1 current:0.0
+
+  Branch: V1 voltage:3.00 current:1.00
+  Branch: R1 voltage:3.00 current:1.00
+  Branch: L1 voltage:-0.00 current:1.01
+      ---------- Time:0.013199985, step:132 ----------
+  Node: 0 voltage:0.00
+  Node: 1 voltage:3.00
+  Node: 2 voltage:-0.00
+
+  Union: 0 current:-0.0
+  Union: 1 current:0.0
+
+  Branch: V1 voltage:3.00 current:1.00
+  Branch: R1 voltage:3.00 current:1.00
+  Branch: L1 voltage:-0.00 current:1.01
+      ---------- Time:0.013599984, step:136 ----------
+  Node: 0 voltage:0.00
+  Node: 1 voltage:3.00
+  Node: 2 voltage:-0.00
+
+  Union: 0 current:-0.0
+  Union: 1 current:0.0
+
+  Branch: V1 voltage:3.00 current:1.00
+  Branch: R1 voltage:3.00 current:1.00
+  Branch: L1 voltage:-0.00 current:1.01
+      ---------- Time:0.013999984, step:140 ----------
+  Node: 0 voltage:0.00
+  Node: 1 voltage:3.00
+  Node: 2 voltage:-0.00
+
+  Union: 0 current:-0.0
+  Union: 1 current:0.0
+
+  Branch: V1 voltage:3.00 current:1.00
+  Branch: R1 voltage:3.00 current:1.00
+  Branch: L1 voltage:-0.00 current:1.01
+      ---------- Time:0.014399983, step:144 ----------
+  Node: 0 voltage:0.00
+  Node: 1 voltage:3.00
+  Node: 2 voltage:-0.00
+
+  Union: 0 current:-0.0
+  Union: 1 current:0.0
+
+  Branch: V1 voltage:3.00 current:1.00
+  Branch: R1 voltage:3.00 current:1.00
+  Branch: L1 voltage:-0.00 current:1.01
+      ---------- Time:0.014799982, step:148 ----------
+  Node: 0 voltage:0.00
+  Node: 1 voltage:3.00
+  Node: 2 voltage:-0.00
+
+  Union: 0 current:-0.0
+  Union: 1 current:0.0
+
+  Branch: V1 voltage:3.00 current:1.00
+  Branch: R1 voltage:3.00 current:1.00
+  Branch: L1 voltage:-0.00 current:1.01
+      ---------- Time:0.015199982, step:152 ----------
+  Node: 0 voltage:0.00
+  Node: 1 voltage:3.00
+  Node: 2 voltage:-0.00
+
+  Union: 0 current:-0.0
+  Union: 1 current:0.0
+
+  Branch: V1 voltage:3.00 current:1.00
+  Branch: R1 voltage:3.00 current:1.00
+  Branch: L1 voltage:-0.00 current:1.01
+      ---------- Time:0.015599981, step:156 ----------
+  Node: 0 voltage:0.00
+  Node: 1 voltage:3.00
+  Node: 2 voltage:-0.00
+
+  Union: 0 current:-0.0
+  Union: 1 current:0.0
+
+  Branch: V1 voltage:3.00 current:1.00
+  Branch: R1 voltage:3.00 current:1.00
+  Branch: L1 voltage:-0.00 current:1.01
+      ---------- Time:0.01599998, step:160 ----------
+  Node: 0 voltage:0.00
+  Node: 1 voltage:3.00
+  Node: 2 voltage:-0.00
+
+  Union: 0 current:-0.0
+  Union: 1 current:0.0
+
+  Branch: V1 voltage:3.00 current:1.00
+  Branch: R1 voltage:3.00 current:1.00
+  Branch: L1 voltage:-0.00 current:1.01
+      ---------- Time:0.01639998, step:164 ----------
+  Node: 0 voltage:0.00
+  Node: 1 voltage:3.00
+  Node: 2 voltage:-0.00
+
+  Union: 0 current:-0.0
+  Union: 1 current:0.0
+
+  Branch: V1 voltage:3.00 current:1.00
+  Branch: R1 voltage:3.00 current:1.00
+  Branch: L1 voltage:-0.00 current:1.01
+      ---------- Time:0.016799979, step:168 ----------
+  Node: 0 voltage:0.00
+  Node: 1 voltage:3.00
+  Node: 2 voltage:-0.00
+
+  Union: 0 current:-0.0
+  Union: 1 current:0.0
+
+  Branch: V1 voltage:3.00 current:1.00
+  Branch: R1 voltage:3.00 current:1.00
+  Branch: L1 voltage:-0.00 current:1.01
+      ---------- Time:0.017199978, step:172 ----------
+  Node: 0 voltage:0.00
+  Node: 1 voltage:3.00
+  Node: 2 voltage:-0.00
+
+  Union: 0 current:-0.0
+  Union: 1 current:0.0
+
+  Branch: V1 voltage:3.00 current:1.00
+  Branch: R1 voltage:3.00 current:1.00
+  Branch: L1 voltage:-0.00 current:1.01
+      ---------- Time:0.017599978, step:176 ----------
+  Node: 0 voltage:0.00
+  Node: 1 voltage:3.00
+  Node: 2 voltage:-0.00
+
+  Union: 0 current:-0.0
+  Union: 1 current:0.0
+
+  Branch: V1 voltage:3.00 current:1.00
+  Branch: R1 voltage:3.00 current:1.00
+  Branch: L1 voltage:-0.00 current:1.01
+      ---------- Time:0.017999977, step:180 ----------
+  Node: 0 voltage:0.00
+  Node: 1 voltage:3.00
+  Node: 2 voltage:-0.00
+
+  Union: 0 current:-0.0
+  Union: 1 current:0.0
+
+  Branch: V1 voltage:3.00 current:1.00
+  Branch: R1 voltage:3.00 current:1.00
+  Branch: L1 voltage:-0.00 current:1.01
+      ---------- Time:0.018399976, step:184 ----------
+  Node: 0 voltage:0.00
+  Node: 1 voltage:3.00
+  Node: 2 voltage:-0.00
+
+  Union: 0 current:-0.0
+  Union: 1 current:0.0
+
+  Branch: V1 voltage:3.00 current:1.00
+  Branch: R1 voltage:3.00 current:1.00
+  Branch: L1 voltage:-0.00 current:1.01
+      ---------- Time:0.018799976, step:188 ----------
+  Node: 0 voltage:0.00
+  Node: 1 voltage:3.00
+  Node: 2 voltage:-0.00
+
+  Union: 0 current:-0.0
+  Union: 1 current:0.0
+
+  Branch: V1 voltage:3.00 current:1.00
+  Branch: R1 voltage:3.00 current:1.00
+  Branch: L1 voltage:-0.00 current:1.01
+      ---------- Time:0.019199975, step:192 ----------
+  Node: 0 voltage:0.00
+  Node: 1 voltage:3.00
+  Node: 2 voltage:-0.00
+
+  Union: 0 current:-0.0
+  Union: 1 current:0.0
+
+  Branch: V1 voltage:3.00 current:1.00
+  Branch: R1 voltage:3.00 current:1.00
+  Branch: L1 voltage:-0.00 current:1.00
+      ---------- Time:0.019599974, step:196 ----------
+  Node: 0 voltage:0.00
+  Node: 1 voltage:3.00
+  Node: 2 voltage:-0.00
+
+  Union: 0 current:-0.0
+  Union: 1 current:0.0
+
+  Branch: V1 voltage:3.00 current:1.00
+  Branch: R1 voltage:3.00 current:1.00
+  Branch: L1 voltage:-0.00 current:1.00
+      ---------- Time:0.019999973, step:200 ----------
+  Node: 0 voltage:0.00
+  Node: 1 voltage:3.00
+  Node: 2 voltage:-0.00
+
+  Union: 0 current:-0.0
+  Union: 1 current:0.0
+
+  Branch: V1 voltage:3.00 current:1.00
+  Branch: R1 voltage:3.00 current:1.00
+  Branch: L1 voltage:-0.00 current:1.00
+      ---------- Time:0.020399973, step:204 ----------
+  Node: 0 voltage:0.00
+  Node: 1 voltage:3.00
+  Node: 2 voltage:-0.00
+
+  Union: 0 current:-0.0
+  Union: 1 current:0.0
+
+  Branch: V1 voltage:3.00 current:1.00
+  Branch: R1 voltage:3.00 current:1.00
+  Branch: L1 voltage:-0.00 current:1.00
+      ---------- Time:0.020799972, step:208 ----------
+  Node: 0 voltage:0.00
+  Node: 1 voltage:3.00
+  Node: 2 voltage:-0.00
+
+  Union: 0 current:-0.0
+  Union: 1 current:0.0
+
+  Branch: V1 voltage:3.00 current:1.00
+  Branch: R1 voltage:3.00 current:1.00
+  Branch: L1 voltage:-0.00 current:1.00
+      ---------- Time:0.021199971, step:212 ----------
+  Node: 0 voltage:0.00
+  Node: 1 voltage:3.00
+  Node: 2 voltage:-0.00
+
+  Union: 0 current:-0.0
+  Union: 1 current:0.0
+
+  Branch: V1 voltage:3.00 current:1.00
+  Branch: R1 voltage:3.00 current:1.00
+  Branch: L1 voltage:-0.00 current:1.00
+      ---------- Time:0.02159997, step:216 ----------
+  Node: 0 voltage:0.00
+  Node: 1 voltage:3.00
+  Node: 2 voltage:-0.00
+
+  Union: 0 current:-0.0
+  Union: 1 current:0.0
+
+  Branch: V1 voltage:3.00 current:1.00
+  Branch: R1 voltage:3.00 current:1.00
+  Branch: L1 voltage:-0.00 current:1.00
+      ---------- Time:0.02199997, step:220 ----------
+  Node: 0 voltage:0.00
+  Node: 1 voltage:3.00
+  Node: 2 voltage:-0.00
+
+  Union: 0 current:-0.0
+  Union: 1 current:0.0
+
+  Branch: V1 voltage:3.00 current:1.00
+  Branch: R1 voltage:3.00 current:1.00
+  Branch: L1 voltage:-0.00 current:1.00
+      ---------- Time:0.02239997, step:224 ----------
+  Node: 0 voltage:0.00
+  Node: 1 voltage:3.00
+  Node: 2 voltage:-0.00
+
+  Union: 0 current:-0.0
+  Union: 1 current:0.0
+
+  Branch: V1 voltage:3.00 current:1.00
+  Branch: R1 voltage:3.00 current:1.00
+  Branch: L1 voltage:-0.00 current:1.00
+      ---------- Time:0.022799969, step:228 ----------
+  Node: 0 voltage:0.00
+  Node: 1 voltage:3.00
+  Node: 2 voltage:-0.00
+
+  Union: 0 current:-0.0
+  Union: 1 current:0.0
+
+  Branch: V1 voltage:3.00 current:1.00
+  Branch: R1 voltage:3.00 current:1.00
+  Branch: L1 voltage:-0.00 current:1.00
+      ---------- Time:0.023199968, step:232 ----------
+  Node: 0 voltage:0.00
+  Node: 1 voltage:3.00
+  Node: 2 voltage:-0.00
+
+  Union: 0 current:-0.0
+  Union: 1 current:0.0
+
+  Branch: V1 voltage:3.00 current:1.00
+  Branch: R1 voltage:3.00 current:1.00
+  Branch: L1 voltage:-0.00 current:1.00
+      ---------- Time:0.023599967, step:236 ----------
+  Node: 0 voltage:0.00
+  Node: 1 voltage:3.00
+  Node: 2 voltage:-0.00
+
+  Union: 0 current:0.0
+  Union: 1 current:-0.0
+
+  Branch: V1 voltage:3.00 current:1.00
+  Branch: R1 voltage:3.00 current:1.00
+  Branch: L1 voltage:-0.00 current:1.00
+      ---------- Time:0.023999967, step:240 ----------
+  Node: 0 voltage:0.00
+  Node: 1 voltage:3.00
+  Node: 2 voltage:-0.00
+
+  Union: 0 current:0.0
+  Union: 1 current:-0.0
+
+  Branch: V1 voltage:3.00 current:1.00
+  Branch: R1 voltage:3.00 current:1.00
+  Branch: L1 voltage:-0.00 current:1.00
+      ---------- Time:0.024399966, step:244 ----------
+  Node: 0 voltage:0.00
+  Node: 1 voltage:3.00
+  Node: 2 voltage:-0.00
+
+  Union: 0 current:0.0
+  Union: 1 current:-0.0
+
+  Branch: V1 voltage:3.00 current:1.00
+  Branch: R1 voltage:3.00 current:1.00
+  Branch: L1 voltage:-0.00 current:1.00
+      ---------- Time:0.024799965, step:248 ----------
+  Node: 0 voltage:0.00
+  Node: 1 voltage:3.00
+  Node: 2 voltage:-0.00
+
+  Union: 0 current:0.0
+  Union: 1 current:-0.0
+
+  Branch: V1 voltage:3.00 current:1.00
+  Branch: R1 voltage:3.00 current:1.00
+  Branch: L1 voltage:-0.00 current:1.00
+      ---------- Time:0.025199965, step:252 ----------
+  Node: 0 voltage:0.00
+  Node: 1 voltage:3.00
+  Node: 2 voltage:-0.00
+
+  Union: 0 current:0.0
+  Union: 1 current:-0.0
+
+  Branch: V1 voltage:3.00 current:1.00
+  Branch: R1 voltage:3.00 current:1.00
+  Branch: L1 voltage:-0.00 current:1.00
+      ---------- Time:0.025599964, step:256 ----------
+  Node: 0 voltage:0.00
+  Node: 1 voltage:3.00
+  Node: 2 voltage:-0.00
+
+  Union: 0 current:0.0
+  Union: 1 current:-0.0
+
+  Branch: V1 voltage:3.00 current:1.00
+  Branch: R1 voltage:3.00 current:1.00
+  Branch: L1 voltage:-0.00 current:1.00
+      ---------- Time:0.025999963, step:260 ----------
+  Node: 0 voltage:0.00
+  Node: 1 voltage:3.00
+  Node: 2 voltage:-0.00
+
+  Union: 0 current:0.0
+  Union: 1 current:-0.0
+
+  Branch: V1 voltage:3.00 current:1.00
+  Branch: R1 voltage:3.00 current:1.00
+  Branch: L1 voltage:-0.00 current:1.00
+      ---------- Time:0.026399963, step:264 ----------
+  Node: 0 voltage:0.00
+  Node: 1 voltage:3.00
+  Node: 2 voltage:-0.00
+
+  Union: 0 current:0.0
+  Union: 1 current:-0.0
+
+  Branch: V1 voltage:3.00 current:1.00
+  Branch: R1 voltage:3.00 current:1.00
+  Branch: L1 voltage:-0.00 current:1.00
+      ---------- Time:0.026799962, step:268 ----------
+  Node: 0 voltage:0.00
+  Node: 1 voltage:3.00
+  Node: 2 voltage:-0.00
+
+  Union: 0 current:0.0
+  Union: 1 current:-0.0
+
+  Branch: V1 voltage:3.00 current:1.00
+  Branch: R1 voltage:3.00 current:1.00
+  Branch: L1 voltage:-0.00 current:1.00
+      ---------- Time:0.027199961, step:272 ----------
+  Node: 0 voltage:0.00
+  Node: 1 voltage:3.00
+  Node: 2 voltage:-0.00
+
+  Union: 0 current:0.0
+  Union: 1 current:-0.0
+
+  Branch: V1 voltage:3.00 current:1.00
+  Branch: R1 voltage:3.00 current:1.00
+  Branch: L1 voltage:-0.00 current:1.00
+      ---------- Time:0.02759996, step:276 ----------
+  Node: 0 voltage:0.00
+  Node: 1 voltage:3.00
+  Node: 2 voltage:-0.00
+
+  Union: 0 current:0.0
+  Union: 1 current:-0.0
+
+  Branch: V1 voltage:3.00 current:1.00
+  Branch: R1 voltage:3.00 current:1.00
+  Branch: L1 voltage:-0.00 current:1.00
+      ---------- Time:0.02799996, step:280 ----------
+  Node: 0 voltage:0.00
+  Node: 1 voltage:3.00
+  Node: 2 voltage:-0.00
+
+  Union: 0 current:0.0
+  Union: 1 current:-0.0
+
+  Branch: V1 voltage:3.00 current:1.00
+  Branch: R1 voltage:3.00 current:1.00
+  Branch: L1 voltage:-0.00 current:1.00
+      ---------- Time:0.02839996, step:284 ----------
+  Node: 0 voltage:0.00
+  Node: 1 voltage:3.00
+  Node: 2 voltage:-0.00
+
+  Union: 0 current:0.0
+  Union: 1 current:-0.0
+
+  Branch: V1 voltage:3.00 current:1.00
+  Branch: R1 voltage:3.00 current:1.00
+  Branch: L1 voltage:-0.00 current:1.00
+      ---------- Time:0.028799959, step:288 ----------
+  Node: 0 voltage:0.00
+  Node: 1 voltage:3.00
+  Node: 2 voltage:-0.00
+
+  Union: 0 current:0.0
+  Union: 1 current:-0.0
+
+  Branch: V1 voltage:3.00 current:1.00
+  Branch: R1 voltage:3.00 current:1.00
+  Branch: L1 voltage:-0.00 current:1.00
+      ---------- Time:0.029199958, step:292 ----------
+  Node: 0 voltage:0.00
+  Node: 1 voltage:3.00
+  Node: 2 voltage:-0.00
+
+  Union: 0 current:0.0
+  Union: 1 current:-0.0
+
+  Branch: V1 voltage:3.00 current:1.00
+  Branch: R1 voltage:3.00 current:1.00
+  Branch: L1 voltage:-0.00 current:1.00
+      ---------- Time:0.029599957, step:296 ----------
+  Node: 0 voltage:0.00
+  Node: 1 voltage:3.00
+  Node: 2 voltage:-0.00
+
+  Union: 0 current:0.0
+  Union: 1 current:-0.0
+
+  Branch: V1 voltage:3.00 current:1.00
+  Branch: R1 voltage:3.00 current:1.00
+  Branch: L1 voltage:-0.00 current:0.99
+      ---------- Time:0.029999956, step:300 ----------
+  Node: 0 voltage:0.00
+  Node: 1 voltage:3.00
+  Node: 2 voltage:-0.00
+
+  Union: 0 current:0.0
+  Union: 1 current:-0.0
+
+  Branch: V1 voltage:3.00 current:1.00
+  Branch: R1 voltage:3.00 current:1.00
+  Branch: L1 voltage:-0.00 current:0.99
+      ---------- Time:0.030399956, step:304 ----------
+  Node: 0 voltage:0.00
+  Node: 1 voltage:3.00
+  Node: 2 voltage:-0.00
+
+  Union: 0 current:0.0
+  Union: 1 current:-0.0
+
+  Branch: V1 voltage:3.00 current:1.00
+  Branch: R1 voltage:3.00 current:1.00
+  Branch: L1 voltage:-0.00 current:0.99
+      ---------- Time:0.030799955, step:308 ----------
+  Node: 0 voltage:0.00
+  Node: 1 voltage:3.00
+  Node: 2 voltage:-0.00
+
+  Union: 0 current:0.0
+  Union: 1 current:-0.0
+
+  Branch: V1 voltage:3.00 current:1.00
+  Branch: R1 voltage:3.00 current:1.00
+  Branch: L1 voltage:-0.00 current:0.99
+      ---------- Time:0.031199954, step:312 ----------
+  Node: 0 voltage:0.00
+  Node: 1 voltage:3.00
+  Node: 2 voltage:-0.00
+
+  Union: 0 current:0.0
+  Union: 1 current:-0.0
+
+  Branch: V1 voltage:3.00 current:1.00
+  Branch: R1 voltage:3.00 current:1.00
+  Branch: L1 voltage:-0.00 current:0.99
+      ---------- Time:0.03159996, step:316 ----------
+  Node: 0 voltage:0.00
+  Node: 1 voltage:3.00
+  Node: 2 voltage:-0.00
+
+  Union: 0 current:0.0
+  Union: 1 current:-0.0
+
+  Branch: V1 voltage:3.00 current:1.00
+  Branch: R1 voltage:3.00 current:1.00
+  Branch: L1 voltage:-0.00 current:0.99
+      ---------- Time:0.031999968, step:320 ----------
+  Node: 0 voltage:0.00
+  Node: 1 voltage:3.00
+  Node: 2 voltage:-0.00
+
+  Union: 0 current:0.0
+  Union: 1 current:-0.0
+
+  Branch: V1 voltage:3.00 current:1.00
+  Branch: R1 voltage:3.00 current:1.00
+  Branch: L1 voltage:-0.00 current:0.99
+      ---------- Time:0.032399975, step:324 ----------
+  Node: 0 voltage:0.00
+  Node: 1 voltage:3.00
+  Node: 2 voltage:-0.00
+
+  Union: 0 current:0.0
+  Union: 1 current:-0.0
+
+  Branch: V1 voltage:3.00 current:1.00
+  Branch: R1 voltage:3.00 current:1.00
+  Branch: L1 voltage:-0.00 current:0.99
+      ---------- Time:0.03279998, step:328 ----------
+  Node: 0 voltage:0.00
+  Node: 1 voltage:3.00
+  Node: 2 voltage:-0.00
+
+  Union: 0 current:0.0
+  Union: 1 current:-0.0
+
+  Branch: V1 voltage:3.00 current:1.00
+  Branch: R1 voltage:3.00 current:1.00
+  Branch: L1 voltage:-0.00 current:0.99
+      ---------- Time:0.03319999, step:332 ----------
+  Node: 0 voltage:0.00
+  Node: 1 voltage:3.00
+  Node: 2 voltage:-0.00
+
+  Union: 0 current:0.0
+  Union: 1 current:-0.0
+
+  Branch: V1 voltage:3.00 current:1.00
+  Branch: R1 voltage:3.00 current:1.00
+  Branch: L1 voltage:-0.00 current:0.99
+      ---------- Time:0.033599995, step:336 ----------
+  Node: 0 voltage:0.00
+  Node: 1 voltage:3.00
+  Node: 2 voltage:-0.00
+
+  Union: 0 current:0.0
+  Union: 1 current:-0.0
+
+  Branch: V1 voltage:3.00 current:1.00
+  Branch: R1 voltage:3.00 current:1.00
+  Branch: L1 voltage:-0.00 current:0.99
+      ---------- Time:0.034, step:340 ----------
+  Node: 0 voltage:0.00
+  Node: 1 voltage:3.00
+  Node: 2 voltage:-0.00
+
+  Union: 0 current:0.0
+  Union: 1 current:-0.0
+
+  Branch: V1 voltage:3.00 current:1.00
+  Branch: R1 voltage:3.00 current:1.00
+  Branch: L1 voltage:-0.00 current:0.99
+      ---------- Time:0.03440001, step:344 ----------
+  Node: 0 voltage:0.00
+  Node: 1 voltage:3.00
+  Node: 2 voltage:-0.00
+
+  Union: 0 current:0.0
+  Union: 1 current:-0.0
+
+  Branch: V1 voltage:3.00 current:1.00
+  Branch: R1 voltage:3.00 current:1.00
+  Branch: L1 voltage:-0.00 current:0.99
+      ---------- Time:0.034800015, step:348 ----------
+  Node: 0 voltage:0.00
+  Node: 1 voltage:3.00
+  Node: 2 voltage:-0.00
+
+  Union: 0 current:0.0
+  Union: 1 current:-0.0
+
+  Branch: V1 voltage:3.00 current:1.00
+  Branch: R1 voltage:3.00 current:1.00
+  Branch: L1 voltage:-0.00 current:0.99
+      ---------- Time:0.035200022, step:352 ----------
+  Node: 0 voltage:0.00
+  Node: 1 voltage:3.00
+  Node: 2 voltage:-0.00
+
+  Union: 0 current:0.0
+  Union: 1 current:-0.0
+
+  Branch: V1 voltage:3.00 current:1.00
+  Branch: R1 voltage:3.00 current:1.00
+  Branch: L1 voltage:-0.00 current:0.99
+      ---------- Time:0.03560003, step:356 ----------
+  Node: 0 voltage:0.00
+  Node: 1 voltage:3.00
+  Node: 2 voltage:-0.00
+
+  Union: 0 current:0.0
+  Union: 1 current:-0.0
+
+  Branch: V1 voltage:3.00 current:1.00
+  Branch: R1 voltage:3.00 current:1.00
+  Branch: L1 voltage:-0.00 current:0.99
+      ---------- Time:0.036000036, step:360 ----------
+  Node: 0 voltage:0.00
+  Node: 1 voltage:3.00
+  Node: 2 voltage:-0.00
+
+  Union: 0 current:0.0
+  Union: 1 current:-0.0
+
+  Branch: V1 voltage:3.00 current:1.00
+  Branch: R1 voltage:3.00 current:1.00
+  Branch: L1 voltage:-0.00 current:0.99
+      ---------- Time:0.036400042, step:364 ----------
+  Node: 0 voltage:0.00
+  Node: 1 voltage:3.00
+  Node: 2 voltage:-0.00
+
+  Union: 0 current:0.0
+  Union: 1 current:-0.0
+
+  Branch: V1 voltage:3.00 current:1.00
+  Branch: R1 voltage:3.00 current:1.00
+  Branch: L1 voltage:-0.00 current:0.99
+      ---------- Time:0.03680005, step:368 ----------
+  Node: 0 voltage:0.00
+  Node: 1 voltage:3.00
+  Node: 2 voltage:-0.00
+
+  Union: 0 current:0.0
+  Union: 1 current:-0.0
+
+  Branch: V1 voltage:3.00 current:1.00
+  Branch: R1 voltage:3.00 current:1.00
+  Branch: L1 voltage:-0.00 current:0.99
+      ---------- Time:0.037200056, step:372 ----------
+  Node: 0 voltage:0.00
+  Node: 1 voltage:3.00
+  Node: 2 voltage:-0.00
+
+  Union: 0 current:0.0
+  Union: 1 current:-0.0
+
+  Branch: V1 voltage:3.00 current:1.00
+  Branch: R1 voltage:3.00 current:1.00
+  Branch: L1 voltage:-0.00 current:0.99
+      ---------- Time:0.037600063, step:376 ----------
+  Node: 0 voltage:0.00
+  Node: 1 voltage:3.00
+  Node: 2 voltage:-0.00
+
+  Union: 0 current:0.0
+  Union: 1 current:-0.0
+
+  Branch: V1 voltage:3.00 current:1.00
+  Branch: R1 voltage:3.00 current:1.00
+  Branch: L1 voltage:-0.00 current:0.99
+      ---------- Time:0.03800007, step:380 ----------
+  Node: 0 voltage:0.00
+  Node: 1 voltage:3.00
+  Node: 2 voltage:-0.00
+
+  Union: 0 current:0.0
+  Union: 1 current:-0.0
+
+  Branch: V1 voltage:3.00 current:1.00
+  Branch: R1 voltage:3.00 current:1.00
+  Branch: L1 voltage:-0.00 current:0.99
+      ---------- Time:0.038400076, step:384 ----------
+  Node: 0 voltage:0.00
+  Node: 1 voltage:3.00
+  Node: 2 voltage:-0.00
+
+  Union: 0 current:0.0
+  Union: 1 current:-0.0
+
+  Branch: V1 voltage:3.00 current:1.00
+  Branch: R1 voltage:3.00 current:1.00
+  Branch: L1 voltage:-0.00 current:0.99
+      ---------- Time:0.038800083, step:388 ----------
+  Node: 0 voltage:0.00
+  Node: 1 voltage:3.00
+  Node: 2 voltage:-0.00
+
+  Union: 0 current:0.0
+  Union: 1 current:-0.0
+
+  Branch: V1 voltage:3.00 current:1.00
+  Branch: R1 voltage:3.00 current:1.00
+  Branch: L1 voltage:-0.00 current:0.99
+      ---------- Time:0.03920009, step:392 ----------
+  Node: 0 voltage:0.00
+  Node: 1 voltage:3.00
+  Node: 2 voltage:-0.00
+
+  Union: 0 current:0.0
+  Union: 1 current:-0.0
+
+  Branch: V1 voltage:3.00 current:1.00
+  Branch: R1 voltage:3.00 current:1.00
+  Branch: L1 voltage:-0.00 current:0.99
+      ---------- Time:0.039600097, step:396 ----------
+  Node: 0 voltage:0.00
+  Node: 1 voltage:3.00
+  Node: 2 voltage:-0.00
+
+  Union: 0 current:0.0
+  Union: 1 current:-0.0
+
+  Branch: V1 voltage:3.00 current:1.00
+  Branch: R1 voltage:3.00 current:1.00
+  Branch: L1 voltage:-0.00 current:0.99
