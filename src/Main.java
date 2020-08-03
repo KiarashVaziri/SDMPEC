@@ -1854,6 +1854,7 @@ class ResultPanel extends JComponent implements ActionListener
 {
     JButton run_button , draw_button , graph_button;
     JTextArea ResultArea;
+    JScrollPane scrollPane;
     Circuit circuit;
     MainFrame MainFrame;
     CircuitPanel circuitPanel;
@@ -1937,12 +1938,20 @@ class ResultPanel extends JComponent implements ActionListener
 
         ResultArea = new JTextArea(450, 300);
         ResultArea.setBounds(0, 0, 500, 500);
+        ResultArea.setEditable(false);
         ResultArea.setBackground(Color.WHITE);
         Border ResultArea_border = BorderFactory.createLineBorder(Color.black, 2);
         ResultArea.setBorder(ResultArea_border);
-        add(ResultArea);
-    }
 
+        //scrollPane = new JScrollPane(ResultArea);
+        //scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+
+        this.add(ResultArea);
+        //this.add(scrollPane);
+
+        //ResultArea.setLineWrap(true);
+        //ResultArea.setWrapStyleWord(true);
+    }
     @Override
     public void actionPerformed(ActionEvent e)
     {
@@ -2037,18 +2046,6 @@ class MainFrame extends JFrame implements Cloneable
 public class  Main
 {
     public static void main(String[] args) throws IOException {
-        Circuit circuit = new Circuit();
-        try
-        {
-            circuit.readFile();
-        }
-        catch (FileNotFoundException e)
-        {
-            System.out.println("Data file doesn't exist!");
-        }
-        //circuit.updateCircuit();
-        circuit.gatherUnions();
-        //Phase two
         MainFrame main = new MainFrame();
     }
 }
