@@ -29,6 +29,10 @@ class Node {
     Branch parentElement;
     int parent_element;
 
+    //for voltage source current
+    int numberOfVS;
+    float expected_current = 0;
+
     //-2 error
     boolean toBeChecked = true;
     Set<Branch> neighborCurrentSources = new HashSet<Branch>();
@@ -108,8 +112,12 @@ class Branch {
     void updateBranch(Node[] nodes, float dt, float dv) {
     }
 
-    //dependent type 2 & 4
+    //dependent type 2
     void updateBranch(Branch[] branches, float dt, float dv) {
+    }
+
+    //dependent type 4
+    void updateBranch(Branch[] branches, Node[] nodes, float dt, float dv) {
     }
 
     //for each step
@@ -118,6 +126,7 @@ class Branch {
 }
 
 class Circuit {
+    String filePath = "Input.txt";
     int numberOfNodes = 0;
     int numberOfBranches = 0;
     int numberOfUnions = 0;
@@ -130,6 +139,11 @@ class Circuit {
 
     Circuit() {
         for (int i = 0; i < 100; i++) for (int j = 0; j < 100; j++) adjMatrix[i][j] = 0;
+    }
+
+    Circuit(String filePath) {
+        for (int i = 0; i < 100; i++) for (int j = 0; j < 100; j++) adjMatrix[i][j] = 0;
+        this.filePath = filePath;
     }
 
     class Union {
@@ -225,12 +239,19 @@ class Circuit {
                     updateBranches();
                     //updateNodes();
                     updateUnions();
-                    for (int k = 0; k < numberOfUnions; k++)
+                    for (int k = 0; k < numberOfUnions; k++) {
+                        System.out.println(unionArray[k].current + " cnt:" + cnt + " step:" + step);
                         if (unionArray[k].current > di) flag = true;
+                    }
                     if (!flag) break;
                 }
+
                 updateUnionsFinal();
                 updateBranchesFinal();
+                if (step > 5 && !check_error2()) {
+                    bufferedWriter.write("Error 2 occurred.\n");
+                    break;
+                }
                 if (stepSize == 0 || step % stepSize == 0) {
                     //printData(bufferedWriter);
                     printDataFinal(bufferedWriter);
@@ -244,6 +265,7 @@ class Circuit {
     }
 
     void updateBranches() {
+        setExpectedCurrents();
         for (int j = 0; branchArray[j] != null; j++) {
             if (branchArray[j].independent)
                 branchArray[j].updateBranch(nodeArray[branchArray[j].port1], nodeArray[branchArray[j].port2], dt, dv, time);
@@ -254,7 +276,7 @@ class Circuit {
             else if (branchArray[j].type == 3)
                 branchArray[j].updateBranch(nodeArray, dt, dv);
             else if (branchArray[j].type == 4)
-                branchArray[j].updateBranch(branchArray, dt, dv);
+                branchArray[j].updateBranch(branchArray, nodeArray, dt, dv);
         }
     }
 
@@ -275,14 +297,14 @@ class Circuit {
             unionArray[k].totalCurrent2 = 0;
             for (int i = 0; unionArray[k].nodes[i] != null; i++) {
                 for (int j = 0; branchArray[j] != null; j++) {
-                    if (branchArray[j].port1 == unionArray[k].nodes[i].nodeNumber && branchArray[j].getClass() != VoltageSource.class) {
+                    if (branchArray[j].port1 == unionArray[k].nodes[i].nodeNumber && branchArray[j].type_of_source != 2) {
                         unionArray[k].totalCurrent1 += branchArray[j].current;
-                        System.out.println("Element: " + branchArray[j].name + " current to be add: " + branchArray[j].current);
+                        //System.out.println("Element: " + branchArray[j].name + " current to be add: " + branchArray[j].current);
                         //unionArray[k].nextCurrent += branchArray[j].previousCurrent;
                         unionArray[k].totalCurrent2 += branchArray[j].nextCurrent_plus;
-                    } else if (branchArray[j].port2 == unionArray[k].nodes[i].nodeNumber && branchArray[j].getClass() != VoltageSource.class) {
+                    } else if (branchArray[j].port2 == unionArray[k].nodes[i].nodeNumber && branchArray[j].type_of_source != 2) {
                         unionArray[k].totalCurrent1 -= branchArray[j].current;
-                        System.out.println("Element: " + branchArray[j].name + " current to be add: " + branchArray[j].current);
+                        //System.out.println("Element: " + branchArray[j].name + " current to be add: " + branchArray[j].current);
                         //unionArray[k].nextCurrent -= branchArray[j].previousCurrent;
                         unionArray[k].totalCurrent2 -= branchArray[j].nextCurrent_negative;
                     }
@@ -360,20 +382,20 @@ class Circuit {
         bufferedWriter.write("---------- Time:" + time + ", step:" + step + " ----------\n");
         for (int i = 0; nodeArray[i] != null; i++) {
             //System.out.println("Node: " + nodeArray[i].nodeNumber + " voltage:" + nodeArray[i].voltage);
-            bufferedWriter.write("Node: " + nodeArray[i].nodeNumber + " voltage:" + nodeArray[i].voltage_t.get(step + 1) + " previousVoltage_t:" + nodeArray[i].previousVoltage_t + "\n");
+            bufferedWriter.write("Node: " + nodeArray[i].nodeNumber + " voltage:" + String.format("%.2f", nodeArray[i].voltage_t.get(step + 1)) + "\n");
         }
 
         //System.out.println();
         bufferedWriter.write("\n");
         for (int k = 0; k < numberOfUnions; k++) {
             //System.out.println("Union: " + unionArray[k].unionNumber + " current:" + unionArray[k].current);
-            bufferedWriter.write("Union: " + unionArray[k].unionNumber + " current:" + unionArray[k].current + " totalCurrent1:" + unionArray[k].totalCurrent1 + "\n");
+            bufferedWriter.write("Union: " + unionArray[k].unionNumber + " current:" + String.format("%.1f", unionArray[k].current) + "\n");
         }
         //System.out.println();
         bufferedWriter.write("\n");
         for (int j = 0; branchArray[j] != null; j++) {
             //System.out.println("Branch: " + branchArray[j].name + " voltage:" + branchArray[j].getVoltage(nodeArray[branchArray[j].port1], nodeArray[branchArray[j].port2]) + " current:" + branchArray[j].getCurrent());
-            bufferedWriter.write("Branch: " + branchArray[j].name + " voltage:" + branchArray[j].voltage_t.get(step) + " current:" + branchArray[j].current_t.get(step) + "\n");
+            bufferedWriter.write("Branch: " + branchArray[j].name + " voltage:" + String.format("%.2f", branchArray[j].voltage_t.get(step)) + " current:" + String.format("%.2f", branchArray[j].current_t.get(step)) + "\n");
         }
         //System.out.println("----------");
     }
@@ -394,7 +416,7 @@ class Circuit {
     }
 
     void readFile() throws FileNotFoundException {
-        File file = new File("Input.txt");
+        File file = new File(filePath);
         try {
             FileReader fileReader = new FileReader(file);
             BufferedReader br = new BufferedReader(fileReader);
@@ -485,11 +507,7 @@ class Circuit {
                 else if (element_name.matches("\\.tran")) duration = aFloat(info[1]);
                 line = br.readLine();
             }
-        } catch (
-                FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (
-                IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
 
@@ -572,16 +590,41 @@ class Circuit {
         }
     }
 
+    boolean first_time = true;
+
+    void setExpectedCurrents() {
+        for (int j = 0; j < numberOfBranches; j++)
+            if (branchArray[j].type_of_source == 2 && first_time) {
+                int start = branchArray[j].port1;
+                int end = branchArray[j].port2;
+                nodeArray[start].numberOfVS++;
+                nodeArray[end].numberOfVS++;
+            }
+        first_time = false;
+        for (int i = 0; i <= numberOfNodes; i++)
+            if (nodeArray[i].numberOfVS == 1) {
+                nodeArray[i].expected_current = 0;
+                for (int j = 0; j < numberOfBranches; j++) {
+                    if (branchArray[j].port1 == i && branchArray[j].type_of_source != 2)
+                        nodeArray[i].expected_current += branchArray[j].current;
+                    else if (branchArray[j].port2 == i && branchArray[j].type_of_source != 2)
+                        nodeArray[i].expected_current -= branchArray[j].current;
+                }
+            }
+    }
+
     boolean check_error2() {
         boolean flag = true;
         prepareNodesToBeChecked();
         for (int i = 0; i <= numberOfNodes; i++) {
-            float sum = 0;
-            for (Branch cs : nodeArray[i].neighborCurrentSources) {
-                if (nodeArray[i].nodeNumber == cs.port1) sum += cs.current;
-                else sum -= cs.current;
+            if (nodeArray[i].toBeChecked) {
+                float sum = 0;
+                for (Branch cs : nodeArray[i].neighborCurrentSources) {
+                    if (nodeArray[i].nodeNumber == cs.port1) sum += cs.current;
+                    else sum -= cs.current;
+                }
+                flag = sum <= di;
             }
-            flag = sum <= di;
         }
         return flag;
     }
@@ -598,6 +641,24 @@ class Circuit {
                 nodeArray[port2].toBeChecked = false;
             }
         }
+    }
+
+    boolean check_error3() {
+        boolean result = true;
+        for (int j = 0; j < numberOfBranches; j++)
+            if (branchArray[j].type_of_source == 2)
+                for (int t = j + 1; t < numberOfBranches; t++)
+                    if (branchArray[t].type_of_source == 2) {
+                        int s1 = branchArray[j].port1;
+                        int e1 = branchArray[j].port2;
+                        int s2 = branchArray[t].port2;
+                        int e2 = branchArray[t].port2;
+                        if (s1 == s2 && e1 == e2)
+                            result = branchArray[j].voltage == branchArray[t].voltage;
+                        else if (s1 == e2 && s2 == e1)
+                            result = branchArray[j].voltage == -branchArray[t].voltage;
+                    }
+        return result;
     }
 
     boolean check_error5() {
@@ -621,6 +682,130 @@ class Circuit {
             for (int j = 0; j < numberOfBranches; j++)
                 if (adjMatrix[j][i] == 1 || adjMatrix[j][i] == -1) number_of_neighbors++;
             if (number_of_neighbors <= 1) nodeArray[i].connected = false;
+        }
+    }
+
+    //charts
+    void openCharts(String name) {
+        int index = 0;
+        for (int j = 0; j < numberOfBranches; j++)
+            if (branchArray[j].name.equals(name)) index = j;
+
+        ArrayList<Float> list1 = branchArray[index].voltage_t;
+        ChartDrawer m1 = new ChartDrawer(1, list1, duration);
+        JFrame f1 = new JFrame("Voltage");
+        f1.add(m1);
+        f1.setSize(940, 720);
+        f1.setLocation(540, 150);
+        f1.setVisible(true);
+
+        ArrayList<Float> list = branchArray[index].current_t;
+        ChartDrawer m = new ChartDrawer(2, list, duration);
+        JFrame f = new JFrame("Current");
+        f.add(m);
+        f.setSize(940, 720);
+        f.setLocation(560, 180);
+        f.setVisible(true);
+
+        ArrayList<Float> list2 = branchArray[index].power_t;
+        ChartDrawer m2 = new ChartDrawer(3, list2, duration);
+        JFrame f2 = new JFrame("Power");
+        f2.add(m2);
+        f2.setSize(940, 720);
+        f2.setLocation(580, 210);
+        f2.setVisible(true);
+    }
+}
+
+class ChartDrawer extends Canvas {
+    int type, size;
+    ArrayList<Float> list;
+    float duration;
+    float max = 0, min = 0, scale;
+    String order;
+    String orderOfTime;
+
+    /* We have 3 types of outputs:
+       1.voltage
+       2.current
+       3.power  */
+
+    ChartDrawer(int type, ArrayList<Float> data, float duration) {
+        this.type = type;
+        list = data;
+        this.duration = duration;
+        for (int i = 0; i < list.size(); i++) {
+            if (max < list.get(i)) max = list.get(i);
+            if (min > list.get(i)) min = list.get(i);
+        }
+        size = list.size();
+        if (Math.abs(max) > Math.abs(min)) scale = max;
+        else scale = Math.abs(min);
+
+        if (scale >= 1000) order = "k";
+        else if (scale < 1000 && scale > 0.1f) order = "";
+        else if (scale < 0.1f) order = "m";
+
+        if (duration >= 0.1f) orderOfTime = "";
+        else if (duration < 0.1f && duration >= 1E-4) orderOfTime = "m";
+        else if (duration < 1E-4) orderOfTime = "u";
+    }
+
+    public void paint(Graphics graphics) {
+        setBackground(Color.black);
+        int startX = 60, startY = 340, width, height;
+
+        //Y-axis
+        for (int i = 0; i <= 800; i += 80) {
+            Float value = 0f;
+            if (orderOfTime.equals("")) value = duration * (float) i / 800;
+            else if (orderOfTime.equals("m")) value = 1000 * duration * (float) i / 800;
+            else if (orderOfTime.equals("u")) value = 1000000 * duration * (float) i / 800;
+
+            //String str = value.toString();
+            String string = String.format("%.2f", value);
+            graphics.setColor(Color.gray);
+            graphics.drawString(string, startX + i - 10, startY + 320);
+            graphics.setColor(Color.darkGray);
+            graphics.drawLine(startX + i, startY - 300, startX + i, startY + 300);
+        }
+        graphics.setColor(Color.WHITE);
+        if (type == 1) graphics.drawString("voltage [ " + order + "V ]", startX, startY - 310);
+        else if (type == 2) graphics.drawString("current [ " + order + "A ]", startX, startY - 310);
+        else if (type == 3) graphics.drawString("power [ " + order + "W ]", startX, startY - 310);
+        graphics.drawLine(startX, startY - 300, startX, startY + 300);
+
+        //X-axis
+        for (int i = -300; i <= 300; i += 60) {
+            Float value = 0f;
+            if (order.equals("k")) value = scale * (float) i / 300 / 1000;
+            else if (order.equals("")) value = scale * (float) i / 300;
+            else if (order.equals("m")) value = scale * 1000 * (float) i / 300;
+            //String str = value.toString();
+            String string = String.format("%.2f", value);
+            graphics.setColor(Color.gray);
+            graphics.drawString(string, startX - 40, startY - i);
+            graphics.setColor(Color.darkGray);
+            graphics.drawLine(startX, startY - i, startX + 800, startY - i);
+        }
+        graphics.setColor(Color.WHITE);
+        graphics.drawString("time [" + orderOfTime + "s]", startX + 810, startY);
+        graphics.drawLine(startX, startY, startX + 800, startY);
+
+        //draw data
+        float stepX = 800 / (float) size;
+        float stepY = -300 / scale;
+        float xp = startX;
+        float yp = stepY * list.get(0) + startY;
+
+        if (type == 1) graphics.setColor(Color.green);
+        if (type == 2) graphics.setColor(Color.ORANGE);
+        if (type == 3) graphics.setColor(Color.RED);
+        for (int i = 1; i < size; i++) {
+            float y = stepY * list.get(i) + startY;
+            graphics.drawLine((int) xp, (int) yp, (int) (xp + stepX), (int) y);
+            yp = y;
+            xp += stepX;
         }
     }
 }
@@ -799,7 +984,7 @@ class VoltageDCPanel extends  JPanel
                 VoltageDCLabel = new JLabel(new ImageIcon(VoltageDCImage));
                 NameLabel = new JLabel(name);
                 NameLabel.setBackground(color);
-                NameLabel.setBounds(20 , 40 , 50 ,15);
+                NameLabel.setBounds(15 , 45 , 50 ,15);
                 VoltageDCLabel.add(NameLabel);
                 add(VoltageDCLabel);
             }
@@ -816,7 +1001,7 @@ class VoltageDCPanel extends  JPanel
                 VoltageDCLabel = new JLabel(new ImageIcon(VoltageDCImage));
                 NameLabel = new JLabel(name);
                 NameLabel.setBackground(color);
-                NameLabel.setBounds(20 , 40 , 50 ,15);
+                NameLabel.setBounds(15 , 45 , 50 ,15);
                 VoltageDCLabel.add(NameLabel);
                 add(VoltageDCLabel);
             }
@@ -833,7 +1018,7 @@ class VoltageDCPanel extends  JPanel
                 VoltageDCLabel = new JLabel(new ImageIcon(VoltageDCImage));
                 NameLabel = new JLabel(name);
                 NameLabel.setBackground(color);
-                NameLabel.setBounds(45 , 60 , 50 ,15);
+                NameLabel.setBounds(15 , 45 , 50 ,15);
                 VoltageDCLabel.add(NameLabel);
                 add(VoltageDCLabel);
             }
@@ -850,7 +1035,7 @@ class VoltageDCPanel extends  JPanel
                 VoltageDCLabel = new JLabel(new ImageIcon(VoltageDCImage));
                 NameLabel = new JLabel(name);
                 NameLabel.setBackground(color);
-                NameLabel.setBounds(45 , 60 , 50 ,15);
+                NameLabel.setBounds(15 , 45 , 50 ,15);
                 VoltageDCLabel.add(NameLabel);
                 add(VoltageDCLabel);
             }
@@ -1511,15 +1696,16 @@ class DataPanel extends JComponent implements ActionListener
     JTextArea textArea;
     Border button_border , textArea_border;
     String filePath;
+    JScrollPane scroll;
 
     DataPanel()
     {
-        setBounds(25 , 25 , 350 , 600);
+        setBounds(25 , 25 , 225 , 600);
 
         button_border = BorderFactory.createLineBorder(Color.BLACK , 1);
         load_button = new JButton("     Load");
         load_button.addActionListener(this);
-        int x_load_button = 50;
+        int x_load_button = 10;
         int y_load_button = 530;
         int width_load_button = 100;
         int height_load_button = 30;
@@ -1542,7 +1728,7 @@ class DataPanel extends JComponent implements ActionListener
 
         save_button = new JButton("     Save");
         save_button.addActionListener(this);
-        int x_run_button = x_load_button + width_load_button + 50;
+        int x_run_button = x_load_button + width_load_button + 5;
         int y_run_button = 530;
         int width_run_button = 100;
         int height_run_button = 30;
@@ -1563,11 +1749,14 @@ class DataPanel extends JComponent implements ActionListener
         }
         add(save_button);
 
-        textArea = new JTextArea(450, 300);
-        textArea.setBounds(0, 0, 350, 500);
+        textArea = new JTextArea(10000, 300);
+        textArea.setBounds(0, 0, 220, 500);
         textArea.setBackground(Color.WHITE);
         textArea_border = BorderFactory.createLineBorder(Color.black, 2);
         textArea.setBorder(textArea_border);
+        scroll = new JScrollPane(textArea);
+        scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        add(scroll);
         add(textArea);
     }
     public void actionPerformed(ActionEvent e)
@@ -1606,7 +1795,6 @@ class CircuitPanel extends JComponent
 {
     int startNode , endNode;
     int locationMatrix[][] = new int[6][5];
-    JButton draw_button;
     CircuitPanel()
     {
         setBounds(800 , 25 , 700 , 600);
@@ -1619,7 +1807,7 @@ class CircuitPanel extends JComponent
                 locationMatrix[i][j] = 0;
         }
     }
-    void DrawCircuit(Circuit circuit , JFrame frame)
+    void DrawCircuit(Circuit circuit , MainFrame frame)
     {
         for(int i = 0 ; i < circuit.numberOfBranches ; i++)
         {
@@ -1635,7 +1823,6 @@ class CircuitPanel extends JComponent
             if(startNode != -1 && endNode != -1)
             {
                 new Element(this, locationMatrix, circuit.branchArray[i].name.charAt(0), circuit.branchArray[i] , startNode, endNode);
-                frame.add(this);
             }
         }
         for(int i = 0 ; i < circuit.numberOfBranches ; i++)
@@ -1652,7 +1839,6 @@ class CircuitPanel extends JComponent
             if((circuit.adjMatrix[i][0] == 1 && endNode != 0) || (circuit.adjMatrix[i][0] == -1 && startNode != 0))
             {
                 new Element(this, locationMatrix, circuit.branchArray[i].name.charAt(0), circuit.branchArray[i] , startNode, endNode);
-                frame.add(this);
             }
         }
     }
@@ -1666,17 +1852,14 @@ class CircuitPanel extends JComponent
 }
 class ResultPanel extends JComponent implements ActionListener
 {
-    JButton run_button , draw_button;
+    JButton run_button , draw_button , graph_button;
     JTextArea ResultArea;
     CircuitPanel circuitPanel;
     Circuit circuit;
-    JFrame MainFrame;
-    ResultPanel (JFrame frame , CircuitPanel cp , Circuit c)
+    MainFrame MainFrame;
+    ResultPanel ()
     {
-        circuit = c;
-        circuitPanel = cp;
-        MainFrame = frame;
-        setBounds(400 , 25 , 350 , 600);
+        setBounds(275 , 25 , 500 , 600);
         Border button_border = BorderFactory.createLineBorder(Color.BLACK , 1);
         run_button = new JButton("     Run");
         run_button.addActionListener(this);
@@ -1701,9 +1884,32 @@ class ResultPanel extends JComponent implements ActionListener
         }
         add(run_button);
 
+        graph_button = new JButton("     Graph");
+        graph_button.addActionListener(this);
+        int x_graph_button = x_load_button + width_load_button + 50;
+        int y_graph_button = 530;
+        int width_graph_button = 100;
+        int height_graph_button = 30;
+        graph_button.setBounds(x_graph_button, y_graph_button, width_graph_button, height_graph_button);
+        graph_button.setBackground(Color.ORANGE);
+        graph_button.setBorder(button_border);
+        Image Graph_ButtonImage;
+        JLabel Graph_ButtonLabel;
+        try
+        {
+            Graph_ButtonImage = ImageIO.read(new File("icons/Graph Button.png"));
+            Graph_ButtonLabel = new JLabel(new ImageIcon(Graph_ButtonImage));
+            graph_button.add(Graph_ButtonLabel);
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+        add(graph_button);
+
         draw_button = new JButton("     Draw");
         draw_button.addActionListener(this);
-        int x_run_button = x_load_button + width_load_button + 50;
+        int x_run_button = x_graph_button + width_graph_button + 50;
         int y_run_button = 530;
         int width_run_button = 100;
         int height_run_button = 30;
@@ -1725,7 +1931,7 @@ class ResultPanel extends JComponent implements ActionListener
         add(draw_button);
 
         ResultArea = new JTextArea(450, 300);
-        ResultArea.setBounds(0, 0, 350, 500);
+        ResultArea.setBounds(0, 0, 500, 500);
         ResultArea.setBackground(Color.WHITE);
         Border ResultArea_border = BorderFactory.createLineBorder(Color.black, 2);
         ResultArea.setBorder(ResultArea_border);
@@ -1737,6 +1943,15 @@ class ResultPanel extends JComponent implements ActionListener
         if(e.getSource() == draw_button)
         {
             circuitPanel.DrawCircuit(circuit , MainFrame);
+            MainFrame.setVisible(true);
+        }
+        if(e.getSource() == run_button)
+        {
+            //Phase one
+        }
+        if(e.getSource() == graph_button)
+        {
+
         }
     }
 }
@@ -1761,9 +1976,9 @@ class SharifPanel extends JPanel
         }
     }
 }
-class MainPanel extends JFrame
+class MainFrame extends JFrame implements Cloneable
 {
-    MainPanel(Circuit circuit)
+    MainFrame()
     {
         setSize(1550 , 800);
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
@@ -1779,38 +1994,32 @@ class MainPanel extends JFrame
         add(d);
 
         CircuitPanel c = new CircuitPanel();
-        c.DrawCircuit(circuit , this);
         add(c);
 
-        ResultPanel r = new ResultPanel(this , c , circuit);
+        ResultPanel r = new ResultPanel();
         add(r);
 
         SharifPanel s = new SharifPanel();
         add(s);
+
+        this.setVisible(true);
     }
 }
-public class  Main {
+public class  Main
+{
     public static void main(String[] args) throws IOException {
         Circuit circuit = new Circuit();
-        try {
+        try
+        {
             circuit.readFile();
-        } catch (FileNotFoundException e) {
+        }
+        catch (FileNotFoundException e)
+        {
             System.out.println("Data file doesn't exist!");
         }
-        /*circuit.gatherUnions();
-        for (int k = 0; circuit.unionArray[k] != null; k++) {
-            System.out.print("Union: " + k + ",parent node: " + circuit.unionArray[k].parent_node);
-            for (int i = 1; circuit.unionArray[k].nodes[i] != null; i++) {
-                System.out.print(". node[" + circuit.unionArray[k].nodes[i].nodeNumber + "]'s parent element: " + circuit.unionArray[k].nodes[i].parent_element + " ");
-            }
-            System.out.println();
-        }*/
         //circuit.updateCircuit();
         circuit.gatherUnions();
-        //System.out.println(circuit.check_error2());
-
         //Phase two
-        MainPanel main = new MainPanel(circuit);
-        main.setVisible(true);
+        MainFrame main = new MainFrame();
     }
 }

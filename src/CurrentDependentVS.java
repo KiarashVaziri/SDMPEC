@@ -30,17 +30,24 @@ class CurrentDependentVS extends Branch{
         return b.voltage - a.voltage;
     }
 
-    void updateBranch(Branch[] branches, float dt, float dv) {
+    void updateBranch(Branch[] branches,Node[] nodes, float dt, float dv) {
         updateRelatedElement(branches);
         voltage = gain * element.current;
-        System.out.println("Voltage:"+voltage);
+        updateCurrent(nodes[port1],nodes[port2]);
         power = current * voltage;
     }
 
     @Override
     void updateBranchFinal(Node startNode, Node endNode, float dt, float dv, float time, int step) {
         voltage_t.add(voltage);
-        current_t.add(0f);
+        current_t.add(current);
         power_t.add(power);
+    }
+
+    void updateCurrent(Node s, Node e) {
+        if (s.numberOfVS == 1)
+            current = +s.expected_current;
+        else if (e.numberOfVS == 1)
+            current = -e.expected_current;
     }
 }

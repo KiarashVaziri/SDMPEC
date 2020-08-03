@@ -27,13 +27,21 @@ class VoltageDependentVS extends Branch {
 
     void updateBranch(Node[] nodes, float dt, float dv) {
         voltage = gain * (nodes[related_port1].voltage - nodes[related_port2].voltage);
+        updateCurrent(nodes[port1],nodes[port2]);
         power = current * voltage;
     }
 
     @Override
     void updateBranchFinal(Node startNode, Node endNode, float dt, float dv, float time, int step) {
         voltage_t.add(voltage);
-        current_t.add(0f);
+        current_t.add(current);
         power_t.add(power);
+    }
+
+    void updateCurrent(Node s, Node e) {
+        if (s.numberOfVS == 1)
+            current = +s.expected_current;
+        else if (e.numberOfVS == 1)
+            current = -e.expected_current;
     }
 }
