@@ -1897,6 +1897,7 @@ class ResultPanel extends JComponent implements ActionListener
     JTextArea ResultArea;
     JScrollPane scrollPane;
     Circuit circuit;
+    Circuit circuitToBeDrawn;
     CircuitFrame circuitFrame;
     DataPanel dataPanel;
     String outPutPath = "Output.txt";
@@ -2046,13 +2047,13 @@ class ResultPanel extends JComponent implements ActionListener
         if(e.getSource() == draw_button)
         {
             if (dataPanel.filePath != null) {
-                circuit = new Circuit(dataPanel.filePath);
+                circuitToBeDrawn = new Circuit(dataPanel.filePath);
                 try {
-                    circuit.readFile();
+                    circuitToBeDrawn.readFile();
                 } catch (FileNotFoundException ex) {
                     ex.printStackTrace();
                 }
-                circuitFrame = new CircuitFrame(circuit);
+                circuitFrame = new CircuitFrame(circuitToBeDrawn);
             } else {
                 draw_alert = new JFrame();
                 JOptionPane.showMessageDialog(draw_alert, "No data to draw, please try again.", "Alert", JOptionPane.WARNING_MESSAGE);
