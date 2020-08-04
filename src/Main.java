@@ -980,7 +980,7 @@ class VoltageDCPanel extends  JPanel
         {
             try
             {
-                VoltageDCImage = ImageIO.read(new File("icons/Up side VoltageDC.png"));
+                VoltageDCImage = ImageIO.read(new File("icons/Down side VoltageDC.png"));
                 VoltageDCLabel = new JLabel(new ImageIcon(VoltageDCImage));
                 NameLabel = new JLabel(name);
                 NameLabel.setBackground(color);
@@ -997,7 +997,7 @@ class VoltageDCPanel extends  JPanel
         {
             try
             {
-                VoltageDCImage = ImageIO.read(new File("icons/Down side VoltageDC.png"));
+                VoltageDCImage = ImageIO.read(new File("icons/Up side VoltageDC.png"));
                 VoltageDCLabel = new JLabel(new ImageIcon(VoltageDCImage));
                 NameLabel = new JLabel(name);
                 NameLabel.setBackground(color);
@@ -1902,6 +1902,9 @@ class ResultPanel extends JComponent implements ActionListener
     String outPutPath = "Output.txt";
     Image TitleBoxImage , ButtonImage;
     JLabel TitleBoxLabel , TitleLabel , ButtonLabel;
+    JFrame draw_alert;
+    boolean runFlag = false;
+    JFrame graph_alert;
     ResultPanel (DataPanel dp)
     {
         dataPanel = dp;
@@ -2012,38 +2015,59 @@ class ResultPanel extends JComponent implements ActionListener
         if(e.getSource() == run_button)
         {
             //Phase one
-            circuit = new Circuit(dataPanel.filePath);
-            try
-            {
-                circuit.readFile();
-            } catch (FileNotFoundException ex) {
-                ex.printStackTrace();
-            }
-            try {
-                circuit.updateCircuit();
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
-            try {
-                ResultArea.setFont(ResultArea.getFont().deriveFont(15f));
-                BufferedReader br = new BufferedReader(new FileReader(outPutPath));
-                String s1 = "", s2 = "";
-                while ((s1 = br.readLine()) != null) s2 += s1 + "\n";
-                ResultArea.setText(s2);
-                br.close();
-            } catch (Exception ex) {
-                ex.printStackTrace();
+            if (dataPanel.filePath != null) {
+                circuit = new Circuit(dataPanel.filePath);
+                runFlag = true;
+                try {
+                    circuit.readFile();
+                } catch (FileNotFoundException ex) {
+                    ex.printStackTrace();
+                }
+                try {
+                    circuit.updateCircuit();
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+                try {
+                    ResultArea.setFont(ResultArea.getFont().deriveFont(15f));
+                    BufferedReader br = new BufferedReader(new FileReader(outPutPath));
+                    String s1 = "", s2 = "";
+                    while ((s1 = br.readLine()) != null) s2 += s1 + "\n";
+                    ResultArea.setText(s2);
+                    br.close();
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+            } else {
+                draw_alert = new JFrame();
+                JOptionPane.showMessageDialog(draw_alert, "No data to run, please try again.", "Alert", JOptionPane.WARNING_MESSAGE);
             }
         }
         if(e.getSource() == draw_button)
         {
-            circuitFrame = new CircuitFrame(circuit);
+            if (dataPanel.filePath != null) {
+                circuit = new Circuit(dataPanel.filePath);
+                try {
+                    circuit.readFile();
+                } catch (FileNotFoundException ex) {
+                    ex.printStackTrace();
+                }
+                circuitFrame = new CircuitFrame(circuit);
+            } else {
+                draw_alert = new JFrame();
+                JOptionPane.showMessageDialog(draw_alert, "No data to draw, please try again.", "Alert", JOptionPane.WARNING_MESSAGE);
+            }
         }
         if(e.getSource() == graph_button)
         {
-            JFrame questionFrame = new JFrame("Input");
-            String name = JOptionPane.showInputDialog(questionFrame, "Enter the name of your element");
-            if (name != null) circuit.openCharts(name);
+            if (runFlag) {
+                JFrame questionFrame = new JFrame("Input");
+                String name = JOptionPane.showInputDialog(questionFrame, "Enter the name of your element");
+                if (name != null) circuit.openCharts(name);
+            } else {
+                graph_alert = new JFrame();
+                JOptionPane.showMessageDialog(graph_alert, "Please press run button first.", "Alert", JOptionPane.WARNING_MESSAGE);
+            }
         }
     }
 }
@@ -2093,7 +2117,7 @@ class MainFrame extends JFrame
 
         SharifPanel s = new SharifPanel();
         add(s);
-
+        this.setLocation(450,100);
         this.setVisible(true);
     }
 }
