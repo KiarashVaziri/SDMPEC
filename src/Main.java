@@ -817,10 +817,10 @@ class ResistorPanel extends JPanel
     int node1x , node1y , node2x , node2y;
     ResistorPanel(int node1 , int node2 , String name)
     {
-        node1x = ((node1 - 1) % 6) * 100 + 50;
-        node1y = 450 - (node1 - 1) / 6 * 100;
-        node2x = ((node2 - 1) % 6) * 100 + 50;
-        node2y = 450 - (node2 - 1) / 6 * 100;
+        node1x = ((node1 - 1) % 8) * 100 + 50;
+        node1y = 550 - (node1 - 1) / 8 * 100;
+        node2x = ((node2 - 1) % 8) * 100 + 50;
+        node2y = 550 - (node2 - 1) / 8 * 100;
         setBounds((node1x + node2x) / 2 - 50 , (node1y + node2y) / 2 - 55 , 100 ,105);
         Color color = new Color(1 , 1  ,1 , 1);
         setBackground(color);
@@ -867,10 +867,10 @@ class CapacitorPanel extends JPanel
     int node1x , node1y , node2x , node2y;
     CapacitorPanel(int node1 , int node2 , String name)
     {
-        node1x = ((node1 - 1) % 6) * 100 + 50;
-        node1y = 450 - (node1 - 1) / 6 * 100;
-        node2x = ((node2 - 1) % 6) * 100 + 50;
-        node2y = 450 - (node2 - 1) / 6 * 100;
+        node1x = ((node1 - 1) % 8) * 100 + 50;
+        node1y = 550 - (node1 - 1) / 8 * 100;
+        node2x = ((node2 - 1) % 8) * 100 + 50;
+        node2y = 550 - (node2 - 1) / 8 * 100;
         setBounds((node1x + node2x) / 2 - 50 , (node1y + node2y) / 2 - 55 , 100 ,105);
         Color color = new Color(1 , 1  ,1 , 1);
         setBackground(color);
@@ -917,10 +917,10 @@ class InductorPanel extends JPanel
     int node1x , node1y , node2x , node2y;
     InductorPanel(int node1 , int node2 , String name)
     {
-        node1x = ((node1 - 1) % 6) * 100 + 50;
-        node1y = 450 - (node1 - 1) / 6 * 100;
-        node2x = ((node2 - 1) % 6) * 100 + 50;
-        node2y = 450 - (node2 - 1) / 6 * 100;
+        node1x = ((node1 - 1) % 8) * 100 + 50;
+        node1y = 550 - (node1 - 1) / 8 * 100;
+        node2x = ((node2 - 1) % 8) * 100 + 50;
+        node2y = 550 - (node2 - 1) / 8 * 100;
         setBounds((node1x + node2x) / 2 - 50 , (node1y + node2y) / 2 - 55 , 100 ,105);
         Color color = new Color(1 , 1  ,1 , 1);
         setBackground(color);
@@ -967,10 +967,10 @@ class VoltageDCPanel extends  JPanel
     int node1x , node1y , node2x , node2y;
     VoltageDCPanel(int node1 , int node2 , String name)
     {
-        node1x = ((node1 - 1) % 6) * 100 + 50;
-        node1y = 450 - (node1 - 1) / 6 * 100;
-        node2x = ((node2 - 1) % 6) * 100 + 50;
-        node2y = 450 - (node2 - 1) / 6 * 100;
+        node1x = ((node1 - 1) % 8) * 100 + 50;
+        node1y = 550 - (node1 - 1) / 8 * 100;
+        node2x = ((node2 - 1) % 8) * 100 + 50;
+        node2y = 550 - (node2 - 1) / 8 * 100;
         setBounds((node1x + node2x) / 2 - 50 , (node1y + node2y) / 2 - 55 , 100 ,105);
         Color color = new Color(1 , 1  ,1 , 1);
         setBackground(color);
@@ -1051,10 +1051,10 @@ class VoltageACPanel extends  JPanel
     int node1x , node1y , node2x , node2y;
     VoltageACPanel(int node1 , int node2)
     {
-        node1x = ((node1 - 1) % 6) * 100 + 50;
-        node1y = 450 - (node1 - 1) / 6 * 100;
-        node2x = ((node2 - 1) % 6) * 100 + 50;
-        node2y = 450 - (node2 - 1) / 6 * 100;
+        node1x = ((node1 - 1) % 8) * 100 + 50;
+        node1y = 550 - (node1 - 1) / 8 * 100;
+        node2x = ((node2 - 1) % 8) * 100 + 50;
+        node2y = 550 - (node2 - 1) / 8 * 100;
         setBounds((node1x + node2x) / 2 - 50 , (node1y + node2y) / 2 - 55 , 100 ,105);
         Color color = new Color(1 , 1  ,1 , 1);
         setBackground(color);
@@ -1119,10 +1119,10 @@ class CurrentDCPanel extends  JPanel
     int node1x , node1y , node2x , node2y;
     CurrentDCPanel(int node1 , int node2 , String name)
     {
-        node1x = ((node1 - 1) % 6) * 100 + 50;
-        node1y = 450 - (node1 - 1) / 6 * 100;
-        node2x = ((node2 - 1) % 6) * 100 + 50;
-        node2y = 450 - (node2 - 1) / 6 * 100;
+        node1x = ((node1 - 1) % 8) * 100 + 50;
+        node1y = 550 - (node1 - 1) / 8 * 100;
+        node2x = ((node2 - 1) % 8) * 100 + 50;
+        node2y = 550 - (node2 - 1) / 8 * 100;
         setBounds((node1x + node2x) / 2 - 50 , (node1y + node2y) / 2 - 55 , 100 ,105);
         Color color = new Color(1 , 1  ,1 , 1);
         setBackground(color);
@@ -1203,10 +1203,10 @@ class CurrentACPanel extends  JPanel
     int node1x , node1y , node2x , node2y;
     CurrentACPanel(int node1 , int node2)
     {
-        node1x = ((node1 - 1) % 6) * 100 + 50;
-        node1y = 450 - (node1 - 1) / 6 * 100;
-        node2x = ((node2 - 1) % 6) * 100 + 50;
-        node2y = 450 - (node2 - 1) / 6 * 100;
+        node1x = ((node1 - 1) % 8) * 100 + 50;
+        node1y = 550 - (node1 - 1) / 8 * 100;
+        node2x = ((node2 - 1) % 8) * 100 + 50;
+        node2y = 550 - (node2 - 1) / 8 * 100;
         setBounds((node1x + node2x) / 2 - 50 , (node1y + node2y) / 2 - 55 , 100 ,105);
         Color color = new Color(1 , 1  ,1 , 1);
         setBackground(color);
@@ -1271,10 +1271,10 @@ class DependentCurrentPanel extends  JPanel
     int node1x , node1y , node2x , node2y;
     DependentCurrentPanel(int node1 , int node2 , String name)
     {
-        node1x = ((node1 - 1) % 6) * 100 + 50;
-        node1y = 450 - (node1 - 1) / 6 * 100;
-        node2x = ((node2 - 1) % 6) * 100 + 50;
-        node2y = 450 - (node2 - 1) / 6 * 100;
+        node1x = ((node1 - 1) % 8) * 100 + 50;
+        node1y = 550 - (node1 - 1) / 8 * 100;
+        node2x = ((node2 - 1) % 8) * 100 + 50;
+        node2y = 550 - (node2 - 1) / 8 * 100;
         setBounds((node1x + node2x) / 2 - 50 , (node1y + node2y) / 2 - 55 , 100 ,105);
         Color color = new Color(1 , 1  ,1 , 1);
         setBackground(color);
@@ -1355,10 +1355,10 @@ class DependentVoltagePanel extends  JPanel
     int node1x , node1y , node2x , node2y;
     DependentVoltagePanel(int node1 , int node2 , String name)
     {
-        node1x = ((node1 - 1) % 6) * 100 + 50;
-        node1y = 450 - (node1 - 1) / 6 * 100;
-        node2x = ((node2 - 1) % 6) * 100 + 50;
-        node2y = 450 - (node2 - 1) / 6 * 100;
+        node1x = ((node1 - 1) % 8) * 100 + 50;
+        node1y = 550 - (node1 - 1) / 8 * 100;
+        node2x = ((node2 - 1) % 8) * 100 + 50;
+        node2y = 550 - (node2 - 1) / 8 * 100;
         setBounds((node1x + node2x) / 2 - 50 , (node1y + node2y) / 2 - 55 , 100 ,105);
         Color color = new Color(1 , 1  ,1 , 1);
         setBackground(color);
@@ -1439,8 +1439,8 @@ class GNDPanel extends JPanel
     int nodex , nodey;
     GNDPanel(int node)
     {
-        nodex = ((node - 1) % 6) * 100 + 50;
-        nodey = 450 - (node - 1) / 6 * 100;
+        nodex = ((node - 1) % 8) * 100 + 50;
+        nodey = 550 - (node - 1) / 8 * 100;
         setBounds(nodex , nodey - 5 , 100 , 100);
         Color color = new Color(1 , 1  ,1 , 1);
         setBackground(color);
@@ -1467,10 +1467,10 @@ class WirePanel extends JPanel
     int node1x , node1y , node2x , node2y;
     WirePanel(int node1 , int node2)
     {
-        node1x = ((node1 - 1) % 6) * 100 + 50;
-        node1y = 450 - (node1 - 1) / 6 * 100;
-        node2x = ((node2 - 1) % 6) * 100 + 50;
-        node2y = 450 - (node2 - 1) / 6 * 100;
+        node1x = ((node1 - 1) % 8) * 100 + 50;
+        node1y = 550 - (node1 - 1) / 8 * 100;
+        node2x = ((node2 - 1) % 8) * 100 + 50;
+        node2y = 550 - (node2 - 1) / 8 * 100;
         setBounds((node1x + node2x) / 2 - 50 , (node1y + node2y) / 2 - 50 , 100 ,100);
         Color color = new Color(1 , 1  ,1 , 1);
         setBackground(color);
@@ -1491,34 +1491,34 @@ class Element
     int dx , dy , n1i , n1j , n2i , n2j;
     Element(JFrame frame , int locationMatrix [][] , char type , Branch branch , int node1 , int node2)
     {
-        dx = (node2 - 1) % 6 - (node1 - 1) % 6;
-        dy = (node1 - 1) / 6 - (node2 - 1) / 6;
-        n1i = ((node1 - 1) % 6) * 2;
-        n1j = (4 - (node1 - 1) / 6) * 2;
-        n2i = ((node2 - 1) % 6) * 2;
-        n2j = (4 - (node2 - 1) / 6) * 2;
+        dx = (node2 - 1) % 8 - (node1 - 1) % 8;
+        dy = (node1 - 1) / 8 - (node2 - 1) / 8;
+        n1i = ((node1 - 1) % 8) * 2;
+        n1j = (5 - (node1 - 1) / 8) * 2;
+        n2i = ((node2 - 1) % 8) * 2;
+        n2j = (5 - (node2 - 1) / 8) * 2;
         Draw(frame , locationMatrix , type , branch , node1 , node2 , dx , dy);
     }
     void Draw(JFrame frame , int locationMatrix [][] , char type, Branch branch , int node1 , int node2 , int dx , int dy)
     {
-        n1i = ((node1 - 1) % 6) * 2;
-        n1j = (4 - (node1 - 1) / 6) * 2;
-        n2i = ((node2 - 1) % 6) * 2;
-        n2j = (4 - (node2 - 1) / 6) * 2;
+        n1i = ((node1 - 1) % 8) * 2;
+        n1j = (5 - (node1 - 1) / 8) * 2;
+        n2i = ((node2 - 1) % 8) * 2;
+        n2j = (5 - (node2 - 1) / 8) * 2;
         if(node1 == 0)
         {
-            if(n2i + 1 <= 9 && locationMatrix[n2i + 2][n2j] == 0)
+            if(n2i + 1 <= 11 && locationMatrix[n2i + 2][n2j] == 0)
                 node1 = node2 + 1;
-            else if(n2i - 1 >= 0 && locationMatrix[n2i - 2][n2j] == 0)
+            else if(n2i - 1 >= 2 && locationMatrix[n2i - 2][n2j] == 0)
                 node1 = node2 - 1;
-            else if(n2j + 1 <= 7 && locationMatrix[n2i][n2j + 2] == 0)
-                node1 = node2 - 6;
+            else if(n2j + 1 <= 9 && locationMatrix[n2i][n2j + 2] == 0)
+                node1 = node2 - 8;
             else if(n2j - 1 >= 0 && locationMatrix[n2i][n2j - 2] == 0)
-                node1 = node2 + 6;
-            n1i = ((node1 - 1) % 6) * 2;
-            n1j = (4 - (node1 - 1) / 6) * 2;
-            dx = (node2 - 1) % 6 - (node1 - 1) % 6;
-            dy = (node1 - 1) / 6 - (node2 - 1) / 6;
+                node1 = node2 + 8;
+            n1i = ((node1 - 1) % 8) * 2;
+            n1j = (5 - (node1 - 1) / 8) * 2;
+            dx = (node2 - 1) % 8 - (node1 - 1) % 8;
+            dy = (node1 - 1) / 8 - (node2 - 1) / 8;
             GNDPanel g = new GNDPanel(node1);
             frame.add(g);
             Draw(frame , locationMatrix , type , branch , node1 , node2 , dx , dy);
@@ -1529,14 +1529,14 @@ class Element
                 node2 = node1 + 1;
             else if(n1i - 1 >= 0 && locationMatrix[n1i - 2][n1j] == 0)
                 node2 = node1 - 1;
-            else if(n1j + 1 <= 7 && locationMatrix[n1i][n1j + 2] == 0)
-                node2 = node1 - 6;
+            else if(n1j + 1 <= 9 && locationMatrix[n1i][n1j + 2] == 0)
+                node2 = node1 - 8;
             else if(n1j - 1 >= 0 && locationMatrix[n1i][n1j - 2] == 0)
-                node2 = node1 + 6;
-            n2i = ((node2 - 1) % 6) * 2;
-            n2j = (4 - (node2 - 1) / 6) * 2;
-            dx = (node2 - 1) % 6 - (node1 - 1) % 6;
-            dy = (node1 - 1) / 6 - (node2 - 1) / 6;
+                node2 = node1 + 8;
+            n2i = ((node2 - 1) % 8) * 2;
+            n2j = (5 - (node2 - 1) / 8) * 2;
+            dx = (node2 - 1) % 8 - (node1 - 1) % 8;
+            dy = (node1 - 1) / 8 - (node2 - 1) / 8;
             GNDPanel g = new GNDPanel(node2);
             frame.add(g);
             Draw(frame , locationMatrix , type , branch , node1 , node2 , dx , dy);
@@ -1598,13 +1598,13 @@ class Element
             {
                 if(dy != 0 && locationMatrix[n1i][n1j + (dy / Math.abs(dy))] == 0 && locationMatrix[n1i][n1j + 2 * (dy / Math.abs(dy))] == 0)
                 {
-                    WirePanel w = new WirePanel(node1 , node1 - 6 * dy / Math.abs(dy));
+                    WirePanel w = new WirePanel(node1 , node1 - 8 * dy / Math.abs(dy));
                     frame.add(w);
                     locationMatrix[n1i][n1j + (dy / Math.abs(dy))] = 1;
                     locationMatrix[n1i][n1j + 2 * (dy / Math.abs(dy))] = 1;
-                    Draw(frame , locationMatrix , type , branch , node1 - 6 * dy / Math.abs(dy) , node2 , dx , (dy / Math.abs(dy)) * (Math.abs(dy) - 1));
+                    Draw(frame , locationMatrix , type , branch , node1 - 8 * dy / Math.abs(dy) , node2 , dx , (dy / Math.abs(dy)) * (Math.abs(dy) - 1));
                 }
-                else if(n1i + 1 <= 9 && locationMatrix[n1i + 1][n1j] == 0 && locationMatrix[n1i + 2][n1j] == 0)
+                else if(n1i + 1 <= 13 && locationMatrix[n1i + 1][n1j] == 0 && locationMatrix[n1i + 2][n1j] == 0)
                 {
                     WirePanel w = new WirePanel(node1 , node1 + 1);
                     frame.add(w);
@@ -1631,32 +1631,32 @@ class Element
                     locationMatrix[n1i + 2 * (dx / Math.abs(dx))][n1j] = 1;
                     Draw(frame , locationMatrix , type , branch , node1 + dx / Math.abs(dx) , node2 , (dx / Math.abs(dx)) * (Math.abs(dx) - 1) , dy);
                 }
-                else if(n1j + 1 <= 7 && locationMatrix[n1i][n1j + 1] == 0 && locationMatrix[n1i][n1j + 2] == 0)
+                else if(n1j + 1 <= 9 && locationMatrix[n1i][n1j + 1] == 0 && locationMatrix[n1i][n1j + 2] == 0)
                 {
-                    WirePanel w = new WirePanel(node1 , node1 - 6);
+                    WirePanel w = new WirePanel(node1 , node1 - 8);
                     frame.add(w);
                     locationMatrix[n1i][n1j + 1] = 1;
                     locationMatrix[n1i][n1j + 2] = 1;
-                    Draw(frame , locationMatrix , type , branch , node1 - 6 , node2 , dx , dy - 1);
+                    Draw(frame , locationMatrix , type , branch , node1 - 8 , node2 , dx , dy - 1);
                 }
                 else if(n1j - 1 >= 0 && locationMatrix[n1i][n1j - 1] == 0 && locationMatrix[n1i][n1j - 2] == 0)
                 {
-                    WirePanel w = new WirePanel(node1 , node1 + 6);
+                    WirePanel w = new WirePanel(node1 , node1 + 8);
                     frame.add(w);
                     locationMatrix[n1i][n1j - 1] = 1;
                     locationMatrix[n1i][n1j - 2] = 1;
-                    Draw(frame , locationMatrix , type , branch , node1 + 6 , node2 , dx , dy + 1);
+                    Draw(frame , locationMatrix , type , branch , node1 + 8 , node2 , dx , dy + 1);
                 }
             }
             else
             {
                 if(dy != 0 && locationMatrix[n1i][n1j + (dy / Math.abs(dy))] == 0 && locationMatrix[n1i][n1j + 2 * (dy / Math.abs(dy))] == 0)
                 {
-                    WirePanel w = new WirePanel(node1 , node1 - 6 * dy / Math.abs(dy));
+                    WirePanel w = new WirePanel(node1 , node1 - 8 * dy / Math.abs(dy));
                     frame.add(w);
                     locationMatrix[n1i][n1j + (dy / Math.abs(dy))] = 1;
                     locationMatrix[n1i][n1j + 2 * (dy / Math.abs(dy))] = 1;
-                    Draw(frame , locationMatrix , type , branch , node1 - 6 * dy / Math.abs(dy) , node2 , dx , (dy / Math.abs(dy)) * (Math.abs(dy) - 1));
+                    Draw(frame , locationMatrix , type , branch , node1 - 8 * dy / Math.abs(dy) , node2 , dx , (dy / Math.abs(dy)) * (Math.abs(dy) - 1));
                 }
                 else if(dx != 0 && locationMatrix[n1i + (dx / Math.abs(dx))][n1j] == 0 && locationMatrix[n1i + 2 * (dx / Math.abs(dx))][n1j] == 0)
                 {
@@ -1666,7 +1666,7 @@ class Element
                     locationMatrix[n1i + 2 * (dx / Math.abs(dx))][n1j] = 1;
                     Draw(frame , locationMatrix , type , branch , node1 + dx / Math.abs(dx) , node2 , (dx / Math.abs(dx)) * (Math.abs(dx) - 1) , dy);
                 }
-                else if(n1i + 1 <= 9 && locationMatrix[n1i + 1][n1j] == 0 && locationMatrix[n1i + 2][n1j] == 0)
+                else if(n1i + 1 <= 13 && locationMatrix[n1i + 1][n1j] == 0 && locationMatrix[n1i + 2][n1j] == 0)
                 {
                     WirePanel w = new WirePanel(node1 , node1 + 1);
                     frame.add(w);
@@ -1682,21 +1682,21 @@ class Element
                     locationMatrix[n1i - 2][n1j] = 1;
                     Draw(frame , locationMatrix , type , branch , node1 - 1 , node2 , dx + 1 , dy);
                 }
-                else if(n1j + 1 <= 7 && locationMatrix[n1i][n1j + 1] == 0 && locationMatrix[n1i][n1j + 2] == 0)
+                else if(n1j + 1 <= 9 && locationMatrix[n1i][n1j + 1] == 0 && locationMatrix[n1i][n1j + 2] == 0)
                 {
-                    WirePanel w = new WirePanel(node1 , node1 - 6);
+                    WirePanel w = new WirePanel(node1 , node1 - 8);
                     frame.add(w);
                     locationMatrix[n1i][n1j + 1] = 1;
                     locationMatrix[n1i][n1j + 2] = 1;
-                    Draw(frame , locationMatrix , type , branch , node1 - 6 , node2 , dx , dy - 1);
+                    Draw(frame , locationMatrix , type , branch , node1 - 8 , node2 , dx , dy - 1);
                 }
                 else if(n1j - 1 >= 0 && locationMatrix[n1i][n1j - 1] == 0 && locationMatrix[n1i][n1j - 2] == 0)
                 {
-                    WirePanel w = new WirePanel(node1 , node1 + 6);
+                    WirePanel w = new WirePanel(node1 , node1 + 8);
                     frame.add(w);
                     locationMatrix[n1i][n1j - 1] = 1;
                     locationMatrix[n1i][n1j - 2] = 1;
-                    Draw(frame , locationMatrix , type , branch , node1 + 6 , node2 , dx , dy + 1);
+                    Draw(frame , locationMatrix , type , branch , node1 + 8 , node2 , dx , dy + 1);
                 }
             }
         }
@@ -1825,10 +1825,10 @@ class DataPanel extends JComponent implements ActionListener
 class CircuitFrame extends JFrame
 {
     int startNode , endNode;
-    int locationMatrix[][] = new int[11][9];
+    int locationMatrix[][] = new int[15][11];
     CircuitFrame(Circuit circuit)
     {
-        setSize(700 , 600);
+        setSize(900 , 700);
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         Container content = this.getContentPane();
         content.setBackground(Color.WHITE);
@@ -1838,9 +1838,9 @@ class CircuitFrame extends JFrame
         mgr = new GroupLayout(content);
         this.setLayout(mgr);
         Border border = BorderFactory.createLineBorder(Color.BLACK , 2);
-        for(int i = 0 ; i < 11 ; i++)
+        for(int i = 0 ; i < 15 ; i++)
         {
-            for(int j = 0 ; j < 9 ; j++)
+            for(int j = 0 ; j < 11 ; j++)
                 locationMatrix[i][j] = 0;
         }
         for(int i = 0 ; i < circuit.numberOfBranches ; i++)
@@ -1856,6 +1856,8 @@ class CircuitFrame extends JFrame
             }
             if(startNode != -1 && endNode != -1)
             {
+                startNode = startNode + ((startNode - 1) / 6) * 2 + 9;
+                endNode = endNode + ((endNode - 1) / 6) * 2 + 9;
                 new Element(this, locationMatrix, circuit.branchArray[i].name.charAt(0), circuit.branchArray[i] , startNode, endNode);
             }
         }
@@ -1872,6 +1874,10 @@ class CircuitFrame extends JFrame
             }
             if((circuit.adjMatrix[i][0] == 1 && endNode != 0) || (circuit.adjMatrix[i][0] == -1 && startNode != 0))
             {
+                if(startNode != 0)
+                    startNode = startNode + ((startNode - 1) / 6) * 2 + 9;
+                if(endNode != 0)
+                    endNode = endNode + ((endNode - 1) / 6) * 2 + 9;
                 new Element(this, locationMatrix, circuit.branchArray[i].name.charAt(0), circuit.branchArray[i] , startNode, endNode);
             }
         }
