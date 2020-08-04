@@ -1497,23 +1497,16 @@ class Element
         n1j = (4 - (node1 - 1) / 6) * 2;
         n2i = ((node2 - 1) % 6) * 2;
         n2j = (4 - (node2 - 1) / 6) * 2;
-        System.out.println(type);
-        System.out.println("#" + node1);
-        System.out.println("#" + node2);
-        System.out.println(" ");
         Draw(frame , locationMatrix , type , branch , node1 , node2 , dx , dy);
     }
     void Draw(JFrame frame , int locationMatrix [][] , char type, Branch branch , int node1 , int node2 , int dx , int dy)
     {
-        System.out.println(node1);
-        System.out.println(node2);
         n1i = ((node1 - 1) % 6) * 2;
         n1j = (4 - (node1 - 1) / 6) * 2;
         n2i = ((node2 - 1) % 6) * 2;
         n2j = (4 - (node2 - 1) / 6) * 2;
         if(node1 == 0)
         {
-            System.out.println("run1");
             if(n2i + 1 <= 9 && locationMatrix[n2i + 2][n2j] == 0)
                 node1 = node2 + 1;
             else if(n2i - 1 >= 0 && locationMatrix[n2i - 2][n2j] == 0)
@@ -1532,7 +1525,6 @@ class Element
         }
         else if(node2 == 0)
         {
-            System.out.println("run2");
             if(n1i + 1 <= 9 && locationMatrix[n1i + 2][n1j] == 0)
                 node2 = node1 + 1;
             else if(n1i - 1 >= 0 && locationMatrix[n1i - 2][n1j] == 0)
@@ -1551,8 +1543,6 @@ class Element
         }
         else if((Math.abs(n1i - n2i) == 2 && n1j == n2j && locationMatrix[(n1i + n2i) / 2][n1j] == 0) || (Math.abs(n1j - n2j) == 2 && n1i == n2i && locationMatrix[n1i][(n1j + n2j) / 2] == 0))
         {
-            System.out.println("run3");
-            System.out.println(locationMatrix[0][7]);
             locationMatrix[n1i][n1j] = 1;
             locationMatrix[n2i][n2j] = 1;
             locationMatrix[(n1i + n2i) / 2][(n1j + n2j) / 2] = 1;
@@ -1604,8 +1594,6 @@ class Element
         }
         else
         {
-            System.out.println("value" + locationMatrix[n1i][(n1j + n2j) / 2]);
-            System.out.println("run4");
             if(dx == 0)
             {
                 if(dy != 0 && locationMatrix[n1i][n1j + (dy / Math.abs(dy))] == 0 && locationMatrix[n1i][n1j + 2 * (dy / Math.abs(dy))] == 0)
@@ -2000,7 +1988,7 @@ class ResultPanel extends JComponent implements ActionListener
 
         ResultArea = new JTextArea(8, 30);
         ResultArea.setEditable(false);
-        Border ResultArea_border = BorderFactory.createLineBorder(Color.black, 2);
+        Border ResultArea_border = BorderFactory.createLineBorder(Color.black, 1);
         ResultArea.setBorder(ResultArea_border);
 
         scrollPane = new JScrollPane(ResultArea);
