@@ -1995,9 +1995,7 @@ class ResultPanel extends JComponent implements ActionListener
         add(draw_button);
 
         ResultArea = new JTextArea(8, 30);
-        ResultArea.setBounds(0, 30, 500, 470);
         ResultArea.setEditable(false);
-        //ResultArea.setBackground(Color.WHITE);
         Border ResultArea_border = BorderFactory.createLineBorder(Color.black, 2);
         ResultArea.setBorder(ResultArea_border);
 
@@ -2007,10 +2005,6 @@ class ResultPanel extends JComponent implements ActionListener
         scrollPane.setBorder(ResultArea_border);
 
         add(scrollPane);
-        this.add(ResultArea);
-
-        //ResultArea.setLineWrap(true);
-        //ResultArea.setWrapStyleWord(true);
     }
     @Override
     public void actionPerformed(ActionEvent e)
