@@ -382,7 +382,7 @@ class Circuit {
         bufferedWriter.write("      ---------- Time:" + time + ", step:" + step + " ----------\n");
         for (int i = 0; nodeArray[i] != null; i++) {
             //System.out.println("Node: " + nodeArray[i].nodeNumber + " voltage:" + nodeArray[i].voltage);
-            bufferedWriter.write("  Node: " + nodeArray[i].nodeNumber + " voltage:" + String.format("%.2f", nodeArray[i].voltage_t.get(step + 1)) + "\n");
+            bufferedWriter.write("  Node: " + nodeArray[i].nodeNumber + " voltage:" + String.format("%.3f", nodeArray[i].voltage_t.get(step + 1)) + "\n");
         }
 
         //System.out.println();
@@ -395,9 +395,9 @@ class Circuit {
         bufferedWriter.write("\n");
         for (int j = 0; branchArray[j] != null; j++) {
             //System.out.println("Branch: " + branchArray[j].name + " voltage:" + branchArray[j].getVoltage(nodeArray[branchArray[j].port1], nodeArray[branchArray[j].port2]) + " current:" + branchArray[j].getCurrent());
-            bufferedWriter.write("  Branch: " + branchArray[j].name + " voltage:" + String.format("%.2f", branchArray[j].voltage_t.get(step)) + " current:" + String.format("%.2f", branchArray[j].current_t.get(step)) + "\n");
+            bufferedWriter.write("  Branch: " + branchArray[j].name + " voltage:" + String.format("%.3f", branchArray[j].voltage_t.get(step)) + " current:" + String.format("%.3f", branchArray[j].current_t.get(step))+ " power:"+ String.format("%.3f", branchArray[j].power_t.get(step))+ "\n");
         }
-        //System.out.println("----------");
+        //bufferedWriter.write("\n");
     }
 
     float aFloat(String str) {
