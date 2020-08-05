@@ -448,7 +448,7 @@ class Circuit
                     float value = aFloat(info[3]);
                     Capacitor capacitor = new Capacitor(element_name, startNode, endNode, value);
                     addElement(capacitor);
-                } else if (element_name.matches("I(\\d)+")) {
+                } else if (element_name.matches("I([a-zA-Z])*(\\d)?")) {
                     int startNode = Integer.parseInt(info[1]);
                     int endNode = Integer.parseInt(info[2]);
 
@@ -458,7 +458,7 @@ class Circuit
                     float phase = Float.parseFloat(info[6]);
                     CurrentSource cs = new CurrentSource(element_name, startNode, endNode, offset, amplitude, frequency, phase);
                     addElement(cs);
-                } else if (element_name.matches("V(\\d)+")) {
+                } else if (element_name.matches("V([a-zA-Z])*(\\d)?")) {
                     int startNode = Integer.parseInt(info[1]);
                     int endNode = Integer.parseInt(info[2]);
 
