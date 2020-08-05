@@ -1150,7 +1150,7 @@ class DependentCurrentPanel extends  JPanel
         setBackground(color);
         BufferedImage DependentCurrentImage;
         JLabel DependentCurrentLabel , NameLabel;
-        if(node1x == node2x && node1y < node2y)
+        if(node1x == node2x && node1y > node2y)
         {
             try
             {
@@ -1167,7 +1167,7 @@ class DependentCurrentPanel extends  JPanel
                 e.printStackTrace();
             }
         }
-        else if(node1x == node2x && node2y < node1y)
+        else if(node1x == node2x && node2y > node1y)
         {
             try
             {
@@ -1184,7 +1184,7 @@ class DependentCurrentPanel extends  JPanel
                 e.printStackTrace();
             }
         }
-        else if(node1y == node2y && node1x < node2x)
+        else if(node1y == node2y && node1x > node2x)
         {
             try
             {
@@ -1201,7 +1201,7 @@ class DependentCurrentPanel extends  JPanel
                 e.printStackTrace();
             }
         }
-        else if(node1y == node2y && node1x > node2x)
+        else if(node1y == node2y && node1x < node2x)
         {
             try
             {
