@@ -125,6 +125,16 @@ class Branch
     void updateBranchFinal(Node startNode, Node endNode, float dt, float dv, float time, int step) {
     }
 }
+class Diode extends Branch{
+    public Diode(String name, int startNode, int endNode, float value) {
+        super(name, startNode, endNode, value);
+        this.name = name;
+        port1 = startNode;
+        port2 = endNode;
+        this.resistance = value;
+    }
+}
+
 class Circuit
 {
     String filePath = "Input.txt";
@@ -502,7 +512,14 @@ class Circuit
                     float gain = aFloat(info[4]);
                     CurrentDependentVS currentDependentVS = new CurrentDependentVS(element_name, startNode, endNode, dependentElementName, gain);
                     addElement(currentDependentVS);
-                } else if (element_name.matches("dv")) dv = aFloat(info[1]);
+                }  else if (element_name.matches("D(\\d)+")) {
+                    int startNode = Integer.parseInt(info[1]);
+                    int endNode = Integer.parseInt(info[2]);
+
+                    float value = aFloat(info[3]);
+                    Diode diode = new Diode(element_name,startNode,endNode,value);
+                    addElement(diode);
+                }  else if (element_name.matches("dv")) dv = aFloat(info[1]);
                 else if (element_name.matches("dt")) dt = aFloat(info[1]);
                 else if (element_name.matches("di")) di = aFloat(info[1]);
                 else if (element_name.matches("\\.tran")) duration = aFloat(info[1]);
