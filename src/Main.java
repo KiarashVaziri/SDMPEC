@@ -126,13 +126,12 @@ class Branch
     }
 }
 
-class Circuit
-{
+class Circuit {
     String filePath = "Input.txt";
     int numberOfNodes = 0;
     int numberOfBranches = 0;
     int numberOfUnions = 0;
-    float dt, dv, di, duration, time = 0;
+    float dt = 0, dv = 0, di = 0, duration = 0, time = 0;
     int step = 0;
     int[][] adjMatrix = new int[100][100];
     Node[] nodeArray = new Node[100];
@@ -234,33 +233,35 @@ class Circuit
         int stepSize = (int) (duration / dt) / 100;
 
         if (check_error5()) {
-            //updateBranches();
-            for (time = 0; time <= duration; time += dt) {
-                for (int cnt = 0; cnt < 50000; cnt++) {
-                    boolean flag = false;
-                    updateBranches();
-                    //updateNodes();
-                    updateUnions();
-                    for (int k = 0; k < numberOfUnions; k++) {
-                        System.out.println(unionArray[k].current + " cnt:" + cnt + " step:" + step);
-                        if (unionArray[k].current > di) flag = true;
+            if (check_error3()) {
+                if (check_error2()) {
+                    for (time = 0; time <= duration; time += dt) {
+                        for (int cnt = 0; cnt < 50000; cnt++) {
+                            boolean flag = false;
+                            updateBranches();
+                            //updateNodes();
+                            updateUnions();
+                            for (int k = 0; k < numberOfUnions; k++) {
+                                System.out.println(unionArray[k].current + " cnt:" + cnt + " step:" + step);
+                                if (unionArray[k].current > di) flag = true;
+                            }
+                            if (!flag) break;
+                        }
+                        updateUnionsFinal();
+                        updateBranchesFinal();
+                        if (step > 5 && !check_error2()) {
+                            bufferedWriter.write("\n>>Error 2 occurred.\n");
+                            break;
+                        }
+                        if (stepSize == 0 || step % stepSize == 0) {
+                            //printData(bufferedWriter);
+                            printDataFinal(bufferedWriter);
+                            //System.out.println(stepSize+" "+step);
+                        }
+                        step++;
                     }
-                    if (!flag) break;
-                }
-
-                updateUnionsFinal();
-                updateBranchesFinal();
-                if (step > 5 && !check_error2()) {
-                    bufferedWriter.write("Error 2 occurred.\n");
-                    break;
-                }
-                if (stepSize == 0 || step % stepSize == 0) {
-                    //printData(bufferedWriter);
-                    printDataFinal(bufferedWriter);
-                    //System.out.println(stepSize+" "+step);
-                }
-                step++;
-            }
+                } else bufferedWriter.write("The circuit is not valid; error -2.\n");
+            } else bufferedWriter.write("The circuit is not valid; error -3.\n");
         } else bufferedWriter.write("The circuit is not valid; error -5.\n");
         bufferedWriter.close();
         fileWriter.close();
@@ -397,88 +398,147 @@ class Circuit
         bufferedWriter.write("\n");
         for (int j = 0; branchArray[j] != null; j++) {
             //System.out.println("Branch: " + branchArray[j].name + " voltage:" + branchArray[j].getVoltage(nodeArray[branchArray[j].port1], nodeArray[branchArray[j].port2]) + " current:" + branchArray[j].getCurrent());
-            bufferedWriter.write("  Branch: " + branchArray[j].name + " voltage:" + String.format("%.3f", branchArray[j].voltage_t.get(step)) + " current:" + String.format("%.3f", branchArray[j].current_t.get(step))+ " power:"+ String.format("%.3f", branchArray[j].power_t.get(step))+ "\n");
+            bufferedWriter.write("  Branch: " + branchArray[j].name + " voltage:" + String.format("%.3f", branchArray[j].voltage_t.get(step)) + " current:" + String.format("%.3f", branchArray[j].current_t.get(step)) + " power:" + String.format("%.3f", branchArray[j].power_t.get(step)) + "\n");
         }
-        //bufferedWriter.write("\n");
+        //System.out.println("----------");
     }
+
+    int line_number = 0, size = 0;
 
     float aFloat(String str) {
         float result = 0;
         Pattern num = Pattern.compile("[\\.\\d]+");
         Matcher matcher = num.matcher(str);
-        matcher.find();
-        if (str.matches("[\\.\\d]+G")) result = (float) (1E9 * Float.parseFloat(matcher.group()));
-        if (str.matches("[\\.\\d]+M")) result = (float) (1E6 * Float.parseFloat(matcher.group()));
-        if (str.matches("[\\.\\d]+k")) result = (float) (1E3 * Float.parseFloat(matcher.group()));
-        if (str.matches("[\\.\\d]+")) result = Float.parseFloat(matcher.group());
-        if (str.matches("[\\.\\d]+m")) result = (float) (1E-3 * Float.parseFloat(matcher.group()));
-        if (str.matches("[\\.\\d]+u")) result = (float) (1E-6 * Float.parseFloat(matcher.group()));
-        if (str.matches("[\\.\\d]+n")) result = (float) (1E-9 * Float.parseFloat(matcher.group()));
+        if (matcher.find()) {
+            if (str.matches("[\\.\\d]+G")) result = (float) (1E9 * Float.parseFloat(matcher.group()));
+            if (str.matches("[\\.\\d]+M")) result = (float) (1E6 * Float.parseFloat(matcher.group()));
+            if (str.matches("[\\.\\d]+K")) result = (float) (1E3 * Float.parseFloat(matcher.group()));
+            if (str.matches("[\\.\\d]+")) result = Float.parseFloat(matcher.group());
+            if (str.matches("[\\.\\d]+m")) result = (float) (1E-3 * Float.parseFloat(matcher.group()));
+            if (str.matches("[\\.\\d]+u")) result = (float) (1E-6 * Float.parseFloat(matcher.group()));
+            if (str.matches("[\\.\\d]+n")) result = (float) (1E-9 * Float.parseFloat(matcher.group()));
+        } else {
+            System.out.println("Wrong input at line "+line_number+", please try again.");
+            System.exit(0);
+        }
+        if (str.matches("-(.)*")) {
+            System.out.println("Wrong input at line "+line_number+", please try again.");
+            System.exit(0);
+        }
         return result;
     }
 
     void readFile() throws FileNotFoundException {
         File file = new File(filePath);
+
         try {
             FileReader fileReader = new FileReader(file);
             BufferedReader br = new BufferedReader(fileReader);
             String line;
             String[] info = new String[10];
+
             line = br.readLine();
             while (line != null) {
+                boolean flag = false;
+                line_number++;
                 info = line.split("\\s+");
+                size = info.length;
                 String element_name = new String(info[0]);
+                if (element_name.matches("\\*(.)*")) flag = true;
                 if (element_name.matches("R(\\d)+")) {
-                    int startNode = Integer.parseInt(info[1]);
-                    int endNode = Integer.parseInt(info[2]);
+                    if (size == 4) {
+                        flag = true;
+                        int startNode = Integer.parseInt(info[1]);
+                        int endNode = Integer.parseInt(info[2]);
 
-                    float value = aFloat(info[3]);
-                    Resistor resistor = new Resistor(element_name, startNode, endNode, value);
-                    addElement(resistor);
-                } else if (element_name.matches("L(\\d)+")) {
-                    int startNode = Integer.parseInt(info[1]);
-                    int endNode = Integer.parseInt(info[2]);
+                        float value = aFloat(info[3]);
+                        Resistor resistor = new Resistor(element_name, startNode, endNode, value);
+                        addElement(resistor);
+                    } else {
+                        System.out.println("Wrong input at line " + line_number + ", please try again.");
+                        System.exit(0);
+                    }
+                }
+                if (element_name.matches("L(\\d)+")) {
+                    if (size == 4) {
+                        flag = true;
+                        int startNode = Integer.parseInt(info[1]);
+                        int endNode = Integer.parseInt(info[2]);
 
-                    float value = aFloat(info[3]);
-                    Inductor inductor = new Inductor(element_name, startNode, endNode, value);
-                    addElement(inductor);
-                } else if (element_name.matches("C(\\d)+")) {
-                    int startNode = Integer.parseInt(info[1]);
-                    int endNode = Integer.parseInt(info[2]);
+                        float value = aFloat(info[3]);
+                        Inductor inductor = new Inductor(element_name, startNode, endNode, value);
+                        addElement(inductor);
+                    } else {
+                        System.out.println("Wrong input at line " + line_number + ", please try again.");
+                        System.exit(0);
+                    }
+                }
+                if (element_name.matches("C(\\d)+")) {
+                    if (size == 4) {
+                        flag = true;
+                        int startNode = Integer.parseInt(info[1]);
+                        int endNode = Integer.parseInt(info[2]);
 
-                    float value = aFloat(info[3]);
-                    Capacitor capacitor = new Capacitor(element_name, startNode, endNode, value);
-                    addElement(capacitor);
-                } else if (element_name.matches("I([a-zA-Z])*(\\d)?")) {
-                    int startNode = Integer.parseInt(info[1]);
-                    int endNode = Integer.parseInt(info[2]);
+                        float value = aFloat(info[3]);
+                        Capacitor capacitor = new Capacitor(element_name, startNode, endNode, value);
+                        addElement(capacitor);
+                    } else {
+                        System.out.println("Wrong input at line " + line_number + ", please try again.");
+                        System.exit(0);
+                    }
+                }
+                if (element_name.matches("I([a-zA-Z])*(\\d)?")) {
+                    if (size == 7) {
+                        flag = true;
+                        int startNode = Integer.parseInt(info[1]);
+                        int endNode = Integer.parseInt(info[2]);
 
-                    float offset = aFloat(info[3]);
-                    float amplitude = aFloat(info[4]);
-                    float frequency = aFloat(info[5]);
-                    float phase = Float.parseFloat(info[6]);
-                    CurrentSource cs = new CurrentSource(element_name, startNode, endNode, offset, amplitude, frequency, phase);
-                    addElement(cs);
-                } else if (element_name.matches("V([a-zA-Z])*(\\d)?")) {
-                    int startNode = Integer.parseInt(info[1]);
-                    int endNode = Integer.parseInt(info[2]);
+                        float offset = aFloat(info[3]);
+                        float amplitude = aFloat(info[4]);
+                        float frequency = aFloat(info[5]);
+                        float phase = Float.parseFloat(info[6]);
+                        CurrentSource cs = new CurrentSource(element_name, startNode, endNode, offset, amplitude, frequency, phase);
+                        addElement(cs);
+                    } else {
+                        System.out.println("Wrong input at line " + line_number + ", please try again.");
+                        System.exit(0);
+                    }
+                }
+                if (element_name.matches("V([a-zA-Z])*(\\d)?")) {
+                    if (size == 7) {
+                        flag = true;
+                        int startNode = Integer.parseInt(info[1]);
+                        int endNode = Integer.parseInt(info[2]);
 
-                    float offset = aFloat(info[3]);
-                    float amplitude = aFloat(info[4]);
-                    float frequency = aFloat(info[5]);
-                    float phase = Float.parseFloat(info[6]);
-                    VoltageSource vs = new VoltageSource(element_name, startNode, endNode, offset, amplitude, frequency, phase);
-                    addElement(vs);
-                } else if (element_name.matches("G(\\d)+")) {
-                    int startNode = Integer.parseInt(info[1]);
-                    int endNode = Integer.parseInt(info[2]);
+                        float offset = aFloat(info[3]);
+                        float amplitude = aFloat(info[4]);
+                        float frequency = aFloat(info[5]);
+                        float phase = Float.parseFloat(info[6]);
+                        VoltageSource vs = new VoltageSource(element_name, startNode, endNode, offset, amplitude, frequency, phase);
+                        addElement(vs);
+                    } else {
+                        System.out.println("Wrong input at line " + line_number + ", please try again.");
+                        System.exit(0);
+                    }
+                }
+                if (element_name.matches("G(\\d)+")) {
+                    if (size == 6) {
+                        flag = true;
+                        int startNode = Integer.parseInt(info[1]);
+                        int endNode = Integer.parseInt(info[2]);
 
-                    int related_port1 = Integer.parseInt(info[3]);
-                    int related_port2 = Integer.parseInt(info[4]);
-                    float gain = aFloat(info[5]);
-                    VoltageDependentCS voltageDependentCS = new VoltageDependentCS(element_name, startNode, endNode, related_port1, related_port2, gain);
-                    addElement(voltageDependentCS);
-                } else if (element_name.matches("F(\\d)+")) {
+                        int related_port1 = Integer.parseInt(info[3]);
+                        int related_port2 = Integer.parseInt(info[4]);
+                        float gain = aFloat(info[5]);
+                        VoltageDependentCS voltageDependentCS = new VoltageDependentCS(element_name, startNode, endNode, related_port1, related_port2, gain);
+                        addElement(voltageDependentCS);
+                    } else {
+                        System.out.println("Wrong input at line " + line_number + ", please try again.");
+                        System.exit(0);
+                    }
+                }
+                if (element_name.matches("F(\\d)+")) {
+                    flag = true;
                     int startNode = Integer.parseInt(info[1]);
                     int endNode = Integer.parseInt(info[2]);
 
@@ -486,7 +546,9 @@ class Circuit
                     float gain = aFloat(info[4]);
                     CurrentDependentCS currentDependentCS = new CurrentDependentCS(element_name, startNode, endNode, dependentElementName, gain);
                     addElement(currentDependentCS);
-                } else if (element_name.matches("E(\\d)+")) {
+                }
+                if (element_name.matches("E(\\d)+")) {
+                    flag = true;
                     int startNode = Integer.parseInt(info[1]);
                     int endNode = Integer.parseInt(info[2]);
 
@@ -495,31 +557,60 @@ class Circuit
                     float gain = aFloat(info[5]);
                     VoltageDependentVS voltageDependentVS = new VoltageDependentVS(element_name, startNode, endNode, related_port1, related_port2, gain);
                     addElement(voltageDependentVS);
-                } else if (element_name.matches("H(\\d)+")) {
-                    int startNode = Integer.parseInt(info[1]);
-                    int endNode = Integer.parseInt(info[2]);
+                }
+                if (element_name.matches("H(\\d)+")) {
+                    if (size == 5) {
+                        flag = true;
+                        int startNode = Integer.parseInt(info[1]);
+                        int endNode = Integer.parseInt(info[2]);
 
-                    String dependentElementName = info[3];
-                    float gain = aFloat(info[4]);
-                    CurrentDependentVS currentDependentVS = new CurrentDependentVS(element_name, startNode, endNode, dependentElementName, gain);
-                    addElement(currentDependentVS);
-                }  else if (element_name.matches("D(\\d)+")) {
+                        String dependentElementName = info[3];
+                        float gain = aFloat(info[4]);
+                        CurrentDependentVS currentDependentVS = new CurrentDependentVS(element_name, startNode, endNode, dependentElementName, gain);
+                        addElement(currentDependentVS);
+                    } else {
+                        System.out.println("Wrong input at line " + line_number + ", please try again.");
+                        System.exit(0);
+                    }
+                }
+                if (element_name.matches("D(\\d)+")) {
+                    flag = true;
                     int startNode = Integer.parseInt(info[1]);
                     int endNode = Integer.parseInt(info[2]);
 
                     float value = aFloat(info[3]);
-                    Diode diode = new Diode(element_name,startNode,endNode,value);
+                    Diode diode = new Diode(element_name, startNode, endNode, value);
                     addElement(diode);
-                }  else if (element_name.matches("dv")) dv = aFloat(info[1]);
-                else if (element_name.matches("dt")) dt = aFloat(info[1]);
-                else if (element_name.matches("di")) di = aFloat(info[1]);
-                else if (element_name.matches("\\.tran")) duration = aFloat(info[1]);
-                line = br.readLine();
+                }
+                if (element_name.matches("dv")) {
+                    dv = aFloat(info[1]);
+                    flag = true;
+                }
+                if (element_name.matches("dt")) {
+                    flag = true;
+                    dt = aFloat(info[1]);
+                }
+                if (element_name.matches("di")) {
+                    flag = true;
+                    di = aFloat(info[1]);
+                }
+                if (element_name.matches("\\.tran")) {
+                    flag = true;
+                    duration = aFloat(info[1]);
+                }
+                if (flag) line = br.readLine();
+                else{
+                    System.out.println("Wrong input at line " + line_number + ", please try again.");
+                    System.exit(0);
+                }
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+        if (dv == 0 || dt == 0 || di == 0 || duration == 0) {
+            System.out.println("Wrong input, error -1.");
+            System.exit(0);
+        }
     }
 
     void makeNeighbors(int startNode, int endNode) {
@@ -628,11 +719,13 @@ class Circuit
         for (int i = 0; i <= numberOfNodes; i++) {
             if (nodeArray[i].toBeChecked) {
                 float sum = 0;
+
                 for (Branch cs : nodeArray[i].neighborCurrentSources) {
                     if (nodeArray[i].nodeNumber == cs.port1) sum += cs.current;
                     else sum -= cs.current;
+
                 }
-                flag = sum <= di;
+                if (sum >= di) flag = false;
             }
         }
         return flag;
@@ -660,12 +753,12 @@ class Circuit
                     if (branchArray[t].type_of_source == 2) {
                         int s1 = branchArray[j].port1;
                         int e1 = branchArray[j].port2;
-                        int s2 = branchArray[t].port2;
+                        int s2 = branchArray[t].port1;
                         int e2 = branchArray[t].port2;
-                        if (s1 == s2 && e1 == e2)
-                            result = branchArray[j].voltage == branchArray[t].voltage;
-                        else if (s1 == e2 && s2 == e1)
-                            result = branchArray[j].voltage == -branchArray[t].voltage;
+                        if (s1 == s2 && e1 == e2) {
+                            if (branchArray[j].voltage != branchArray[t].voltage) result = false;
+                        } else if (s1 == e2 && s2 == e1)
+                            if (branchArray[j].voltage != -branchArray[t].voltage) result = false;
                     }
         return result;
     }
@@ -725,6 +818,7 @@ class Circuit
         f2.setVisible(true);
     }
 }
+
 class ChartDrawer extends Canvas
 {
     int type, size;
