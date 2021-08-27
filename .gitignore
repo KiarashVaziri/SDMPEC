@@ -1,8 +1,13 @@
 # Log file
 *.log
 
+Output.txt
+
 *.classpath
 *.project
+*.jpg
+*.jpeg
+results
 
 # Package Files #
 *.jar
