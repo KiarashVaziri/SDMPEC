@@ -1,4 +1,4 @@
-class CurrentDependentVS extends Branch{
+class CurrentDependentVS extends Branch {
 
     /*there are two types:
     1. dependent to a certain voltage

@@ -1,4 +1,4 @@
-public class CurrentDependentCS extends Branch {
+class CurrentDependentCS extends Branch {
 
     /*there are two types:
     1. dependent to a certain voltage
