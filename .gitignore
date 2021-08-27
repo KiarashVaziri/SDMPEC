@@ -5,9 +5,7 @@ Output.txt
 *.class
 *.classpath
 *.project
-*.jpg
-*.jpeg
-results
+
 
 # Package Files #
 *.jar
