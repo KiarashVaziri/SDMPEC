@@ -1,4 +1,9 @@
-class CurrentDependentVS extends Branch {
+package circuit.branch;
+
+import circuit.Node;
+import circuit.branch.Branch;
+
+public class CurrentDependentVS extends Branch {
 
     /*there are two types:
     1. dependent to a certain voltage
@@ -9,7 +14,7 @@ class CurrentDependentVS extends Branch {
     Branch element;
     String dependent_element;
 
-    CurrentDependentVS(String name, int i, int j, String elementName, float value) {
+    public CurrentDependentVS(String name, int i, int j, String elementName, float value) {
         super(name, i, j, value);
         this.name = name;
         independent = false;
@@ -26,11 +31,11 @@ class CurrentDependentVS extends Branch {
             if (branchArray[i].name.equals(dependent_element)) element = branchArray[i];
     }
 
-    float getVoltage(Node a, Node b) {
+    public float getVoltage(Node a, Node b) {
         return b.voltage - a.voltage;
     }
 
-    void updateBranch(Branch[] branches,Node[] nodes, float dt, float dv) {
+    public void updateBranch(Branch[] branches, Node[] nodes, float dt, float dv) {
         updateRelatedElement(branches);
         voltage = gain * element.current;
         updateCurrent(nodes[port1],nodes[port2]);
@@ -38,7 +43,7 @@ class CurrentDependentVS extends Branch {
     }
 
     @Override
-    void updateBranchFinal(Node startNode, Node endNode, float dt, float dv, float time, int step) {
+    public void updateBranchFinal(Node startNode, Node endNode, float dt, float dv, float time, int step) {
         voltage_t.add(voltage);
         current_t.add(current);
         power_t.add(power);

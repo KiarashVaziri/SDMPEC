@@ -1,6 +1,11 @@
-class Resistor extends Branch {
+package circuit.branch;
 
-    Resistor(String name, int a, int b, float r) {
+import circuit.Node;
+import circuit.branch.Branch;
+
+public class Resistor extends Branch {
+
+    public Resistor(String name, int a, int b, float r) {
         super(name, a, b, r);
         this.name = name;
         port1 = a;
@@ -9,12 +14,12 @@ class Resistor extends Branch {
     }
 
     @Override
-    float getVoltage(Node a, Node b) {
+    public float getVoltage(Node a, Node b) {
         return a.voltage - b.voltage;
     }
 
     @Override
-    void updateBranch(Node startNode, Node endNode, float dt, float dv, float time) {
+    public void updateBranch(Node startNode, Node endNode, float dt, float dv, float time) {
         voltage = startNode.voltage - endNode.voltage;
         current = voltage / resistance;
         //previousCurrent = (startNode.voltage - endNode.voltage + dv) / resistance;
@@ -24,7 +29,7 @@ class Resistor extends Branch {
     }
 
     @Override
-    void updateBranchFinal(Node startNode,Node endNode, float dt, float dv, float time,int step) {
+    public void updateBranchFinal(Node startNode, Node endNode, float dt, float dv, float time, int step) {
         //voltage_t.add(startNode.voltage_t.get(step) - endNode.voltage_t.get(step));
         voltage_t.add(voltage);
         //current_t.add(voltage_t.get(step) / resistance);

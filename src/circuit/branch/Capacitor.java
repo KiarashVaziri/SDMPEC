@@ -1,6 +1,11 @@
-class Capacitor extends Branch {
+package circuit.branch;
 
-    Capacitor(String name, int a, int b, float value) {
+import circuit.Node;
+import circuit.branch.Branch;
+
+public class Capacitor extends Branch {
+
+    public Capacitor(String name, int a, int b, float value) {
         super(name, a, b, value);
         this.name = name;
         port1 = a;
@@ -8,11 +13,11 @@ class Capacitor extends Branch {
         this.capacity = value;
     }
 
-    float getVoltage(Node s, Node e) {
+    public float getVoltage(Node s, Node e) {
         return s.voltage - e.voltage;
     }
 
-    void updateBranch(Node s, Node e, float dt, float dv, float time) {
+    public void updateBranch(Node s, Node e, float dt, float dv, float time) {
         //previousVoltage = voltage;
         voltage = s.voltage - e.voltage;
 
@@ -27,7 +32,7 @@ class Capacitor extends Branch {
     }
 
     @Override
-    void updateBranchFinal(Node startNode, Node endNode, float dt, float dv, float time, int step) {
+    public void updateBranchFinal(Node startNode, Node endNode, float dt, float dv, float time, int step) {
         voltage_t.add(voltage);
         current_t.add(current);
         previousVoltage_t = voltage;

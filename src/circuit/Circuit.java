@@ -1,26 +1,30 @@
+package circuit;
+
+import circuit.branch.*;
+import graph.*;
 import javax.swing.*;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-class Circuit {
+public class Circuit {
     String filePath = "Input.txt";
-    int numberOfNodes = 0;
-    int numberOfBranches = 0;
+    public int numberOfNodes = 0;
+    public int numberOfBranches = 0;
     int numberOfUnions = 0;
     float dt = 0, dv = 0, di = 0, duration = 0, time = 0;
     int step = 0;
-    int[][] adjMatrix = new int[100][100];
+    public int[][] adjMatrix = new int[100][100];
     Node[] nodeArray = new Node[100];
-    Branch[] branchArray = new Branch[100];
+    public Branch[] branchArray = new Branch[100];
     Union[] unionArray = new Union[50];
 
     Circuit() {
         for (int i = 0; i < 100; i++) for (int j = 0; j < 100; j++) adjMatrix[i][j] = 0;
     }
 
-    Circuit(String filePath) {
+    public Circuit(String filePath) {
         for (int i = 0; i < 100; i++) for (int j = 0; j < 100; j++) adjMatrix[i][j] = 0;
         this.filePath = filePath;
     }
@@ -102,7 +106,7 @@ class Circuit {
         for (int j = 0; j <= numberOfNodes; j++) nodeArray[j] = new Node(j);
     }
 
-    void updateCircuit() throws IOException {
+    public void updateCircuit() throws IOException {
         gatherUnions();
         File output = new File("Output.txt");
         FileWriter fileWriter = new FileWriter(output);
@@ -306,7 +310,7 @@ class Circuit {
         return result;
     }
 
-    void readFile() throws FileNotFoundException {
+    public void readFile() throws FileNotFoundException {
         File file = new File(filePath);
         try {
             FileReader fileReader = new FileReader(file);
@@ -668,7 +672,7 @@ class Circuit {
     }
 
     //charts
-    void openCharts(String name) {
+    public void openCharts(String name) {
         int index = 0;
         if (name.equals("nodes")) openNodes();
         else {

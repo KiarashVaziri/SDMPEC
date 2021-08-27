@@ -1,11 +1,16 @@
-class VoltageSource extends Branch {
+package circuit.branch;
+
+import circuit.Node;
+import circuit.branch.Branch;
+
+public class VoltageSource extends Branch {
 
     float offset;
     float amplitude;
     float frequency;
     float phase;
 
-    VoltageSource(String name, int a, int b, float offset, float amplitude, float frequency, float phase) {
+    public VoltageSource(String name, int a, int b, float offset, float amplitude, float frequency, float phase) {
         super(name, a, b, offset);
         this.name = name;
         port1 = a;
@@ -19,14 +24,14 @@ class VoltageSource extends Branch {
         voltage = (float) (offset + amplitude * Math.sin(Math.toRadians(phase)));
     }
 
-    void updateBranch(Node s, Node e, float dt, float dv, float time) {
+    public void updateBranch(Node s, Node e, float dt, float dv, float time) {
         voltage = (float) (offset + amplitude * Math.sin(2 * Math.PI * frequency * time + Math.toRadians(phase)));
         updateCurrent(s, e);
         power = current * voltage;
     }
 
     @Override
-    void updateBranchFinal(Node startNode, Node endNode, float dt, float dv, float time, int step) {
+    public void updateBranchFinal(Node startNode, Node endNode, float dt, float dv, float time, int step) {
         voltage_t.add(voltage);
         current_t.add(current);
         previousVoltage_t = voltage;

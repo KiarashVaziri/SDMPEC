@@ -1,4 +1,9 @@
-class VoltageDependentVS extends Branch {
+package circuit.branch;
+
+import circuit.Node;
+import circuit.branch.Branch;
+
+public class VoltageDependentVS extends Branch {
 
     /*there are two types:
     3. dependent to a certain voltage
@@ -8,7 +13,7 @@ class VoltageDependentVS extends Branch {
     int related_port1;
     int related_port2;
 
-    VoltageDependentVS(String name, int i, int j, int k, int m, float value) {
+    public VoltageDependentVS(String name, int i, int j, int k, int m, float value) {
         super(name, i, j, value);
         this.name = name;
         independent = false;
@@ -21,18 +26,18 @@ class VoltageDependentVS extends Branch {
         related_port2 = m;
     }
 
-    float getVoltage(Node a, Node b) {
+    public float getVoltage(Node a, Node b) {
         return b.voltage - a.voltage;
     }
 
-    void updateBranch(Node[] nodes, float dt, float dv) {
+    public void updateBranch(Node[] nodes, float dt, float dv) {
         voltage = gain * (nodes[related_port1].voltage - nodes[related_port2].voltage);
         updateCurrent(nodes[port1],nodes[port2]);
         power = current * voltage;
     }
 
     @Override
-    void updateBranchFinal(Node startNode, Node endNode, float dt, float dv, float time, int step) {
+    public void updateBranchFinal(Node startNode, Node endNode, float dt, float dv, float time, int step) {
         voltage_t.add(voltage);
         current_t.add(current);
         power_t.add(power);

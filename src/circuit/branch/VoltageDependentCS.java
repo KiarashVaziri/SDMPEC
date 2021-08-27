@@ -1,4 +1,9 @@
-class VoltageDependentCS extends Branch {
+package circuit.branch;
+
+import circuit.Node;
+import circuit.branch.Branch;
+
+public class VoltageDependentCS extends Branch {
 
     /*there are two types:
     1. dependent to a certain voltage
@@ -8,7 +13,7 @@ class VoltageDependentCS extends Branch {
     int related_port1;
     int related_port2;
 
-    VoltageDependentCS(String name, int i, int j, int k, int m, float value) {
+    public VoltageDependentCS(String name, int i, int j, int k, int m, float value) {
         super(name, i, j, value);
         this.name = name;
         independent = false;
@@ -22,11 +27,11 @@ class VoltageDependentCS extends Branch {
         //this.current=value*(nodeArray[related_port1]-nodeArray[related_port2]);
     }
 
-    float getVoltage(Node a, Node b) {
+    public float getVoltage(Node a, Node b) {
         return b.voltage - a.voltage;
     }
 
-    void updateBranch(Node[] nodes, float dt, float dv) {
+    public void updateBranch(Node[] nodes, float dt, float dv) {
         current = gain * (nodes[related_port1].voltage - nodes[related_port2].voltage);
         nextCurrent_plus = current;
         nextCurrent_negative = current;
@@ -35,7 +40,7 @@ class VoltageDependentCS extends Branch {
     }
 
     @Override
-    void updateBranchFinal(Node startNode, Node endNode, float dt, float dv, float time, int step) {
+    public void updateBranchFinal(Node startNode, Node endNode, float dt, float dv, float time, int step) {
         voltage = startNode.voltage - endNode.voltage;
         current_t.add(current);
         voltage_t.add(voltage);

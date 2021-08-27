@@ -1,11 +1,16 @@
-class CurrentSource extends Branch {
+package circuit.branch;
+
+import circuit.Node;
+import circuit.branch.Branch;
+
+public class CurrentSource extends Branch {
 
     float offset;
     float amplitude;
     float frequency;
     float phase;
 
-    CurrentSource(String name, int a, int b, float offset, float amplitude, float frequency, float phase) {
+    public CurrentSource(String name, int a, int b, float offset, float amplitude, float frequency, float phase) {
         super(name, a, b, offset);
         this.name = name;
         port1 = b;
@@ -20,12 +25,12 @@ class CurrentSource extends Branch {
     }
 
     @Override
-    float getVoltage(Node a, Node b) {
+    public float getVoltage(Node a, Node b) {
         return b.voltage - a.voltage;
     }
 
     @Override
-    void updateBranch(Node a, Node b, float dt, float dv, float time) {
+    public void updateBranch(Node a, Node b, float dt, float dv, float time) {
         voltage = a.voltage - b.voltage;
         current = (float) (offset + amplitude * Math.sin(2 * Math.PI * frequency * time + Math.toRadians(phase)));
         previousCurrent = current;
@@ -35,7 +40,7 @@ class CurrentSource extends Branch {
     }
 
     @Override
-    void updateBranchFinal(Node startNode, Node endNode, float dt, float dv, float time, int step) {
+    public void updateBranchFinal(Node startNode, Node endNode, float dt, float dv, float time, int step) {
         voltage_t.add(voltage);
         current_t.add(current);
         power_t.add(power);
