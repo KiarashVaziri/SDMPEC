@@ -7,10 +7,15 @@ The program has the following features:
 1. Drawing Circuit Diagram
 User interface looks like below:
 <!-- Image of interface -->
-![User Interface](result/Interface.jpg)
+![User Interface](results/Interface.jpg)
 ---
 # Performance Examination
 In this section we examine program's performance with different circuit inputs. The input text file consists of elements described in an HSPICE format.
+Example:
+```
+***Input***
+
+```
 ## Resistors and Current Sources Test
 ```
 
