@@ -5,3 +5,6 @@ The program has the following features:
 1. DC Operating Point Analysis
 1. Transient Analysis
 1. Drawing Circuit Diagram
+---
+# Feature Examination
+In this section we examine programs performance with different circuits as input.
