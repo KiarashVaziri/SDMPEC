@@ -5,6 +5,13 @@ The program has the following features:
 1. DC Operating Point Analysis
 1. Transient Analysis
 1. Drawing Circuit Diagram
+User interface looks like below:
+<!-- Image of interface -->
+![User Interface](result/Interface.jpg)
 ---
-# Feature Examination
-In this section we examine programs performance with different circuits as input.
+# Performance Examination
+In this section we examine program's performance with different circuit inputs. The input text file consists of elements described in an HSPICE format.
+## Resistors and Current Sources Test
+```
+
+```

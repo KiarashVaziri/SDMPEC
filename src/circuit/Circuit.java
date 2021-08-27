@@ -249,11 +249,11 @@ public class Circuit {
         }
 
         //System.out.println();
-        bufferedWriter.write("\n");
-        for (int k = 0; k < numberOfUnions; k++) {
-            //System.out.println("Union: " + unionArray[k].unionNumber + " current:" + unionArray[k].current);
-            bufferedWriter.write("Union: " + unionArray[k].unionNumber + " current:" + unionArray[k].current + " totalCurrent1:" + unionArray[k].totalCurrent1 + " totalCurrent2:" + unionArray[k].totalCurrent2 + "\n");
-        }
+//        bufferedWriter.write("\n");
+//        for (int k = 0; k < numberOfUnions; k++) {
+//            //System.out.println("Union: " + unionArray[k].unionNumber + " current:" + unionArray[k].current);
+//            bufferedWriter.write("Union: " + unionArray[k].unionNumber + " current:" + unionArray[k].current + " totalCurrent1:" + unionArray[k].totalCurrent1 + " totalCurrent2:" + unionArray[k].totalCurrent2 + "\n");
+//        }
         //System.out.println();
         bufferedWriter.write("\n");
         for (int j = 0; branchArray[j] != null; j++) {
