@@ -2,7 +2,7 @@
 *.log
 
 Output.txt
-
+*.class
 *.classpath
 *.project
 *.jpg
