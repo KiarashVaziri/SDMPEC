@@ -267,20 +267,20 @@ public class Circuit {
         bufferedWriter.write("      ---------- Time:" + time + ", step:" + step + " ----------\n");
         for (int i = 0; nodeArray[i] != null; i++) {
             //System.out.println("Node: " + nodeArray[i].nodeNumber + " voltage:" + nodeArray[i].voltage);
-            bufferedWriter.write("  Node: " + nodeArray[i].nodeNumber + " voltage:" + String.format("%.3f", nodeArray[i].voltage_t.get(step + 1)) + "\n");
+            bufferedWriter.write(" Node: " + nodeArray[i].nodeNumber + "\t voltage[V]:" + String.format("%.3f", nodeArray[i].voltage_t.get(step + 1)) + "\n");
         }
 
         //System.out.println();
-        bufferedWriter.write("\n");
-        for (int k = 0; k < numberOfUnions; k++) {
-            //System.out.println("Union: " + unionArray[k].unionNumber + " current:" + unionArray[k].current);
-            bufferedWriter.write("  Union: " + unionArray[k].unionNumber + " current:" + String.format("%.1f", unionArray[k].current) + "\n");
-        }
+//        bufferedWriter.write("\n");
+//        for (int k = 0; k < numberOfUnions; k++) {
+//            //System.out.println("Union: " + unionArray[k].unionNumber + " current:" + unionArray[k].current);
+//            bufferedWriter.write("  Union: " + unionArray[k].unionNumber + " current:" + String.format("%.1f", unionArray[k].current) + "\n");
+//        }
         //System.out.println();
         bufferedWriter.write("\n");
         for (int j = 0; branchArray[j] != null; j++) {
             //System.out.println("Branch: " + branchArray[j].name + " voltage:" + branchArray[j].getVoltage(nodeArray[branchArray[j].port1], nodeArray[branchArray[j].port2]) + " current:" + branchArray[j].getCurrent());
-            bufferedWriter.write("  Branch: " + branchArray[j].name + " voltage:" + String.format("%.3f", branchArray[j].voltage_t.get(step)) + "   current:" + String.format("%.3f", branchArray[j].current_t.get(step)) + "   power:" + String.format("%.3f", branchArray[j].power_t.get(step)) + "\n");
+            bufferedWriter.write(" Branch: " + branchArray[j].name + "\tvoltage[V]:" + String.format("%.3f", branchArray[j].voltage_t.get(step)) + ", current[mA]:" + String.format("%.1f", 1000*branchArray[j].current_t.get(step)) + ", power[mW]:" + String.format("%.1f", 1000*branchArray[j].power_t.get(step)) + "\n");
         }
         //System.out.println("----------");
     }
